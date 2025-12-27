@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Offers Zone — Updated</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    /* ----------------- Global / Cards ----------------- */
+    :root {
+      --orange: #f97316;
+      --orange-dark: #ea580c;
+      --card-h: 480px;
+      /* default desktop card height */
+    }
+
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+
+
+
+    .nav-link {
+      position: relative;
+      cursor: pointer;
+      padding-bottom: 4px;
+      transition: color .3s ease;
+    }
+
+    .nav-link:hover {
+      color: #f97316;
+      /* orange */
+    }
+
+    /* underline effect */
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      height: 2px;
+      width: 0%;
+      background-color: #f97316;
+      transition: width .3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* active link */
+    .nav-link.active {
+      color: #f97316;
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .product-card {
+      height: var(--card-h);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 1rem;
+      overflow: visible;
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
+
+    .img-wrap {
+      position: relative !important;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 40px rgba(2, 6, 23, .12);
+    }
+
+    /* Image fills entire image area — no white gaps */
+    .product-card .img-wrap {
+      height: 56%;
+      width: 100%;
+      overflow: hidden;
+      /* ONLY here */
+      background: #f3f4f6;
+    }
+
+    .product-card .img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .6s ease;
+    }
+
+    .product-card .img-wrap img:hover {
+      transform: scale(1.08);
+    }
+
+    /* Buttons */
+    .btn-orange {
+      background: var(--orange);
+      color: #fff;
+      transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+    }
+
+    .btn-orange:hover {
+      background: var(--orange-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(234, 88, 12, .22);
+    }
+
+    .btn-outline {
+      background: #fff;
+      border: 1px solid rgba(15, 23, 42, .06);
+      color: #0f172a;
+      transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+    }
+
+    .btn-outline:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(2, 6, 23, .06);
+    }
+
+    .add-cart-btn:hover {
+      color: #f97316 !important;
+    }
+
+    /* Ratings */
+    .stars i {
+      color: #fbbf24;
+      margin-right: 2px;
+    }
+
+    /* Responsive card height */
+    @media (max-width:1024px) {
+      :root {
+        --card-h: 520px;
+      }
+
+      /* slightly taller on tablet */
+    }
+
+    @media (max-width:640px) {
+      :root {
+        --card-h: 460px;
+      }
+    }
+
+
+    .like-btn {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      z-index: 20;
+
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+      opacity: 1;
+      /* Always visible */
+      visibility: visible;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: .3s ease;
+    }
+
+    .like-btn i {
+      font-size: 20px;
+      color: #9ca3af;
+      transition: .3s ease;
+    }
+
+    /* When liked */
+    .like-btn.liked i {
+      color: #f97316 !important;
+    }
+
+    /* Hover highlight */
+    .like-btn:hover {
+      transform: scale(1.06);
+    }
+
+    .filter-btn {
+      padding: 10px 18px;
+      border-radius: 20px;
+      border: 1px solid #f97316;
+      background: white;
+      color: #f97316;
+      font-weight: 600;
+      transition: .3s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: #f97316;
+      color: white;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-slate-800">
+
+  <!-- HEADER -->
+  <header class="bg-white shadow-md px-6 py-4 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+      <!-- LOGO -->
+      <a href="./index.html" class="select-none">
+        <h1 class="text-3xl md:text-4xl font-black tracking-[2px] text-orange-500 uppercase
+                 transition-all duration-300 hover:text-orange-400 hover:scale-105">
+          OFFERS ZONE
+        </h1>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:block">
+        <ul class="flex space-x-8 text-gray-700 font-medium">
+          <li><a href="./index.html">Home</a></li>
+
+          <li class="relative group">
+            <a class="nav-link flex items-center gap-1">
+              Categories
+              <i class="fa-solid fa-chevron-down text-xs"></i>
+            </a>
+
+            <!-- Dropdown -->
+            <ul class="absolute left-0 top-full mt-3 w-56 bg-white shadow-lg rounded-xl
+           opacity-0 invisible group-hover:opacity-100 group-hover:visible
+           transition-all duration-300 z-50 overflow-hidden">
+
+              <li>
+                <a href="./gas.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                  Gas Safety Devices
+                </a>
+              </li>
+
+              <li>
+                <a href="./men.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                  Mens Wears
+                </a>
+              </li>
+
+              <li>
+                <a href="./leadies.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                  Ladies Wears
+                </a>
+              </li>
+
+              <li>
+                <a href="./sares.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500 nav-link active">
+                  Sarees
+                </a>
+              </li>
+
+              <li>
+                <a href="./kid.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                  Kids Wears
+                </a>
+              </li>
+              <li>
+                <a href="./TRACKPANTS/trackp.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                  Track Pants
+                </a>
+              </li>
+              <li>
+                <a href="./SWEATERS/sweater.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                  Sweater
+                </a>
+              </li>
+              <li>
+                <a href="./SHIRTSHOOT/shirtshoot.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                  Shirting & Shooting
+                </a>
+              </li>
+              <li>
+                <a href="./GOLD/gold.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500 ">
+                  Gold Jewellery
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li><a class="nav-link " href="l./iked.html">Liked</a></li>
+          <li><a class="nav-link" href="./CART/cart.html">Cart</a></li>
+          <li><a class="nav-link" href="#">Blogs</a></li>
+          <li><a class="nav-link" href="#">Contact</a></li>
+          <li><a class="nav-link" href="#">About</a></li>
+
+
+        </ul>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button onclick="toggleMenu()" class="md:hidden text-3xl text-gray-700">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <nav id="mobileMenu" class="hidden md:hidden bg-white shadow-md mt-3 rounded-lg px-6 py-4">
+      <ul class="flex flex-col space-y-4 text-gray-700 font-medium">
+        <li><a href="./index.html">Home</a></li>
+
+        <li>
+          <details class="group">
+            <summary class="cursor-pointer flex items-center justify-between nav-link">
+              Categories
+              <i class="fa-solid fa-chevron-down text-xs"></i>
+            </summary>
+
+            <ul class="ml-4 mt-2 space-y-2 text-slate-600">
+              <li><a href="./gas.html">Gas Safety Devices</a></li>
+              <li><a href="./men.html">Mens Wears</a></li>
+              <li><a href="./leadies.html">Ladies Wears</a></li>
+              <li><a href="./sares.html" class="nav-link active">Sarees</a></li>
+              <li><a href="./kid.html">Kids Wears</a></li>
+              <li><a href="./TRACKPANTS/trackp.html">Track Pants</a></li>
+              <li><a href="./SWEATERS/sweater.html">Sweater</a></li>
+              <li><a href="./SHIRTSHOOT/shirtshoot.html">Shirting & Shooting</a></li>
+              <li><a href="./GOLD/gold.html">Gold Jewellery</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a class="nav-link " href="./liked.html">Liked</a></li>
+        <li><a class="nav-link" href="./CART/cart.html">Cart</a></li>
+
+        <li><a class="nav-link" href="#">Blog</a></li>
+        <li><a class="nav-link" href="#">Contact</a></li>
+        <li><a class="nav-link" href="#">About</a></li>
+
+      </ul>
+    </nav>
+  </header>
+ 
+
+<!-- ========== SHIRTING CLOTHS COLLECTION ========== -->
+<section class="mt-12">
+  <h4 class="text-center text-black-600 text-3xl font-extrabold section-title">
+    Shirting Cloths Collection
+  </h4>
+
+  <!-- FILTER BUTTONS -->
+  <div class="flex flex-wrap justify-center gap-4 mt-6 mb-6">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="formal">Formal</button>
+    <button class="filter-btn" data-filter="casual">Casual</button>
+    <button class="filter-btn" data-filter="cotton">Cotton</button>
+    <button class="filter-btn" data-filter="linen">Linen</button>
+    <button class="filter-btn" data-filter="party">Party Wear</button>
+    <button class="filter-btn" data-filter="premium">Premium</button>
+    <button class="filter-btn" data-filter="checked">Checked</button>
+    <button class="filter-btn" data-filter="striped">Striped</button>
+  </div>
+
+  <div class="grid grid-cols-1 mt-11
+          sm:grid-cols-2 
+          md:grid-cols-4 
+          gap-3 sm:gap-4 
+          px-3 sm:px-4 md:px-6 mb-[7%]">
+
+    <!-- Shirt Cloth 1 - Formal -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="formal" data-id="801"
+      data-name="Formal Shirt Cloth — Premium Cotton" data-price="1899" data-img="./IMAGES/sh1.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=801">
+          <img src="./IMAGES/sh1.jpeg" alt="Formal Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=801">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Formal Shirt Cloth — Premium Cotton
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Perfect stitching material for office & functions.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.5</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(610)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,899</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 2 - Casual -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="casual" data-id="802"
+      data-name="Casual Checked Shirt Cloth" data-price="1599" data-img="./IMAGES/sh2.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=802">
+          <img src="./IMAGES/sh2.jpeg" alt="Checked Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=802">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Casual Checked Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Soft checked fabric for daily wear shirts.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.3</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(480)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,599</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 3 - Party -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="party" data-id="803"
+      data-name="Party Wear Shirt Cloth" data-price="2199" data-img="./IMAGES/sh3.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=803">
+          <img src="./IMAGES/sh3.jpeg" alt="Party Wear Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=803">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Party Wear Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Premium finish cloth for stylish party shirts.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.6</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(395)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,199</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 4 - Linen -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="linen" data-id="804"
+      data-name="Linen Shirt Cloth — Summer Wear" data-price="1999" data-img="./IMAGES/sh4.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=804">
+          <img src="./IMAGES/sh4.jpeg" alt="Linen Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=804">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Linen Shirt Cloth — Summer Wear
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Breathable linen fabric for hot climate tailoring.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.4</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(450)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,999</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 5 - Cotton -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="cotton" data-id="805"
+      data-name="Premium Cotton Shirt Cloth" data-price="1799" data-img="./IMAGES/sh5.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=805">
+          <img src="./IMAGES/sh5.jpeg" alt="Premium Cotton Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=805">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Premium Cotton Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          100% pure cotton for comfortable tailoring.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.7</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <span class="text-xs text-gray-400">(520)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,799</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 6 - Checked -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="checked" data-id="806"
+      data-name="Classic Checked Shirt Cloth" data-price="1499" data-img="./IMAGES/sh6.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=806">
+          <img src="./IMAGES/sh6.jpeg" alt="Classic Checked Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=806">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Classic Checked Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Traditional check pattern for casual shirts.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.2</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(380)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,499</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 7 - Striped -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="striped" data-id="807"
+      data-name="Striped Formal Shirt Cloth" data-price="2099" data-img="./IMAGES/sh7.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=807">
+          <img src="./IMAGES/sh7.jpeg" alt="Striped Formal Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=807">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Striped Formal Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Elegant stripes for business shirt tailoring.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.5</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(410)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,099</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 8 - Premium -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="premium" data-id="808"
+      data-name="Luxury Shirt Cloth" data-price="2599" data-img="./IMAGES/sh8.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=808">
+          <img src="./IMAGES/sh8.jpeg" alt="Luxury Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=808">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Luxury Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          High-end fabric for premium shirt making.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.8</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <span class="text-xs text-gray-400">(290)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,599</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 9 - Formal -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="formal" data-id="809"
+      data-name="Office Formal Shirt Cloth" data-price="1699" data-img="./IMAGES/sh1.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=809">
+          <img src="./IMAGES/sh1.jpeg" alt="Office Formal Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=809">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Office Formal Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Crisp fabric perfect for corporate shirts.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.4</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(470)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,699</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 10 - Casual -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="casual" data-id="810"
+      data-name="Soft Casual Shirt Cloth" data-price="1399" data-img="./IMAGES/sh2.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=810">
+          <img src="./IMAGES/sh2.jpeg" alt="Soft Casual Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=810">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Soft Casual Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Comfortable fabric for weekend shirts.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.3</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(390)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,399</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 11 - Cotton -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="cotton" data-id="811"
+      data-name="Organic Cotton Shirt Cloth" data-price="1899" data-img="./IMAGES/sh3.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=811">
+          <img src="./IMAGES/sh3.jpeg" alt="Organic Cotton Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=811">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Organic Cotton Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Eco-friendly organic cotton fabric.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.6</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(310)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,899</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 12 - Linen -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="linen" data-id="812"
+      data-name="Pure Linen Shirt Cloth" data-price="2299" data-img="./IMAGES/sh4.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=812">
+          <img src="./IMAGES/sh4.jpeg" alt="Pure Linen Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=812">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Pure Linen Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          100% pure linen for summer shirts.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.7</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <span class="text-xs text-gray-400">(280)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,299</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 13 - Party -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="party" data-id="813"
+      data-name="Designer Party Shirt Cloth" data-price="2399" data-img="./IMAGES/sh5.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=813">
+          <img src="./IMAGES/sh5.jpeg" alt="Designer Party Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=813">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Designer Party Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Trendy fabric for party shirt tailoring.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.5</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(340)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,399</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 14 - Premium -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="premium" data-id="814"
+      data-name="Executive Shirt Cloth" data-price="2799" data-img="./IMAGES/sh6.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=814">
+          <img src="./IMAGES/sh6.jpeg" alt="Executive Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=814">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Executive Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Premium fabric for senior executive shirts.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.8</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <span class="text-xs text-gray-400">(210)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,799</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 15 - Checked -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="checked" data-id="815"
+      data-name="Modern Checked Shirt Cloth" data-price="1699" data-img="./IMAGES/sh7.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=815">
+          <img src="./IMAGES/sh7.jpeg" alt="Modern Checked Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=815">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Modern Checked Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Contemporary check patterns for fashion shirts.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.4</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(360)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,699</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 16 - Striped -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="striped" data-id="816"
+      data-name="Business Striped Shirt Cloth" data-price="1899" data-img="./IMAGES/sh8.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=816">
+          <img src="./IMAGES/sh8.jpeg" alt="Business Striped Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=816">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Business Striped Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Professional stripes for office shirt making.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.5</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(290)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,899</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 17 - Formal -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="formal" data-id="817"
+      data-name="Corporate Shirt Cloth" data-price="1999" data-img="./IMAGES/sh1.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=817">
+          <img src="./IMAGES/sh1.jpeg" alt="Corporate Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=817">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Corporate Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Premium quality for corporate shirt tailoring.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.6</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(320)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,999</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 18 - Casual -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="casual" data-id="818"
+      data-name="Weekend Casual Shirt Cloth" data-price="1299" data-img="./IMAGES/sh2.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=818">
+          <img src="./IMAGES/sh2.jpeg" alt="Weekend Casual Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=818">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Weekend Casual Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Comfort fabric for relaxed weekend shirts.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.2</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(410)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,299</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 19 - Cotton -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="cotton" data-id="819"
+      data-name="Soft Touch Cotton Cloth" data-price="1599" data-img="./IMAGES/sh3.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=819">
+          <img src="./IMAGES/sh3.jpeg" alt="Soft Touch Cotton Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=819">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Soft Touch Cotton Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Ultra-soft cotton for comfortable shirts.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.7</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <span class="text-xs text-gray-400">(380)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,599</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 20 - Linen -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="linen" data-id="820"
+      data-name="Lightweight Linen Cloth" data-price="2099" data-img="./IMAGES/sh4.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=820">
+          <img src="./IMAGES/sh4.jpeg" alt="Lightweight Linen Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=820">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Lightweight Linen Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Breathable linen for summer shirt making.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.5</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(270)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,099</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 21 - Party -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="party" data-id="821"
+      data-name="Celebration Shirt Cloth" data-price="2499" data-img="./IMAGES/sh5.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=821">
+          <img src="./IMAGES/sh5.jpeg" alt="Celebration Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=821">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Celebration Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Festive fabric for celebration shirt tailoring.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.6</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(230)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,499</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 22 - Premium -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="premium" data-id="822"
+      data-name="Luxury Blend Shirt Cloth" data-price="2999" data-img="./IMAGES/sh6.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=822">
+          <img src="./IMAGES/sh6.jpeg" alt="Luxury Blend Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=822">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Luxury Blend Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Premium cotton-linen blend for luxury shirts.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.9</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <span class="text-xs text-gray-400">(180)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,999</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 23 - Checked -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="checked" data-id="823"
+      data-name="Vintage Checked Cloth" data-price="1799" data-img="./IMAGES/sh7.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=823">
+          <img src="./IMAGES/sh7.jpeg" alt="Vintage Checked Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=823">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Vintage Checked Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Retro check patterns for vintage style shirts.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.3</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(320)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,799</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- Shirt Cloth 24 - Striped -->
+    <article class="bg-white product-card shadow-sm p-4" data-category="striped" data-id="824"
+      data-name="Navy Striped Shirt Cloth" data-price="1999" data-img="./IMAGES/sh8.jpeg">
+      <div class="img-wrap rounded-lg">
+        <div class="like-btn" onclick="toggleLike(this)">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="./PRODUCTS/product.html?id=824">
+          <img src="./IMAGES/sh8.jpeg" alt="Navy Striped Shirt Cloth" class="product-img">
+        </a>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-slate-500">Shirting Cloth</p>
+        <a href="./PRODUCTS/product.html?id=824">
+          <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">
+            Navy Striped Shirt Cloth
+          </h4>
+        </a>
+        <p class="text-sm text-slate-600 truncate-2">
+          Classic navy stripes for formal shirt making.
+        </p>
+        <div class="flex items-center gap-2 stars mt-2">
+          <span class="text-sm font-semibold">4.5</span>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-xs text-gray-400">(280)</span>
+        </div>
+        <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,999</p>
+      </div>
+      <div class="flex gap-3 mt-3">
+        <a href="./buy.html" onclick="event.stopPropagation()"
+          class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+        <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+          onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </article>
+
+
+  </div>
+</section>
+
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-300 mt-0 w-full">
+    <div class="w-full px-10 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+
+      <div>
+        <h4 class="text-orange-500 text-2xl font-extrabold">OFFERS ZONE</h4>
+        <p class="mt-3 text-slate-400">Your trusted marketplace for essentials, fashion & safety.</p>
+
+        <!-- SOCIAL ICONS WITH A TAGS -->
+        <div class="flex gap-3 mt-4">
+          <a href="https://facebook.com" target="_blank"
+            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+
+          <a href="https://instagram.com" target="_blank"
+            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+
+          <a href="https://twitter.com" target="_blank"
+            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h5 class="text-white font-semibold">Quick Links</h5>
+        <ul class="mt-3 space-y-2 text-slate-400">
+          <li><a href="index.html" class="hover:text-orange-400">Home</a></li>
+          <li><a href="gas.html" class="hover:text-orange-400">Gas Safety Device</a></li>
+          <li><a href="men.html" class="hover:text-orange-400">Mens Wears</a></li>
+          <li><a href="leadies.html" class="hover:text-orange-400">leadies Wears</a></li>
+          <li><a href="sares.html" class="hover:text-orange-400">Sarees</a></li>
+          <li><a href="kid.html" class="hover:text-orange-400">Kids Wears</a></li>
+
+
+
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-white font-semibold">Support</h5>
+        <ul class="mt-3 space-y-2 text-slate-400">
+          <li><a href="#" class="hover:text-orange-400">FAQ</a></li>
+          <li><a href="#" class="hover:text-orange-400">Privacy policy</a></li>
+          <li><a href="#" class="hover:text-orange-400">Terms & Conditions</a></li>
+          <li><a href="#" class="hover:text-orange-400">Contact</a></li>
+          <li><a href="#" class="hover:text-orange-400">About</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-white font-semibold">Contact</h5>
+
+        <p class="mt-3 space-y-2 text-slate-400">
+          📍
+          <a href="https://maps.google.com/?q=Hyderabad, Telangana" target="_blank" class="hover:text-orange-400">
+            Hyderabad, Telangana
+          </a>
+        </p>
+
+        <p class="mt-3 space-y-2 text-slate-400">
+          📞
+          <a href="tel:+919876543210" class="hover:text-orange-400">
+            +91 98765 43210
+          </a>
+        </p>
+
+        <p class="mt-3 space-y-2 text-slate-400">
+          📧
+          <a href="mailto:support@offerszone.com" class="hover:text-orange-400">
+            support@offerszone.com
+          </a>
+        </p>
+      </div>
+
+
+    </div>
+
+    <div class="border-t border-gray-800">
+      <p class="text-center text-slate-500 py-6">© 2025 OFFERS ZONE — All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="shirtcloth.js"></script>
+
+</body>
+
+</html>
