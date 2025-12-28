@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Offers Zone — Track Pants</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        /* ----------------- Global / Cards ----------------- */
+        :root {
+            --orange: #f97316;
+            --orange-dark: #ea580c;
+            --card-h: 480px;
+            /* default desktop card height */
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .nav-link {
+            position: relative;
+            cursor: pointer;
+            padding-bottom: 4px;
+            transition: color .3s ease;
+        }
+
+        .nav-link:hover {
+            color: #f97316;
+        }
+
+        /* underline effect */
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            height: 2px;
+            width: 0%;
+            background-color: #f97316;
+            transition: width .3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* active link */
+        .nav-link.active {
+            color: #f97316;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .product-card {
+            height: var(--card-h);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 1rem;
+            overflow: visible;
+            transition: transform .28s ease, box-shadow .28s ease;
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.3s ease;
+        }
+
+        .product-card.hidden {
+            display: none;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .img-wrap {
+            position: relative !important;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(2, 6, 23, .12);
+        }
+
+        /* Image fills entire image area — no white gaps */
+        .product-card .img-wrap {
+            height: 56%;
+            width: 100%;
+            overflow: hidden;
+            background: #f3f4f6;
+        }
+
+        .product-card .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform .6s ease;
+        }
+
+        .product-card .img-wrap img:hover {
+            transform: scale(1.08);
+        }
+
+        /* Buttons */
+        .btn-orange {
+            background: var(--orange);
+            color: #fff;
+            transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+        }
+
+        .btn-orange:hover {
+            background: var(--orange-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(234, 88, 12, .22);
+        }
+
+        .btn-outline {
+            background: #fff;
+            border: 1px solid rgba(15, 23, 42, .06);
+            color: #0f172a;
+            transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+        }
+
+        .btn-outline:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(2, 6, 23, .06);
+        }
+
+        .add-cart-btn:hover {
+            color: #f97316 !important;
+        }
+
+        /* Ratings */
+        .stars i {
+            color: #fbbf24;
+            margin-right: 2px;
+        }
+
+        /* Responsive card height */
+        @media (max-width:1024px) {
+            :root {
+                --card-h: 520px;
+            }
+        }
+
+        @media (max-width:640px) {
+            :root {
+                --card-h: 460px;
+            }
+        }
+
+        .like-btn {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(4px);
+            opacity: 1;
+            visibility: visible;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: .3s ease;
+        }
+
+        .like-btn i {
+            font-size: 20px;
+            color: #9ca3af;
+            transition: .3s ease;
+        }
+
+        /* When liked */
+        .like-btn.liked i {
+            color: #f97316 !important;
+        }
+
+        /* Hover highlight */
+        .like-btn:hover {
+            transform: scale(1.06);
+        }
+
+        .filter-btn {
+            padding: 10px 18px;
+            border-radius: 20px;
+            border: 1px solid #f97316;
+            background: white;
+            color: #f97316;
+            font-weight: 600;
+            transition: .3s;
+            cursor: pointer;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #f97316;
+            color: white;
+        }
+
+        .truncate-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Smooth filtering animation */
+        .products-grid {
+            transition: all 0.4s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-slate-800">
+
+    <!-- HEADER -->
+    <header class="bg-white shadow-md px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- LOGO -->
+            <a href="../index.html" class="select-none">
+                <h1 class="text-3xl md:text-4xl font-black tracking-[2px] text-orange-500 uppercase
+                 transition-all duration-300 hover:text-orange-400 hover:scale-105">
+                    OFFERS ZONE
+                </h1>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:block">
+                <ul class="flex space-x-8 text-gray-700 font-medium">
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="relative group">
+                        <a class="nav-link flex items-center gap-1">
+                            Categories
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </a>
+                        <!-- Dropdown -->
+                        <ul class="absolute left-0 top-full mt-3 w-56 bg-white shadow-lg rounded-xl
+           opacity-0 invisible group-hover:opacity-100 group-hover:visible
+           transition-all duration-300 z-50 overflow-hidden">
+                            <li>
+                                <a href="../gas.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                                    Gas Safety Devices
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../men.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                                    Mens Wears
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../leadies.html"
+                                    class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                                    Ladies Wears
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../sares.html"
+                                    class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500 ">
+                                    Sarees
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../kid.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                                    Kids Wears
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../TRACKPANTS/trackp.html"
+                                    class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500 nav-link active">
+                                    Track Pants
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../SWEATERS/sweater.html"
+                                    class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                                    Sweater
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../SHIRTSHOOT/shirtshoot.html"
+                                    class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                                    Shirting & Shooting
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../GOLD/gold.html"
+                                    class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                                    Gold Jewellery
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link " href="../liked.html">Liked</a></li>
+                    <li><a class="nav-link" href="../CART/cart.html">Cart</a></li>
+                    <li><a class="nav-link" href="#">Blogs</a></li>
+                    <li><a class="nav-link" href="#">Contact</a></li>
+                    <li><a class="nav-link" href="#">About</a></li>
+                </ul>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMenu()" class="md:hidden text-3xl text-gray-700">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <nav id="mobileMenu" class="hidden md:hidden bg-white shadow-md mt-3 rounded-lg px-6 py-4">
+            <ul class="flex flex-col space-y-4 text-gray-700 font-medium">
+                <li><a href="../index.html">Home</a></li>
+                <li>
+                    <details class="group">
+                        <summary class="cursor-pointer flex items-center justify-between nav-link">
+                            Categories
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </summary>
+                        <ul class="ml-4 mt-2 space-y-2 text-slate-600">
+                            <li><a href="../gas.html">Gas Safety Devices</a></li>
+                            <li><a href="../men.html">Mens Wears</a></li>
+                            <li><a href="../leadies.html">Ladies Wears</a></li>
+                            <li><a href="../sares.html">Sarees</a></li>
+                            <li><a href="../kid.html">Kids Wears</a></li>
+                            <li><a href="../TRACKPANTS/trackp.html" class="nav-link active">Track Pants</a></li>
+                            <li><a href="../SWEATERS/sweater.html">Sweater</a></li>
+                            <li><a href="../SHIRTSHOOT/shirtshoot.html">Shirting & Shooting</a></li>
+                            <li><a href="../GOLD/gold.html">Gold Jewellery</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li><a class="nav-link " href="../liked.html">Liked</a></li>
+                <li><a class="nav-link" href="../CART/cart.html">Cart</a></li>
+                <li><a class="nav-link" href="#">Blog</a></li>
+                <li><a class="nav-link" href="#">Contact</a></li>
+                <li><a class="nav-link" href="#">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ========== SAREES COLLECTION ========== -->
+    <section class="mt-12">
+        <h3 class="text-center text-black-600 text-3xl font-extrabold section-title">
+            Track Pants Collection
+        </h3>
+
+        <!-- FILTER BUTTONS -->
+        <div class="flex flex-wrap justify-center gap-4 mt-6 mb-6">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="slim">Slim Fit</button>
+            <button class="filter-btn" data-filter="sports">Sports</button>
+            <button class="filter-btn" data-filter="jogger">Jogger</button>
+            <button class="filter-btn" data-filter="gym">Gym / Training</button>
+        </div>
+
+        <div class="products-grid grid grid-cols-1 mt-11
+            sm:grid-cols-2 
+            md:grid-cols-4 
+            gap-3 sm:gap-4 
+            px-3 sm:px-4 md:px-6 mb-[7%]">
+
+            <!-- Track Pant 1 - Slim Fit -->
+            <article class="bg-white product-card shadow-sm p-4 cursor-pointer" data-id="601"
+                data-name="Men Track Pants — Slim Fit" data-price="1299" data-img="./IMAGES/tp1.jpeg"
+                data-filter="slim">
+                <div class="img-wrap rounded-lg">
+                    <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <a href="/public/PRODUCTS/product.html?id=601" onclick="event.stopPropagation()">
+                        <img src="./IMAGES/tp1.jpeg" class="product-img" alt="Track Pant">
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm text-slate-500">Track Pants</p>
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Men Track Pants — Slim Fit</h4>
+                    <p class="text-sm text-slate-600 truncate-2">Comfortable cotton blend for daily wear.</p>
+                    <div class="flex items-center gap-2 stars mt-2">
+                        <span class="text-sm font-semibold">4.4</span>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <span class="text-xs text-gray-400">(520)</span>
+                    </div>
+                    <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,299</p>
+                </div>
+                <div class="flex gap-3 mt-3">
+                    <a href="./buy.html?id=601" onclick="event.stopPropagation()"
+                        class="btn-orange w-1/2 px-4 py-2 rounded-full text-sm font-semibold text-center">Buy</a>
+                    <button class="add-cart-btn btn-outline w-1/2 px-4 py-2 rounded-full text-sm font-semibold"
+                        onclick="event.stopPropagation()">Add to Cart</button>
+                </div>
+            </article>
+
+            <!-- Track Pant 2 - Sports -->
+            <article class="bg-white product-card shadow-sm p-4 cursor-pointer" data-id="602"
+                data-name="Sports Track Pants — Dry Fit" data-price="1499" data-img="./IMAGES/tp2.jpeg"
+                data-filter="sports">
+                <div class="img-wrap rounded-lg">
+                    <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <a href="../PRODUCTS/product.html?id=602" onclick="event.stopPropagation()">
+                        <img src="./IMAGES/tp2.jpeg" class="product-img" alt="Sports Track Pant">
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm text-slate-500">Track Pants</p>
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Sports Track Pants — Dry Fit</h4>
+                    <p class="text-sm text-slate-600 truncate-2">Sweat-resistant fabric ideal for workouts.</p>
+                    <div class="flex items-center gap-2 stars mt-2">
+                        <span class="text-sm font-semibold">4.5</span>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <span class="text-xs text-gray-400">(410)</span>
+                    </div>
+                    <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,499</p>
+                </div>
+                <div class="flex gap-3 mt-3">
+                    <a href="./buy.html?id=602" onclick="event.stopPropagation()"
+                        class="btn-orange w-1/2 px-4 py-2 rounded-full text-sm font-semibold text-center">Buy</a>
+                    <button class="add-cart-btn btn-outline w-1/2 px-4 py-2 rounded-full text-sm font-semibold"
+                        onclick="event.stopPropagation()">Add to Cart</button>
+                </div>
+            </article>
+
+            <!-- Track Pant 3 - Jogger -->
+            <article class="bg-white product-card shadow-sm p-4 cursor-pointer" data-id="603"
+                data-name="Jogger Track Pants — Ankle Fit" data-price="1699" data-img="./IMAGES/tp3.jpeg"
+                data-filter="jogger">
+                <div class="img-wrap rounded-lg">
+                    <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <a href="../PRODUCTS/product.html?id=603" onclick="event.stopPropagation()">
+                        <img src="./IMAGES/tp3.jpeg" class="product-img" alt="Jogger Track Pant">
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm text-slate-500">Track Pants</p>
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Jogger Track Pants — Ankle Fit</h4>
+                    <p class="text-sm text-slate-600 truncate-2">Trendy jogger style with elastic cuffs.</p>
+                    <div class="flex items-center gap-2 stars mt-2">
+                        <span class="text-sm font-semibold">4.3</span>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <span class="text-xs text-gray-400">(380)</span>
+                    </div>
+                    <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,699</p>
+                </div>
+                <div class="flex gap-3 mt-3">
+                    <a href="./buy.html?id=603" onclick="event.stopPropagation()"
+                        class="btn-orange w-1/2 px-4 py-2 rounded-full text-sm font-semibold text-center">Buy</a>
+                    <button class="add-cart-btn btn-outline w-1/2 px-4 py-2 rounded-full text-sm font-semibold"
+                        onclick="event.stopPropagation()">Add to Cart</button>
+                </div>
+            </article>
+
+            <!-- Track Pant 4 - Gym -->
+            <article class="bg-white product-card shadow-sm p-4 cursor-pointer" data-id="604"
+                data-name="Training Track Pants — Gym Wear" data-price="1399" data-img="./IMAGES/tp4.jpeg"
+                data-filter="gym">
+                <div class="img-wrap rounded-lg">
+                    <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <a href="../PRODUCTS/product.html?id=604" onclick="event.stopPropagation()">
+                        <img src="./IMAGES/tp4.jpeg" class="product-img" alt="Training Track Pant">
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm text-slate-500">Track Pants</p>
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Training Track Pants — Gym Wear</h4>
+                    <p class="text-sm text-slate-600 truncate-2">Stretchable fabric for intense training.</p>
+                    <div class="flex items-center gap-2 stars mt-2">
+                        <span class="text-sm font-semibold">4.6</span>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <span class="text-xs text-gray-400">(600)</span>
+                    </div>
+                    <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,399</p>
+                </div>
+                <div class="flex gap-3 mt-3">
+                    <a href="./buy.html?id=604" onclick="event.stopPropagation()"
+                        class="btn-orange w-1/2 px-4 py-2 rounded-full text-sm font-semibold text-center">Buy</a>
+                    <button class="add-cart-btn btn-outline w-1/2 px-4 py-2 rounded-full text-sm font-semibold"
+                        onclick="event.stopPropagation()">Add to Cart</button>
+                </div>
+            </article>
+
+            <!-- Track Pant 5 - Slim Fit -->
+            <article class="bg-white product-card shadow-sm p-4 cursor-pointer" data-id="605"
+                data-name="Premium Slim Fit Track Pants" data-price="1599" data-img="./IMAGES/tp1.jpeg"
+                data-filter="slim">
+                <div class="img-wrap rounded-lg">
+                    <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <a href="../PRODUCTS/product.html?id=605" onclick="event.stopPropagation()">
+                        <img src="./IMAGES/tp1.jpeg" class="product-img" alt="Premium Slim Fit">
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm text-slate-500">Track Pants</p>
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Premium Slim Fit Track Pants</h4>
+                    <p class="text-sm text-slate-600 truncate-2">High-quality fabric with perfect fit.</p>
+                    <div class="flex items-center gap-2 stars mt-2">
+                        <span class="text-sm font-semibold">4.7</span>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                        <span class="text-xs text-gray-400">(720)</span>
+                    </div>
+                    <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,599</p>
+                </div>
+                <div class="flex gap-3 mt-3">
+                    <a href="./buy.html?id=605" onclick="event.stopPropagation()"
+                        class="btn-orange w-1/2 px-4 py-2 rounded-full text-sm font-semibold text-center">Buy</a>
+                    <button class="add-cart-btn btn-outline w-1/2 px-4 py-2 rounded-full text-sm font-semibold"
+                        onclick="event.stopPropagation()">Add to Cart</button>
+                </div>
+            </article>
+
+            <!-- Track Pant 6 - Sports -->
+            <article class="bg-white product-card shadow-sm p-4 cursor-pointer" data-id="606"
+                data-name="Running Track Pants — Quick Dry" data-price="1799" data-img="./IMAGES/tp2.jpeg"
+                data-filter="sports">
+                <div class="img-wrap rounded-lg">
+                    <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <a href="../PRODUCTS/product.html?id=606" onclick="event.stopPropagation()">
+                        <img src="./IMAGES/tp2.jpeg" class="product-img" alt="Running Track Pant">
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm text-slate-500">Track Pants</p>
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Running Track Pants — Quick Dry</h4>
+                    <p class="text-sm text-slate-600 truncate-2">Lightweight for running and sports.</p>
+                    <div class="flex items-center gap-2 stars mt-2">
+                        <span class="text-sm font-semibold">4.8</span>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span class="text-xs text-gray-400">(890)</span>
+                    </div>
+                    <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,799</p>
+                </div>
+                <div class="flex gap-3 mt-3">
+                    <a href="./buy.html?id=606" onclick="event.stopPropagation()"
+                        class="btn-orange w-1/2 px-4 py-2 rounded-full text-sm font-semibold text-center">Buy</a>
+                    <button class="add-cart-btn btn-outline w-1/2 px-4 py-2 rounded-full text-sm font-semibold"
+                        onclick="event.stopPropagation()">Add to Cart</button>
+                </div>
+            </article>
+
+            <!-- Track Pant 7 - Jogger -->
+            <article class="bg-white product-card shadow-sm p-4 cursor-pointer" data-id="607"
+                data-name="Designer Jogger Track Pants" data-price="1999" data-img="./IMAGES/tp3.jpeg"
+                data-filter="jogger">
+                <div class="img-wrap rounded-lg">
+                    <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <a href="../PRODUCTS/product.html?id=607" onclick="event.stopPropagation()">
+                        <img src="./IMAGES/tp3.jpeg" class="product-img" alt="Designer Jogger">
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm text-slate-500">Track Pants</p>
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Designer Jogger Track Pants</h4>
+                    <p class="text-sm text-slate-600 truncate-2">Stylish jogger with modern design.</p>
+                    <div class="flex items-center gap-2 stars mt-2">
+                        <span class="text-sm font-semibold">4.4</span>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <span class="text-xs text-gray-400">(450)</span>
+                    </div>
+                    <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,999</p>
+                </div>
+                <div class="flex gap-3 mt-3">
+                    <a href="./buy.html?id=607" onclick="event.stopPropagation()"
+                        class="btn-orange w-1/2 px-4 py-2 rounded-full text-sm font-semibold text-center">Buy</a>
+                    <button class="add-cart-btn btn-outline w-1/2 px-4 py-2 rounded-full text-sm font-semibold"
+                        onclick="event.stopPropagation()">Add to Cart</button>
+                </div>
+            </article>
+
+            <!-- Track Pant 8 - Gym -->
+            <article class="bg-white product-card shadow-sm p-4 cursor-pointer" data-id="608"
+                data-name="Professional Gym Track Pants" data-price="1699" data-img="./IMAGES/tp4.jpeg"
+                data-filter="gym">
+                <div class="img-wrap rounded-lg">
+                    <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <a href="../PRODUCTS/product.html?id=608" onclick="event.stopPropagation()">
+                        <img src="./IMAGES/tp4.jpeg" class="product-img" alt="Gym Track Pant">
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm text-slate-500">Track Pants</p>
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Professional Gym Track Pants</h4>
+                    <p class="text-sm text-slate-600 truncate-2">Designed for professional training sessions.</p>
+                    <div class="flex items-center gap-2 stars mt-2">
+                        <span class="text-sm font-semibold">4.9</span>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span class="text-xs text-gray-400">(950)</span>
+                    </div>
+                    <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,699</p>
+                </div>
+                <div class="flex gap-3 mt-3">
+                    <a href="./buy.html?id=608" onclick="event.stopPropagation()"
+                        class="btn-orange w-1/2 px-4 py-2 rounded-full text-sm font-semibold text-center">Buy</a>
+                    <button class="add-cart-btn btn-outline w-1/2 px-4 py-2 rounded-full text-sm font-semibold"
+                        onclick="event.stopPropagation()">Add to Cart</button>
+                </div>
+            </article>
+
+            <!-- Track Pant 9 - Slim Fit -->
+            <article class="bg-white product-card shadow-sm p-4 cursor-pointer" data-id="609"
+                data-name="Casual Slim Fit Track Pants" data-price="1199" data-img="./IMAGES/tp1.jpeg"
+                data-filter="slim">
+                <div class="img-wrap rounded-lg">
+                    <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <a href="../PRODUCTS/product.html?id=609" onclick="event.stopPropagation()">
+                        <img src="./IMAGES/tp1.jpeg" class="product-img" alt="Casual Slim Fit">
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm text-slate-500">Track Pants</p>
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Casual Slim Fit Track Pants</h4>
+                    <p class="text-sm text-slate-600 truncate-2">Perfect for casual outings and daily wear.</p>
+                    <div class="flex items-center gap-2 stars mt-2">
+                        <span class="text-sm font-semibold">4.2</span>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <span class="text-xs text-gray-400">(320)</span>
+                    </div>
+                    <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,199</p>
+                </div>
+                <div class="flex gap-3 mt-3">
+                    <a href="./buy.html?id=609" onclick="event.stopPropagation()"
+                        class="btn-orange w-1/2 px-4 py-2 rounded-full text-sm font-semibold text-center">Buy</a>
+                    <button class="add-cart-btn btn-outline w-1/2 px-4 py-2 rounded-full text-sm font-semibold"
+                        onclick="event.stopPropagation()">Add to Cart</button>
+                </div>
+            </article>
+
+            <!-- Track Pant 10 - Sports -->
+            <article class="bg-white product-card shadow-sm p-4 cursor-pointer" data-id="610"
+                data-name="Outdoor Sports Track Pants" data-price="1899" data-img="./IMAGES/tp2.jpeg"
+                data-filter="sports">
+                <div class="img-wrap rounded-lg">
+                    <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <a href="../PRODUCTS/product.html?id=610" onclick="event.stopPropagation()">
+                        <img src="./IMAGES/tp2.jpeg" class="product-img" alt="Outdoor Sports">
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm text-slate-500">Track Pants</p>
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Outdoor Sports Track Pants</h4>
+                    <p class="text-sm text-slate-600 truncate-2">Durable fabric for outdoor activities.</p>
+                    <div class="flex items-center gap-2 stars mt-2">
+                        <span class="text-sm font-semibold">4.5</span>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                        <span class="text-xs text-gray-400">(510)</span>
+                    </div>
+                    <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,899</p>
+                </div>
+                <div class="flex gap-3 mt-3">
+                    <a href="./buy.html?id=610" onclick="event.stopPropagation()"
+                        class="btn-orange w-1/2 px-4 py-2 rounded-full text-sm font-semibold text-center">Buy</a>
+                    <button class="add-cart-btn btn-outline w-1/2 px-4 py-2 rounded-full text-sm font-semibold"
+                        onclick="event.stopPropagation()">Add to Cart</button>
+                </div>
+            </article>
+
+            <!-- Track Pant 11 - Jogger -->
+            <article class="bg-white product-card shadow-sm p-4 cursor-pointer" data-id="611"
+                data-name="Comfort Jogger Track Pants" data-price="1399" data-img="./IMAGES/tp3.jpeg"
+                data-filter="jogger">
+                <div class="img-wrap rounded-lg">
+                    <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <a href="../PRODUCTS/product.html?id=611" onclick="event.stopPropagation()">
+                        <img src="./IMAGES/tp3.jpeg" class="product-img" alt="Comfort Jogger">
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm text-slate-500">Track Pants</p>
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Comfort Jogger Track Pants</h4>
+                    <p class="text-sm text-slate-600 truncate-2">Maximum comfort with soft fabric.</p>
+                    <div class="flex items-center gap-2 stars mt-2">
+                        <span class="text-sm font-semibold">4.3</span>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <span class="text-xs text-gray-400">(290)</span>
+                    </div>
+                    <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,399</p>
+                </div>
+                <div class="flex gap-3 mt-3">
+                    <a href="./buy.html?id=611" onclick="event.stopPropagation()"
+                        class="btn-orange w-1/2 px-4 py-2 rounded-full text-sm font-semibold text-center">Buy</a>
+                    <button class="add-cart-btn btn-outline w-1/2 px-4 py-2 rounded-full text-sm font-semibold"
+                        onclick="event.stopPropagation()">Add to Cart</button>
+                </div>
+            </article>
+
+            <!-- Track Pant 12 - Gym -->
+            <article class="bg-white product-card shadow-sm p-4 cursor-pointer" data-id="612"
+                data-name="Advanced Training Track Pants" data-price="2099" data-img="./IMAGES/tp4.jpeg"
+                data-filter="gym">
+                <div class="img-wrap rounded-lg">
+                    <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <a href="../PRODUCTS/product.html?id=612" onclick="event.stopPropagation()">
+                        <img src="./IMAGES/tp4.jpeg" class="product-img" alt="Advanced Training">
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm text-slate-500">Track Pants</p>
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Advanced Training Track Pants</h4>
+                    <p class="text-sm text-slate-600 truncate-2">For serious athletes and trainers.</p>
+                    <div class="flex items-center gap-2 stars mt-2">
+                        <span class="text-sm font-semibold">4.8</span>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span class="text-xs text-gray-400">(870)</span>
+                    </div>
+                    <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,099</p>
+                </div>
+                <div class="flex gap-3 mt-3">
+                    <a href="./buy.html?id=612" onclick="event.stopPropagation()"
+                        class="btn-orange w-1/2 px-4 py-2 rounded-full text-sm font-semibold text-center">Buy</a>
+                    <button class="add-cart-btn btn-outline w-1/2 px-4 py-2 rounded-full text-sm font-semibold"
+                        onclick="event.stopPropagation()">Add to Cart</button>
+                </div>
+            </article>
+
+            
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-300 mt-0 w-full">
+        <div class="w-full px-10 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h4 class="text-orange-500 text-2xl font-extrabold">OFFERS ZONE</h4>
+                <p class="mt-3 text-slate-400">Your trusted marketplace for essentials, fashion & safety.</p>
+                <div class="flex gap-3 mt-4">
+                    <a href="https://facebook.com" target="_blank"
+                        class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank"
+                        class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank"
+                        class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h5 class="text-white font-semibold">Quick Links</h5>
+                <ul class="mt-3 space-y-2 text-slate-400">
+                    <li><a href="index.html" class="hover:text-orange-400">Home</a></li>
+                    <li><a href="gas.html" class="hover:text-orange-400">Gas Safety Device</a></li>
+                    <li><a href="men.html" class="hover:text-orange-400">Mens Wears</a></li>
+                    <li><a href="leadies.html" class="hover:text-orange-400">leadies Wears</a></li>
+                    <li><a href="sares.html" class="hover:text-orange-400">Sarees</a></li>
+                    <li><a href="kid.html" class="hover:text-orange-400">Kids Wears</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-white font-semibold">Support</h5>
+                <ul class="mt-3 space-y-2 text-slate-400">
+                    <li><a href="#" class="hover:text-orange-400">FAQ</a></li>
+                    <li><a href="#" class="hover:text-orange-400">Privacy policy</a></li>
+                    <li><a href="#" class="hover:text-orange-400">Terms & Conditions</a></li>
+                    <li><a href="#" class="hover:text-orange-400">Contact</a></li>
+                    <li><a href="#" class="hover:text-orange-400">About</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-white font-semibold">Contact</h5>
+                <p class="mt-3 space-y-2 text-slate-400">
+                    📍
+                    <a href="https://maps.google.com/?q=Hyderabad, Telangana" target="_blank"
+                        class="hover:text-orange-400">
+                        Hyderabad, Telangana
+                    </a>
+                </p>
+                <p class="mt-3 space-y-2 text-slate-400">
+                    📞
+                    <a href="tel:+919876543210" class="hover:text-orange-400">
+                        +91 98765 43210
+                    </a>
+                </p>
+                <p class="mt-3 space-y-2 text-slate-400">
+                    📧
+                    <a href="mailto:support@offerszone.com" class="hover:text-orange-400">
+                        support@offerszone.com
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="border-t border-gray-800">
+            <p class="text-center text-slate-500 py-6">© 2025 OFFERS ZONE — All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="tackp.js"></script>
+
+</body>
+
+</html>

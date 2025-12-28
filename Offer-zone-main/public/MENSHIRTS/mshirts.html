@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Offers Zone — Updated</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        /* ----------------- Global / Cards ----------------- */
+        :root {
+            --orange: #f97316;
+            --orange-dark: #ea580c;
+            --card-h: 480px;
+            /* default desktop card height */
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+
+
+
+        .nav-link {
+            position: relative;
+            cursor: pointer;
+            padding-bottom: 4px;
+            transition: color .3s ease;
+        }
+
+        .nav-link:hover {
+            color: #f97316;
+            /* orange */
+        }
+
+        /* underline effect */
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            height: 2px;
+            width: 0%;
+            background-color: #f97316;
+            transition: width .3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* active link */
+        .nav-link.active {
+            color: #f97316;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .product-card {
+            height: var(--card-h);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 1rem;
+            overflow: visible;
+            transition: transform .28s ease, box-shadow .28s ease;
+        }
+
+        .img-wrap {
+            position: relative !important;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(2, 6, 23, .12);
+        }
+
+        /* Image fills entire image area — no white gaps */
+        .product-card .img-wrap {
+            height: 56%;
+            width: 100%;
+            overflow: hidden;
+            /* ONLY here */
+            background: #f3f4f6;
+        }
+
+        .product-card .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform .6s ease;
+        }
+
+        .product-card .img-wrap img:hover {
+            transform: scale(1.08);
+        }
+
+        /* Buttons */
+        .btn-orange {
+            background: var(--orange);
+            color: #fff;
+            transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+        }
+
+        .btn-orange:hover {
+            background: var(--orange-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(234, 88, 12, .22);
+        }
+
+        .btn-outline {
+            background: #fff;
+            border: 1px solid rgba(15, 23, 42, .06);
+            color: #0f172a;
+            transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+        }
+
+        .btn-outline:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(2, 6, 23, .06);
+        }
+
+        .add-cart-btn:hover {
+            color: #f97316 !important;
+        }
+
+        /* Ratings */
+        .stars i {
+            color: #fbbf24;
+            margin-right: 2px;
+        }
+
+        /* Responsive card height */
+        @media (max-width:1024px) {
+            :root {
+                --card-h: 520px;
+            }
+
+            /* slightly taller on tablet */
+        }
+
+        @media (max-width:640px) {
+            :root {
+                --card-h: 460px;
+            }
+        }
+
+
+        .like-btn {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            z-index: 20;
+
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(4px);
+            opacity: 1;
+            /* Always visible */
+            visibility: visible;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: .3s ease;
+        }
+
+        .like-btn i {
+            font-size: 20px;
+            color: #9ca3af;
+            transition: .3s ease;
+        }
+
+        /* When liked */
+        .like-btn.liked i {
+            color: #f97316 !important;
+        }
+
+        /* Hover highlight */
+        .like-btn:hover {
+            transform: scale(1.06);
+        }
+
+
+        .filter-btn {
+            padding: 10px 18px;
+            border-radius: 20px;
+            border: 1px solid #f97316;
+            background: white;
+            color: #f97316;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #f97316;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-slate-800">
+
+    <!-- HEADER -->
+    <header class="bg-white shadow-md px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+            <!-- LOGO -->
+            <a href="./index.html" class="select-none">
+                <h1 class="text-3xl md:text-4xl font-black tracking-[2px] text-orange-500 uppercase
+                 transition-all duration-300 hover:text-orange-400 hover:scale-105">
+                    OFFERS ZONE
+                </h1>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:block">
+                <ul class="flex space-x-8 text-gray-700 font-medium">
+                    <li><a href="./index.html">Home</a></li>
+
+                    <li class="relative group">
+                        <a class="nav-link flex items-center gap-1">
+                            Categories
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </a>
+
+                        <!-- Dropdown -->
+                        <ul class="absolute left-0 top-full mt-3 w-56 bg-white shadow-lg rounded-xl
+           opacity-0 invisible group-hover:opacity-100 group-hover:visible
+           transition-all duration-300 z-50 overflow-hidden">
+
+                            <li>
+                                <a href="./gas.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                                    Gas Safety Devices
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="./men.html"
+                                    class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500 nav-link active">
+                                    Mens Wears
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="./leadies.html"
+                                    class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                                    Ladies Wears
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="./sares.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                                    Sarees
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="./kid.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                                    Kids Wears
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./TRACKPANTS/trackp.html"
+                                    class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                                    Track Pants
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./SWEATERS/sweater.html"
+                                    class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                                    Sweater
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./SHIRTSHOOT/shirtshoot.html"
+                                    class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
+                                    Shirting & Shooting
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./GOLD/gold.html"
+                                    class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500 ">
+                                    Gold Jewellery
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link " href="./liked.html">Liked</a></li>
+                    <li><a class="nav-link" href="./CART/cart.html">Cart</a></li>
+                    <li><a class="nav-link" href="#">Blogs</a></li>
+                    <li><a class="nav-link" href="#">Contact</a></li>
+                    <li><a class="nav-link" href="#">About</a></li>
+
+
+                </ul>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMenu()" class="md:hidden text-3xl text-gray-700">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <nav id="mobileMenu" class="hidden md:hidden bg-white shadow-md mt-3 rounded-lg px-6 py-4">
+            <ul class="flex flex-col space-y-4 text-gray-700 font-medium">
+                <li><a href="./index.html">Home</a></li>
+
+                <li>
+                    <details class="group">
+                        <summary class="cursor-pointer flex items-center justify-between nav-link">
+                            Categories
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </summary>
+
+                        <ul class="ml-4 mt-2 space-y-2 text-slate-600">
+                            <li><a href="./gas.html">Gas Safety Devices</a></li>
+                            <li><a href="./men.html" class="nav-link active">Mens Wears</a></li>
+                            <li><a href="./leadies.html">Ladies Wears</a></li>
+                            <li><a href="./sares.html">Sarees</a></li>
+                            <li><a href="./kid.html">Kids Wears</a></li>
+                            <li><a href="./TRACKPANTS/trackp.html">Track Pants</a></li>
+                            <li><a href="./SWEATERS/sweater.html">Sweater</a></li>
+                            <li><a href="./SHIRTSHOOT/shirtshoot.html">Shirting & Shooting</a></li>
+                            <li><a href="./GOLD/gold.html">Gold Jewellery</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li><a class="nav-link " href="./liked.html">Liked</a></li>
+                <li><a class="nav-link" href="./CART/cart.html">Cart</a></li>
+
+                <li><a class="nav-link" href="#">Blog</a></li>
+                <li><a class="nav-link" href="#">Contact</a></li>
+                <li><a class="nav-link" href="#">About</a></li>
+
+            </ul>
+        </nav>
+    </header>
+    <h3 class="mt-10 mb-10 text-center text-black-600 text-3xl font-extrabold section-title">Men's Shirts</h3>
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap justify-center gap-4 mt-6 mb-6">
+        <button class="filter-btn active" data-filter="all">All Shirts</button>
+        <button class="filter-btn" data-filter="casual">Casual Shirts</button>
+        <button class="filter-btn" data-filter="formal">Formal Shirts</button>
+        <button class="filter-btn" data-filter="linen">Linen Shirts</button>
+        <button class="filter-btn" data-filter="sports">Sports Shirts</button>
+        <button class="filter-btn" data-filter="cotton">Cotton Shirts</button>
+        <button class="filter-btn" data-filter="denim">Denim Shirts</button>
+        <button class="filter-btn" data-filter="printed">Printed Shirts</button>
+    </div>
+
+    <!-- Shirts Grid -->
+    <div class="grid grid-cols-1 mt-11
+            sm:grid-cols-2 
+            md:grid-cols-4 
+            gap-3 sm:gap-4 
+            px-3 sm:px-4 md:px-6 mb-[7%]">
+
+        <!-- Shirt 1 - Casual -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="301" data-name="Casual Cotton Shirt"
+            data-price="1499" data-img="./IMAGES/m1.jpeg" data-category="casual">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=301">
+                    <img src="./IMAGES/m1.jpeg" alt="Casual Cotton Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=301">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Casual Cotton Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Soft cotton fabric for daily wear.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.4</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(430)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,499</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 2 - Formal -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="302" data-name="Formal Shirt" data-price="1699"
+            data-img="./IMAGES/s2.jpeg" data-category="formal">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=302">
+                    <img src="./IMAGES/s2.jpeg" alt="Formal Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=302">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Formal Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Sharp look for office & formal events.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.1</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(190)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,699</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 3 - Linen -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="303" data-name="Linen Shirt" data-price="1799"
+            data-img="./IMAGES/s3.jpeg" data-category="linen">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=303">
+                    <img src="./IMAGES/s3.jpeg" alt="Linen Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=303">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Linen Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Breathable linen fabric for summer comfort.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.6</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(520)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,799</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 4 - Casual -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="304" data-name="Lycra Shirt" data-price="1599"
+            data-img="./IMAGES/s4.jpeg" data-category="casual">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=304">
+                    <img src="./IMAGES/s4.jpeg" alt="Lycra Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=304">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Lycra Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Stretch-fit shirt with premium finish.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.1</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(190)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,599</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 5 - Sports -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="305" data-name="Sports T-Shirt" data-price="899"
+            data-img="./IMAGES/s5.jpeg" data-category="sports">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=305">
+                    <img src="./IMAGES/s5.jpeg" alt="Sports T-Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=305">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Sports T-Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Moisture-wicking fabric for workouts.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.5</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(670)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹899</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 6 - Cotton -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="306" data-name="Premium Cotton Shirt"
+            data-price="1899" data-img="./IMAGES/s6.jpeg" data-category="cotton">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=306">
+                    <img src="./IMAGES/s6.jpeg" alt="Premium Cotton Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=306">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Premium Cotton Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">High-quality Egyptian cotton fabric.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.7</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <span class="text-xs text-gray-400">(320)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,899</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 7 - Formal -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="307" data-name="Office Formal Shirt"
+            data-price="1999" data-img="./IMAGES/s7.jpeg" data-category="formal">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=307">
+                    <img src="./IMAGES/s7.jpeg" alt="Office Formal Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=307">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Office Formal Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Crisp fabric perfect for business meetings.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.3</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(280)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,999</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 8 - Denim -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="308" data-name="Denim Shirt" data-price="1799"
+            data-img="./IMAGES/s8.jpeg" data-category="denim">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=308">
+                    <img src="./IMAGES/s8.jpeg" alt="Denim Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=308">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Denim Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Classic denim fabric for rugged look.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.4</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(410)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,799</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 9 - Linen -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="309" data-name="White Linen Shirt"
+            data-price="1899" data-img="./IMAGES/s9.jpeg" data-category="linen">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=309">
+                    <img src="./IMAGES/s9.jpeg" alt="White Linen Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=309">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">White Linen Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Pure linen fabric for summer elegance.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.6</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(290)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,899</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 10 - Printed -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="310" data-name="Printed Casual Shirt"
+            data-price="1399" data-img="./IMAGES/s10.jpeg" data-category="printed">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=310">
+                    <img src="./IMAGES/s10.jpeg" alt="Printed Casual Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=310">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Printed Casual Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Floral prints for stylish casual look.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.2</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(380)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,399</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 11 - Sports -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="311" data-name="Training T-Shirt" data-price="799"
+            data-img="./IMAGES/s11.jpeg" data-category="sports">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=311">
+                    <img src="./IMAGES/s11.jpeg" alt="Training T-Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=311">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Training T-Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Quick-dry fabric for intense workouts.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.7</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <span class="text-xs text-gray-400">(520)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹799</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 12 - Cotton -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="312" data-name="Organic Cotton Shirt"
+            data-price="2199" data-img="./IMAGES/s12.jpeg" data-category="cotton">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=312">
+                    <img src="./IMAGES/s12.jpeg" alt="Organic Cotton Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=312">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Organic Cotton Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Eco-friendly organic cotton fabric.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.8</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <span class="text-xs text-gray-400">(210)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,199</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 13 - Formal -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="313" data-name="Business Shirt" data-price="2299"
+            data-img="./IMAGES/s13.jpeg" data-category="formal">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=313">
+                    <img src="./IMAGES/s13.jpeg" alt="Business Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=313">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Business Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Professional look for corporate meetings.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.4</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(190)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,299</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 14 - Denim -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="314" data-name="Light Denim Shirt"
+            data-price="1599" data-img="./IMAGES/s14.jpeg" data-category="denim">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=314">
+                    <img src="./IMAGES/s14.jpeg" alt="Light Denim Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=314">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Light Denim Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Light wash denim for casual styling.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.3</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(310)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,599</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 15 - Linen -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="315" data-name="Blue Linen Shirt"
+            data-price="1999" data-img="./IMAGES/s15.jpeg" data-category="linen">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=315">
+                    <img src="./IMAGES/s15.jpeg" alt="Blue Linen Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=315">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Blue Linen Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Cool blue linen for summer parties.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.5</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(270)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,999</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 16 - Printed -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="316" data-name="Geometric Print Shirt"
+            data-price="1499" data-img="./IMAGES/s16.jpeg" data-category="printed">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=316">
+                    <img src="./IMAGES/s16.jpeg" alt="Geometric Print Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=316">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Geometric Print Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Modern geometric patterns for fashion.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.2</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(340)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,499</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 17 - Sports -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="317" data-name="Running T-Shirt" data-price="699"
+            data-img="./IMAGES/s17.jpeg" data-category="sports">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=317">
+                    <img src="./IMAGES/s17.jpeg" alt="Running T-Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=317">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Running T-Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Lightweight fabric for marathon running.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.6</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(480)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹699</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 18 - Cotton -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="318" data-name="Long Sleeve Cotton"
+            data-price="1699" data-img="./IMAGES/s18.jpeg" data-category="cotton">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=318">
+                    <img src="./IMAGES/s18.jpeg" alt="Long Sleeve Cotton" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=318">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Long Sleeve Cotton</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Full sleeve cotton shirt for winters.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.4</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(230)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,699</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 19 - Formal -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="319" data-name="Executive Shirt" data-price="2499"
+            data-img="./IMAGES/s19.jpeg" data-category="formal">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=319">
+                    <img src="./IMAGES/s19.jpeg" alt="Executive Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=319">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Executive Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Premium fabric for senior executives.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.7</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <span class="text-xs text-gray-400">(150)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,499</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 20 - Denim -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="320" data-name="Dark Denim Shirt"
+            data-price="1899" data-img="./IMAGES/s20.jpeg" data-category="denim">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=320">
+                    <img src="./IMAGES/s20.jpeg" alt="Dark Denim Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=320">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Dark Denim Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Dark wash denim for evening wear.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.3</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(260)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,899</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 21 - Linen -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="321" data-name="Striped Linen Shirt"
+            data-price="2099" data-img="./IMAGES/s21.jpeg" data-category="linen">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=321">
+                    <img src="./IMAGES/s21.jpeg" alt="Striped Linen Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=321">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Striped Linen Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Vertical stripes for slim look.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.5</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(180)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,099</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 22 - Printed -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="322" data-name="Hawaiian Print Shirt"
+            data-price="1299" data-img="./IMAGES/s22.jpeg" data-category="printed">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=322">
+                    <img src="./IMAGES/s22.jpeg" alt="Hawaiian Print Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=322">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Hawaiian Print Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Tropical prints for beach vacations.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.1</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(290)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,299</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 23 - Sports -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="323" data-name="Gym Tank Top" data-price="599"
+            data-img="./IMAGES/s23.jpeg" data-category="sports">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=323">
+                    <img src="./IMAGES/s23.jpeg" alt="Gym Tank Top" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=323">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Gym Tank Top</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Sleeveless for maximum muscle movement.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.8</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <span class="text-xs text-gray-400">(410)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹599</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 24 - Cotton -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="324" data-name="Checked Cotton Shirt"
+            data-price="1599" data-img="./IMAGES/s24.jpeg" data-category="cotton">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=324">
+                    <img src="./IMAGES/s24.jpeg" alt="Checked Cotton Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=324">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Checked Cotton Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Classic check pattern for casual look.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.3</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(350)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,599</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 25 - Formal -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="325" data-name="French Cuff Shirt"
+            data-price="2799" data-img="./IMAGES/s25.jpeg" data-category="formal">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=325">
+                    <img src="./IMAGES/s25.jpeg" alt="French Cuff Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=325">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">French Cuff Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Elegant French cuffs for cufflinks.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.6</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(120)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹2,799</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 26 - Denim -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="326" data-name="Vintage Denim Shirt"
+            data-price="1699" data-img="./IMAGES/s26.jpeg" data-category="denim">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=326">
+                    <img src="./IMAGES/s26.jpeg" alt="Vintage Denim Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=326">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Vintage Denim Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Distressed look for retro style.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.2</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(220)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,699</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 27 - Linen -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="327" data-name="Beige Linen Shirt"
+            data-price="1899" data-img="./IMAGES/s27.jpeg" data-category="linen">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=327">
+                    <img src="./IMAGES/s27.jpeg" alt="Beige Linen Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=327">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Beige Linen Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Neutral beige color for versatility.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.4</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(190)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,899</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 28 - Printed -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="328" data-name="Abstract Print Shirt"
+            data-price="1399" data-img="./IMAGES/s28.jpeg" data-category="printed">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=328">
+                    <img src="./IMAGES/s28.jpeg" alt="Abstract Print Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=328">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Abstract Print Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Artistic abstract patterns for creativity.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.3</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(270)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,399</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 29 - Sports -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="329" data-name="Compression Shirt"
+            data-price="1299" data-img="./IMAGES/s29.jpeg" data-category="sports">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=329">
+                    <img src="./IMAGES/s29.jpeg" alt="Compression Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=329">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Compression Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Muscle support during heavy workouts.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.7</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <span class="text-xs text-gray-400">(330)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,299</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+        <!-- Shirt 30 - Casual -->
+        <article class="bg-white product-card shadow-sm p-4" data-id="330" data-name="Oversized Casual Shirt"
+            data-price="1199" data-img="./IMAGES/s30.jpeg" data-category="casual">
+            <div class="img-wrap rounded-lg">
+                <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <a href="./PRODUCTS/product.html?id=330">
+                    <img src="./IMAGES/s30.jpeg" alt="Oversized Casual Shirt" class="product-img">
+                </a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-slate-500">Men Shirts</p>
+                <a href="./PRODUCTS/product.html?id=330">
+                    <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Oversized Casual Shirt</h4>
+                </a>
+                <p class="text-sm text-slate-600 truncate-2">Comfortable oversized fit for relaxation.</p>
+                <div class="flex items-center gap-2 stars mt-2">
+                    <span class="text-sm font-semibold">4.2</span>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-xs text-gray-400">(310)</span>
+                </div>
+                <p class="text-2xl font-extrabold text-orange-600 mt-3">₹1,199</p>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <a href="./buy.html" onclick="event.stopPropagation()"
+                    class="btn-orange px-4 py-2 rounded-full text-center w-1/2 text-sm font-semibold">Buy</a>
+                <button class="add-cart-btn btn-outline px-4 py-2 rounded-full w-1/2 text-sm font-semibold"
+                    onclick="event.stopPropagation()">Add to Cart</button>
+            </div>
+        </article>
+
+    </div>
+   
+
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-300 mt-10 w-full">
+        <div class="w-full px-10 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+
+            <div>
+                <h4 class="text-orange-500 text-2xl font-extrabold">OFFERS ZONE</h4>
+                <p class="mt-3 text-slate-400">Your trusted marketplace for essentials, fashion & safety.</p>
+
+                <!-- SOCIAL ICONS WITH A TAGS -->
+                <div class="flex gap-3 mt-4">
+                    <a href="https://facebook.com" target="_blank"
+                        class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="https://instagram.com" target="_blank"
+                        class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                    <a href="https://twitter.com" target="_blank"
+                        class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h5 class="text-white font-semibold">Quick Links</h5>
+                <ul class="mt-3 space-y-2 text-slate-400">
+                    <li><a href="index.html" class="hover:text-orange-400">Home</a></li>
+                    <li><a href="gas.html" class="hover:text-orange-400">Gas Safety Device</a></li>
+                    <li><a href="men.html" class="hover:text-orange-400">Mens Wears</a></li>
+                    <li><a href="leadies.html" class="hover:text-orange-400">leadies Wears</a></li>
+                    <li><a href="sares.html" class="hover:text-orange-400">Sarees</a></li>
+                    <li><a href="kid.html" class="hover:text-orange-400">Kids Wears</a></li>
+
+
+
+                </ul>
+            </div>
+
+            <div>
+                <h5 class="text-white font-semibold">Support</h5>
+                <ul class="mt-3 space-y-2 text-slate-400">
+                    <li><a href="#" class="hover:text-orange-400">FAQ</a></li>
+                    <li><a href="#" class="hover:text-orange-400">Privacy policy</a></li>
+                    <li><a href="#" class="hover:text-orange-400">Terms & Conditions</a></li>
+                    <li><a href="#" class="hover:text-orange-400">Contact</a></li>
+                    <li><a href="#" class="hover:text-orange-400">About</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h5 class="text-white font-semibold">Contact</h5>
+
+                <p class="mt-3 space-y-2 text-slate-400">
+                    📍
+                    <a href="https://maps.google.com/?q=Hyderabad, Telangana" target="_blank"
+                        class="hover:text-orange-400">
+                        Hyderabad, Telangana
+                    </a>
+                </p>
+
+                <p class="mt-3 space-y-2 text-slate-400">
+                    📞
+                    <a href="tel:+919876543210" class="hover:text-orange-400">
+                        +91 98765 43210
+                    </a>
+                </p>
+
+                <p class="mt-3 space-y-2 text-slate-400">
+                    📧
+                    <a href="mailto:support@offerszone.com" class="hover:text-orange-400">
+                        support@offerszone.com
+                    </a>
+                </p>
+            </div>
+
+
+        </div>
+
+        <div class="border-t border-gray-800">
+            <p class="text-center text-slate-500 py-6">© 2025 OFFERS ZONE — All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="mshirts.js"></script>
+
+</body>
+
+</html>
