@@ -623,6 +623,183 @@
       background: linear-gradient(90deg, #f97316, #ea580c, #f97316);
       border-radius: 3px 3px 0 0;
     }
+
+    /* Extra small text size */
+.text-2xs {
+  font-size: 0.625rem; /* 10px */
+  line-height: 0.75rem; /* 12px */
+}
+
+/* Truncate long text */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Mobile product styling */
+.mobile-product-card {
+  min-width: 100px;
+}
+
+
+        /* Auto scroll animation */
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-100% + 100vw));
+            }
+        }
+        
+        .auto-scroll {
+            animation: scroll-left 30s linear infinite;
+            padding-left: 100%;
+        }
+        
+        .auto-scroll:hover {
+            animation-play-state: paused;
+        }
+        
+        /* Category card styles */
+        .category-card {
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            background-color: #fff7ed; /* Light orange background on hover */
+        }
+        
+        /* H3 hover underline */
+        .category-card h3 {
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover h3 {
+            color: #ea580c; /* Orange color on hover */
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        
+        .circle-container {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto;
+        background-color: transparent; /* Remove any background */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .circle-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures image covers the circle without distortion */
+        object-position: center; /* Centers the image */
+    }
+
+    /* Mobile specific circle size */
+    .mobile-scroll-content .circle-container {
+        width: 70px;
+        height: 70px;
+    }
+
+    /* Mobile scroll container */
+    .mobile-scroll-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 10px;
+    }
+
+    .mobile-scroll-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .mobile-scroll-content {
+        display: flex;
+        gap: 16px;
+        padding: 0 8px;
+    }
+
+    /* Optional: Add hover effects for better UX */
+    .category-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .category-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+        
+        /* Category colors */
+        .gas-device {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+        
+        .mens-pants {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .mens-shirts {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+        
+        .sarees {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+        }
+        
+        .track-pants {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        
+        .shirts-cloths {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+        }
+        
+        .pant-cloths {
+            background: linear-gradient(135deg, #84cc16, #65a30d);
+        }
+        
+        .gold {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .circle-container {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .mobile-scroll-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            
+            .mobile-scroll-container::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .mobile-scroll-content {
+                display: flex;
+                gap: 1rem;
+                padding-bottom: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .circle-container {
+                width: 70px;
+                height: 70px;
+            }
+        }
   </style>
 </head>
 
@@ -898,7 +1075,7 @@
 
   </header>
 
-
+<!-- Slider Banner -->
   <div class="relative max-w-7xl mx-auto   h-[330px] md:h-[420px] overflow-hidden rounded-2xl">
 
     <!-- SLIDE 1 -->
@@ -1003,7 +1180,199 @@
 
   </div>
 
+  <!-- categories -->
+<div class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Title Section -->
+    <div class="mb-8 text-center">
+        <h2 class="text-3xl font-bold text-gray-800 mb-2">Shop by Category</h2>
+        <p class="text-gray-600">Discover amazing products across all categories</p>
+    </div>
 
+    <!-- Desktop Grid View (hidden on mobile) -->
+    <div class="hidden md:grid grid-cols-4 lg:grid-cols-8 gap-4 mb-8">
+        <!-- Gas Devices - FIXED -->
+        <a href="#" class="category-card bg-white rounded-xl p-4 shadow-sm text-center">
+            <div class="circle-container gas-device">
+                <img src="./IMAGES/g2.jpeg" alt="Gas Devices" 
+                     onerror="this.src='https://cdn-icons-png.flaticon.com/512/869/869869.png'"
+                     class="w-full h-full object-cover object-center">
+            </div>
+            <h3 class="font-medium text-gray-800 mt-3">Gas Devices</h3>
+            <p class="text-xs text-gray-500 mt-1">Pipes, Safety</p>
+        </a>
+
+        <!-- Mens Pants -->
+        <a href="#" class="category-card bg-white rounded-xl p-4 shadow-sm text-center">
+            <div class="circle-container mens-pants">
+                <img src="./IMAGES/mp1.jpeg" alt="Mens Pants"
+                     onerror="this.src='https://cdn-icons-png.flaticon.com/512/863/863684.png'"
+                     class="w-full h-full object-cover object-center">
+            </div>
+            <h3 class="font-medium text-gray-800 mt-3">Mens Pants</h3>
+            <p class="text-xs text-gray-500 mt-1">Formal, Casual</p>
+        </a>
+
+        <!-- Mens Shirts -->
+        <a href="#" class="category-card bg-white rounded-xl p-4 shadow-sm text-center">
+            <div class="circle-container mens-shirts">
+                <img src="./IMAGES/ms.jpeg" alt="Mens Shirts"
+                     onerror="this.src='https://cdn-icons-png.flaticon.com/512/4254/4254056.png'"
+                     class="w-full h-full object-cover object-center">
+            </div>
+            <h3 class="font-medium text-gray-800 mt-3">Mens Shirts</h3>
+            <p class="text-xs text-gray-500 mt-1">Cotton, Formal</p>
+        </a>
+
+        <!-- Sarees -->
+        <a href="#" class="category-card bg-white rounded-xl p-4 shadow-sm text-center">
+            <div class="circle-container sarees">
+                <img src="./s1.jpeg" alt="Sarees"
+                     onerror="this.src='https://cdn-icons-png.flaticon.com/512/3111/3111091.png'"
+                     class="w-full h-full object-cover object-center">
+            </div>
+            <h3 class="font-medium text-gray-800 mt-3">Sarees</h3>
+            <p class="text-xs text-gray-500 mt-1">Silk, Cotton</p>
+        </a>
+
+        <!-- Track Pants -->
+        <a href="#" class="category-card bg-white rounded-xl p-4 shadow-sm text-center">
+            <div class="circle-container track-pants">
+                <img src="./IMAGES/tp1.jpeg" alt="Track Pants"
+                     onerror="this.src='https://cdn-icons-png.flaticon.com/512/2236/2236810.png'"
+                     class="w-full h-full object-cover object-center">
+            </div>
+                <h3 class="font-medium text-gray-800 mt-3">Track Pants</h3>
+            <p class="text-xs text-gray-500 mt-1">Sports, Gym</p>
+        </a>
+
+        <!-- Shirts Cloths -->
+        <a href="#" class="category-card bg-white rounded-xl p-4 shadow-sm text-center">
+            <div class="circle-container shirts-cloths">
+                <img src="./IMAGES/sc1.jpeg" alt="Shirts Cloths"
+                     onerror="this.src='https://cdn-icons-png.flaticon.com/512/3082/3082383.png'"
+                     class="w-full h-full object-cover object-center">
+            </div>
+            <h3 class="font-medium text-gray-800 mt-3">Shirts Cloths</h3>
+            <p class="text-xs text-gray-500 mt-1">Fabrics, Materials</p>
+        </a>
+
+        <!-- Pant Cloths -->
+        <a href="#" class="category-card bg-white rounded-xl p-4 shadow-sm text-center">
+            <div class="circle-container pant-cloths">
+                <img src="./IMAGES/sc1.jpeg" alt="Pant Cloths"
+                     onerror="this.src='https://cdn-icons-png.flaticon.com/512/863/863684.png'"
+                     class="w-full h-full object-cover object-center">
+            </div>
+            <h3 class="font-medium text-gray-800 mt-3">Pant Cloths</h3>
+            <p class="text-xs text-gray-500 mt-1">Denim, Cotton</p>
+        </a>
+
+        <!-- Gold -->
+        <a href="#" class="category-card bg-white rounded-xl p-4 shadow-sm text-center">
+            <div class="circle-container gold">
+                <img src="./IMAGES/gld1.jpeg" alt="Gold"
+                     onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'"
+                     class="w-full h-full object-cover object-center">
+            </div>
+            <h3 class="font-medium text-gray-800 mt-3">Gold</h3>
+            <p class="text-xs text-gray-500 mt-1">Jewelry, Coins</p>
+        </a>
+    </div>
+
+    <!-- Fixed Mobile View (visible on mobile only) -->
+    <div class="md:hidden">
+        <div class="mobile-scroll-container">
+            <div class="mobile-scroll-content">
+                <!-- Gas Devices - FIXED for mobile -->
+                <a href="#" class="flex-shrink-0 w-40 bg-white rounded-xl p-4 shadow-sm text-center category-card">
+                    <div class="circle-container gas-device mx-auto">
+                        <img src="./IMAGES/g2.jpeg" alt="Gas Devices"
+                             onerror="this.src='https://cdn-icons-png.flaticon.com/512/869/869869.png'"
+                             class="w-full h-full object-cover object-center">
+                    </div>
+                    <h3 class="font-medium text-gray-800 mt-3 text-sm">Gas Devices</h3>
+                    <p class="text-xs text-gray-500 mt-1">Pipes, Safety</p>
+                </a>
+
+                 <!-- Mens Pants -->
+                    <a href="#" class="flex-shrink-0 w-40 bg-white rounded-xl p-4 shadow-sm text-center category-card">
+                        <div class="circle-container mens-pants mx-auto">
+                            <img src="./IMAGES/mp1.jpeg" alt="Mens Pants"
+                                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/863/863684.png'">
+                        </div>
+                        <h3 class="font-medium text-gray-800 mt-3 text-sm">Mens Pants</h3>
+                        <p class="text-xs text-gray-500 mt-1">Formal, Casual</p>
+                    </a>
+
+                    <!-- Mens Shirts -->
+                    <a href="#" class="flex-shrink-0 w-40 bg-white rounded-xl p-4 shadow-sm text-center category-card">
+                        <div class="circle-container mens-shirts mx-auto">
+                            <img src="./IMAGES/ms.jpeg" alt="Mens Shirts"
+                                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/4254/4254056.png'">
+                        </div>
+                        <h3 class="font-medium text-gray-800 mt-3 text-sm">Mens Shirts</h3>
+                        <p class="text-xs text-gray-500 mt-1">Cotton, Formal</p>
+                    </a>
+
+                    <!-- Sarees -->
+                    <a href="#" class="flex-shrink-0 w-40 bg-white rounded-xl p-4 shadow-sm text-center category-card">
+                        <div class="circle-container sarees mx-auto">
+                            <img src="./s1.jpeg" alt="Sarees"
+                                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/3111/3111091.png'">
+                        </div>
+                        <h3 class="font-medium text-gray-800 mt-3 text-sm">Sarees</h3>
+                        <p class="text-xs text-gray-500 mt-1">Silk, Cotton</p>
+                    </a>
+
+                    <!-- Track Pants -->
+                    <a href="#" class="flex-shrink-0 w-40 bg-white rounded-xl p-4 shadow-sm text-center category-card">
+                        <div class="circle-container track-pants mx-auto">
+                            <img src="./IMAGES/tp1.jpeg" alt="Track Pants"
+                                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/2236/2236810.png'">
+                        </div>
+                        <h3 class="font-medium text-gray-800 mt-3 text-sm">Track Pants</h3>
+                        <p class="text-xs text-gray-500 mt-1">Sports, Gym</p>
+                    </a>
+
+                    <!-- Shirts Cloths -->
+                    <a href="#" class="flex-shrink-0 w-40 bg-white rounded-xl p-4 shadow-sm text-center category-card">
+                        <div class="circle-container shirts-cloths mx-auto">
+                            <img src="./IMAGES/sc1.jpeg" alt="Shirts Cloths"
+                                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/3082/3082383.png'">
+                        </div>
+                        <h3 class="font-medium text-gray-800 mt-3 text-sm">Shirts Cloths</h3>
+                        <p class="text-xs text-gray-500 mt-1">Fabrics, Materials</p>
+                    </a>
+
+                    <!-- Pant Cloths -->
+                    <a href="#" class="flex-shrink-0 w-40 bg-white rounded-xl p-4 shadow-sm text-center category-card">
+                        <div class="circle-container pant-cloths mx-auto">
+                            <img src="./IMAGES/sc1.jpeg" alt="Pant Cloths"
+                                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/863/863684.png'">
+                        </div>
+                        <h3 class="font-medium text-gray-800 mt-3 text-sm">Pant Cloths</h3>
+                        <p class="text-xs text-gray-500 mt-1">Denim, Cotton</p>
+                    </a>
+
+                    <!-- Gold -->
+                    <a href="#" class="flex-shrink-0 w-40 bg-white rounded-xl p-4 shadow-sm text-center category-card">
+                        <div class="circle-container gold mx-auto">
+                            <img src="./IMAGES/gld1.jpeg" alt="Gold"
+                                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'">
+                        </div>
+                        <h3 class="font-medium text-gray-800 mt-3 text-sm">Gold</h3>
+                        <p class="text-xs text-gray-500 mt-1">Jewelry, Coins</p>
+                    </a>
+                
+            </div>
+        </div>
+        
+        <!-- Scroll indicator for mobile -->
+        <div class="mt-4 text-center">
+            <p class="text-xs text-gray-500">← Scroll to see more →</p>
+        </div>
+    </div>
+</div>
 
   <!-- FEATURES -->
   <section class="max-w-7xl mx-auto mt-12 px-6">
@@ -2770,163 +3139,223 @@
 
 
 
-  <!-- First Combo Pack Section -->
-  <div class="max-w-7xl mx-auto mt-10">
-    <div class="singil-container rounded-3xl overflow-hidden">
-      <!-- Banner Header -->
-      <div class="singil-header-bg py-6 px-8 text-center relative">
-        <!-- Decorative elements -->
-        <div class="absolute top-0 left-0 w-20 h-20 opacity-10">
-          <i class="fas fa-star text-white text-4xl"></i>
-        </div>
-        <div class="absolute bottom-0 right-0 w-16 h-16 opacity-10">
-          <i class="fas fa-gift text-white text-3xl"></i>
-        </div>
-
-        <h1 class="text-white text-4xl md:text-5xl font-extrabold singil-glow tracking-tight relative z-10">
-          First Combo Pack
-        </h1>
-        <p class="text-orange-100 text-lg mt-2 relative z-10">Get all 3 essential appliances in one amazing bundle!</p>
+<!-- First Combo Pack Section -->
+<div class="max-w-7xl mx-auto mt-10">
+  <div class="singil-container rounded-3xl overflow-hidden">
+    <!-- Banner Header -->
+    <div class="singil-header-bg py-6 px-8 text-center relative">
+      <!-- Decorative elements -->
+      <div class="absolute top-0 left-0 w-20 h-20 opacity-10">
+        <i class="fas fa-star text-white text-4xl"></i>
+      </div>
+      <div class="absolute bottom-0 right-0 w-16 h-16 opacity-10">
+        <i class="fas fa-gift text-white text-3xl"></i>
       </div>
 
-      <!-- Main Content Area with White Background -->
-      <div class="bg-white p-8 md:p-12 relative">
-        <!-- Decorative corner accents -->
-        <div class="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-orange-200 rounded-tl-lg"></div>
-        <div class="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-orange-200 rounded-tr-lg"></div>
-        <div class="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-orange-200 rounded-bl-lg"></div>
-        <div class="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-orange-200 rounded-br-lg"></div>
+      <h1 class="text-white text-4xl md:text-5xl font-extrabold singil-glow tracking-tight relative z-10">
+        First Combo Pack
+      </h1>
+      <p class="text-orange-100 text-lg mt-2 relative z-10">Get all 3 essential appliances in one amazing bundle!</p>
+    </div>
 
-        <!-- Products Section -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 relative z-10">
+    <!-- Main Content Area with White Background -->
+    <div class="bg-white p-8 md:p-12 relative">
+      <!-- Decorative corner accents -->
+      <div class="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-orange-200 rounded-tl-lg"></div>
+      <div class="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-orange-200 rounded-tr-lg"></div>
+      <div class="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-orange-200 rounded-bl-lg"></div>
+      <div class="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-orange-200 rounded-br-lg"></div>
 
-          <!-- Product Card 1: Charging Lite -->
-          <div class="singil-product-card rounded-xl p-4 text-center shadow-lg relative h-full flex flex-col">
-            <div class="bg-gradient-to-b from-orange-50 to-white p-4 rounded-lg flex-grow-0">
-              <img src="bublb.png" class="singil-product-image mx-auto" alt="Charging Lite"
-                onerror="this.src='https://cdn-icons-png.flaticon.com/512/2972/2972543.png'">
-            </div>
-            <!-- Title with Number -->
-            <div class="singil-title-container mt-3">
-              <div class="singil-product-number">1</div>
-              <h3 class="text-xl font-bold text-orange-900">Charging Lite</h3>
-            </div>
-            <p class="mt-1 text-orange-700 text-sm">Fast charging solution for all devices</p>
-            <div class="mt-2">
-              <span class="inline-block bg-orange-100 text-orange-800 font-semibold px-3 py-1 rounded-full text-xs">
-                Portable & Efficient
+      <!-- Mobile Products Container (only for mobile) -->
+      <div class="md:hidden mb-6 relative z-10">
+        <div class="singil-product-card rounded-xl p-4 shadow-lg">
+          <!-- Mobile container title -->
+          <div class="text-center mb-4">
+            <h3 class="text-lg font-bold text-orange-900">3-in-1 Combo Pack</h3>
+            <p class="text-orange-700 text-sm mt-1">All 3 products included</p>
+          </div>
+          
+          <!-- Fixed 3-column grid for mobile -->
+          <div class="grid grid-cols-3 gap-3">
+            <!-- Product Card 1: Charging Lite -->
+            <div class="rounded-lg p-3 bg-gradient-to-b from-orange-50 to-white text-center">
+              <div class="flex justify-center mb-2">
+                <div class="singil-product-number text-xs w-6 h-6 flex items-center justify-center">1</div>
+              </div>
+              <div class="h-16 mb-2 flex items-center justify-center">
+                <img src="bublb.png" class="h-full object-contain" alt="Charging Lite"
+                  onerror="this.src='https://cdn-icons-png.flaticon.com/512/2972/2972543.png'">
+              </div>
+              <h4 class="font-bold text-orange-900 text-sm">Charging Lite</h4>
+              <p class="text-orange-700 text-xs mt-1">Fast charging solution</p>
+              <span class="inline-block bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-1 rounded-full mt-2">
+                Portable
               </span>
             </div>
-          </div>
 
-          <!-- Product Card 2: Water Heater -->
-          <div class="singil-product-card rounded-xl p-4 text-center shadow-lg relative h-full flex flex-col">
-            <div class="bg-gradient-to-b from-orange-50 to-white p-4 rounded-lg flex-grow-0">
-              <img src="heater.png" class="singil-product-image mx-auto" alt="Water Heater"
-                onerror="this.src='https://cdn-icons-png.flaticon.com/512/3037/3037008.png'">
-            </div>
-            <!-- Title with Number -->
-            <div class="singil-title-container mt-3">
-              <div class="singil-product-number">2</div>
-              <h3 class="text-xl font-bold text-orange-900">Water Heater</h3>
-            </div>
-            <p class="mt-1 text-orange-700 text-sm">Instant hot water for your needs</p>
-            <div class="mt-2">
-              <span class="inline-block bg-orange-100 text-orange-800 font-semibold px-3 py-1 rounded-full text-xs">
+            <!-- Product Card 2: Water Heater -->
+            <div class="rounded-lg p-3 bg-gradient-to-b from-orange-50 to-white text-center">
+              <div class="flex justify-center mb-2">
+                <div class="singil-product-number text-xs w-6 h-6 flex items-center justify-center">2</div>
+              </div>
+              <div class="h-16 mb-2 flex items-center justify-center">
+                <img src="heater.png" class="h-full object-contain" alt="Water Heater"
+                  onerror="this.src='https://cdn-icons-png.flaticon.com/512/3037/3037008.png'">
+              </div>
+              <h4 class="font-bold text-orange-900 text-sm">Water Heater</h4>
+              <p class="text-orange-700 text-xs mt-1">Instant hot water</p>
+              <span class="inline-block bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-1 rounded-full mt-2">
                 Energy Saving
               </span>
             </div>
-          </div>
 
-          <!-- Product Card 3: Iron Box -->
-          <div class="singil-product-card rounded-xl p-4 text-center shadow-lg relative h-full flex flex-col">
-            <div class="bg-gradient-to-b from-orange-50 to-white p-4 rounded-lg flex-grow-0">
-              <img src="neck.png" class="singil-product-image mx-auto" alt="Iron Box"
-                onerror="this.src='https://cdn-icons-png.flaticon.com/512/3127/3127247.png'">
-            </div>
-            <!-- Title with Number -->
-            <div class="singil-title-container mt-3">
-              <div class="singil-product-number">3</div>
-              <h3 class="text-xl font-bold text-orange-900">Neckband Earphones</h3>
-            </div>
-
-            <p class="mt-1 text-orange-700 text-sm">
-              Wireless audio with deep bass and clear calls
-            </p>
-
-            <div class="mt-2">
-              <span class="inline-block bg-orange-100 text-orange-800 font-semibold px-3 py-1 rounded-full text-xs">
-                Bluetooth Connectivity
+            <!-- Product Card 3: Neckband Earphones -->
+            <div class="rounded-lg p-3 bg-gradient-to-b from-orange-50 to-white text-center">
+              <div class="flex justify-center mb-2">
+                <div class="singil-product-number text-xs w-6 h-6 flex items-center justify-center">3</div>
+              </div>
+              <div class="h-16 mb-2 flex items-center justify-center">
+                <img src="neck.png" class="h-full object-contain" alt="Neckband Earphones"
+                  onerror="this.src='https://cdn-icons-png.flaticon.com/512/3127/3127247.png'">
+              </div>
+              <h4 class="font-bold text-orange-900 text-sm">Neckband</h4>
+              <p class="text-orange-700 text-xs mt-1">Wireless audio</p>
+              <span class="inline-block bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-1 rounded-full mt-2">
+                Bluetooth
               </span>
             </div>
-
           </div>
-        </div>
-
-        <!-- ALL IN ONE SUPER DEAL Highlight -->
-        <div class="mb-10 text-center relative z-10">
-          <div class="singil-deal-banner inline-block rounded-full py-3 px-6 relative">
-            <div class="absolute -top-1 -left-1 w-6 h-6 bg-yellow-300 rounded-full opacity-70"></div>
-            <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-yellow-300 rounded-full opacity-70"></div>
-            <h2
-              class="text-white text-xl md:text-2xl font-extrabold flex items-center justify-center gap-2 relative z-10">
-              <i class="fas fa-star text-yellow-300 text-sm"></i>
-              ALL IN ONE SUPER DEAL!
-              <i class="fas fa-star text-yellow-300 text-sm"></i>
-            </h2>
-          </div>
-          <p class="mt-3 text-gray-600">Limited time offer - Save 30% when you buy all three together!</p>
-
-          <!-- Price Section -->
-          <div class="mt-4 flex items-center justify-center gap-3">
-            <span class="text-2xl font-bold text-orange-600">$149.99</span>
-            <span class="text-lg text-gray-500 line-through">$214.99</span>
-            <span class="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-sm">Save $65</span>
-          </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
-          <button class="singil-buy-button group flex items-center justify-center gap-2 
-                          text-white font-bold px-8 py-3 rounded-full shadow-lg 
-                          hover:from-orange-600 hover:to-orange-700 transition-all duration-300 
-                          transform hover:-translate-y-1 hover:shadow-xl">
-            <i class="fa-solid fa-bolt group-hover:scale-125 transition-transform"></i>
-            BUY NOW
-            <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
-          </button>
-
-          <button
-            class="singil-cart-button group flex items-center justify-center gap-2 bg-white text-orange-600 
-                          font-bold px-8 py-3 rounded-full shadow-lg border-2 
-                          hover:bg-orange-50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl">
-            <i class="fa-solid fa-cart-shopping group-hover:scale-125 transition-transform"></i>
-            ADD TO CART
-          </button>
         </div>
       </div>
 
-      <!-- Footer Banner -->
-      <div class="singil-header-bg py-3 text-center relative">
-        <p class="text-orange-100 font-medium">
-          <i class="fas fa-gift mr-2"></i>
-          Limited Time Offer • Offer Ends Soon!
-        </p>
-        <!-- Decorative dots -->
-        <div class="absolute top-1/2 left-6 transform -translate-y-1/2 flex gap-1">
-          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
-          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
-          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+      <!-- Desktop Products Section (hidden on mobile) -->
+      <div class="hidden md:grid md:grid-cols-3 gap-6 mb-10 relative z-10">
+
+        <!-- Product Card 1: Charging Lite -->
+        <div class="singil-product-card rounded-xl p-4 text-center shadow-lg relative h-full flex flex-col">
+          <div class="bg-gradient-to-b from-orange-50 to-white p-4 rounded-lg flex-grow-0">
+            <img src="bublb.png" class="singil-product-image mx-auto" alt="Charging Lite"
+              onerror="this.src='https://cdn-icons-png.flaticon.com/512/2972/2972543.png'">
+          </div>
+          <!-- Title with Number -->
+          <div class="singil-title-container mt-3">
+            <div class="singil-product-number">1</div>
+            <h3 class="text-xl font-bold text-orange-900">Charging Lite</h3>
+          </div>
+          <p class="mt-1 text-orange-700 text-sm">Fast charging solution for all devices</p>
+          <div class="mt-2">
+            <span class="inline-block bg-orange-100 text-orange-800 font-semibold px-3 py-1 rounded-full text-xs">
+              Portable & Efficient
+            </span>
+          </div>
         </div>
-        <div class="absolute top-1/2 right-6 transform -translate-y-1/2 flex gap-1">
-          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
-          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
-          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+
+        <!-- Product Card 2: Water Heater -->
+        <div class="singil-product-card rounded-xl p-4 text-center shadow-lg relative h-full flex flex-col">
+          <div class="bg-gradient-to-b from-orange-50 to-white p-4 rounded-lg flex-grow-0">
+            <img src="heater.png" class="singil-product-image mx-auto" alt="Water Heater"
+              onerror="this.src='https://cdn-icons-png.flaticon.com/512/3037/3037008.png'">
+          </div>
+          <!-- Title with Number -->
+          <div class="singil-title-container mt-3">
+            <div class="singil-product-number">2</div>
+            <h3 class="text-xl font-bold text-orange-900">Water Heater</h3>
+          </div>
+          <p class="mt-1 text-orange-700 text-sm">Instant hot water for your needs</p>
+          <div class="mt-2">
+            <span class="inline-block bg-orange-100 text-orange-800 font-semibold px-3 py-1 rounded-full text-xs">
+              Energy Saving
+            </span>
+          </div>
         </div>
+
+        <!-- Product Card 3: Neckband Earphones -->
+        <div class="singil-product-card rounded-xl p-4 text-center shadow-lg relative h-full flex flex-col">
+          <div class="bg-gradient-to-b from-orange-50 to-white p-4 rounded-lg flex-grow-0">
+            <img src="neck.png" class="singil-product-image mx-auto" alt="Neckband Earphones"
+              onerror="this.src='https://cdn-icons-png.flaticon.com/512/3127/3127247.png'">
+          </div>
+          <!-- Title with Number -->
+          <div class="singil-title-container mt-3">
+            <div class="singil-product-number">3</div>
+            <h3 class="text-xl font-bold text-orange-900">Neckband Earphones</h3>
+          </div>
+          <p class="mt-1 text-orange-700 text-sm">
+            Wireless audio with deep bass and clear calls
+          </p>
+          <div class="mt-2">
+            <span class="inline-block bg-orange-100 text-orange-800 font-semibold px-3 py-1 rounded-full text-xs">
+              Bluetooth Connectivity
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALL IN ONE SUPER DEAL Highlight -->
+      <div class="mb-10 text-center relative z-10">
+        <div class="singil-deal-banner inline-block rounded-full py-3 px-6 relative">
+          <div class="absolute -top-1 -left-1 w-6 h-6 bg-yellow-300 rounded-full opacity-70"></div>
+          <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-yellow-300 rounded-full opacity-70"></div>
+          <h2
+            class="text-white text-xl md:text-2xl font-extrabold flex items-center justify-center gap-2 relative z-10">
+            <i class="fas fa-star text-yellow-300 text-sm"></i>
+            ALL IN ONE SUPER DEAL!
+            <i class="fas fa-star text-yellow-300 text-sm"></i>
+          </h2>
+        </div>
+        <p class="mt-3 text-gray-600">Limited time offer - Save 30% when you buy all three together!</p>
+
+        <!-- Price Section -->
+        <div class="mt-4 flex items-center justify-center gap-3">
+          <span class="text-2xl font-bold text-orange-600">$149.99</span>
+          <span class="text-lg text-gray-500 line-through">$214.99</span>
+          <span class="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-sm">Save $65</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
+        <button class="singil-buy-button group flex items-center justify-center gap-2 
+                        text-white font-bold px-8 py-3 rounded-full shadow-lg 
+                        hover:from-orange-600 hover:to-orange-700 transition-all duration-300 
+                        transform hover:-translate-y-1 hover:shadow-xl">
+          <i class="fa-solid fa-bolt group-hover:scale-125 transition-transform"></i>
+          BUY NOW
+          <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+        </button>
+
+        <button
+          class="singil-cart-button group flex items-center justify-center gap-2 bg-white text-orange-600 
+                        font-bold px-8 py-3 rounded-full shadow-lg border-2 
+                        hover:bg-orange-50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl">
+          <i class="fa-solid fa-cart-shopping group-hover:scale-125 transition-transform"></i>
+          ADD TO CART
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer Banner -->
+    <div class="singil-header-bg py-3 text-center relative">
+      <p class="text-orange-100 font-medium">
+        <i class="fas fa-gift mr-2"></i>
+        Limited Time Offer • Offer Ends Soon!
+      </p>
+      <!-- Decorative dots -->
+      <div class="absolute top-1/2 left-6 transform -translate-y-1/2 flex gap-1">
+        <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+        <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+        <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+      </div>
+      <div class="absolute top-1/2 right-6 transform -translate-y-1/2 flex gap-1">
+        <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+        <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+        <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
       </div>
     </div>
   </div>
-  <!-- Second Combo Pack Section -->
+</div>
+
+<!-- Second Combo Pack Section -->
 <div class="max-w-7xl mx-auto mt-10">
   <div class="singil-container rounded-3xl overflow-hidden">
     <!-- Banner Header -->
@@ -2953,8 +3382,70 @@
       <div class="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-orange-200 rounded-bl-lg"></div>
       <div class="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-orange-200 rounded-br-lg"></div>
 
-      <!-- Products Section -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 relative z-10">
+      <!-- Mobile Products Container (only for mobile) -->
+      <div class="md:hidden mb-6 relative z-10">
+        <div class="singil-product-card rounded-xl p-4 shadow-lg">
+          <!-- Mobile container title -->
+          <div class="text-center mb-4">
+            <h3 class="text-lg font-bold text-orange-900">3-in-1 Combo Pack</h3>
+            <p class="text-orange-700 text-sm mt-1">All 3 products included</p>
+          </div>
+          
+          <!-- Fixed 3-column grid for mobile -->
+          <div class="grid grid-cols-3 gap-3">
+            <!-- Product Card 1: Iron Box -->
+            <div class="rounded-lg p-3 bg-gradient-to-b from-orange-50 to-white text-center">
+              <div class="flex justify-center mb-2">
+                <div class="singil-product-number text-xs w-6 h-6 flex items-center justify-center">1</div>
+              </div>
+              <div class="h-16 mb-2 flex items-center justify-center">
+                <img src="./iron.png" class="h-full object-contain" alt="Iron Box"
+                  onerror="this.src='https://cdn-icons-png.flaticon.com/512/3127/3127247.png'">
+              </div>
+              <h4 class="font-bold text-orange-900 text-sm">Iron Box</h4>
+              <p class="text-orange-700 text-xs mt-1">Steam iron</p>
+              <span class="inline-block bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-1 rounded-full mt-2">
+                Steam
+              </span>
+            </div>
+
+            <!-- Product Card 2: Dosa Tawa -->
+            <div class="rounded-lg p-3 bg-gradient-to-b from-orange-50 to-white text-center">
+              <div class="flex justify-center mb-2">
+                <div class="singil-product-number text-xs w-6 h-6 flex items-center justify-center">2</div>
+              </div>
+              <div class="h-16 mb-2 flex items-center justify-center">
+                <img src="dosa.png" class="h-full object-contain" alt="Dosa Tawa"
+                  onerror="this.src='https://cdn-icons-png.flaticon.com/512/3190/3190635.png'">
+              </div>
+              <h4 class="font-bold text-orange-900 text-sm">Dosa Tawa</h4>
+              <p class="text-orange-700 text-xs mt-1">Non-stick pan</p>
+              <span class="inline-block bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-1 rounded-full mt-2">
+                Non-Stick
+              </span>
+            </div>
+
+            <!-- Product Card 3: Neckband Earphones -->
+            <div class="rounded-lg p-3 bg-gradient-to-b from-orange-50 to-white text-center">
+              <div class="flex justify-center mb-2">
+                <div class="singil-product-number text-xs w-6 h-6 flex items-center justify-center">3</div>
+              </div>
+              <div class="h-16 mb-2 flex items-center justify-center">
+                <img src="neck.png" class="h-full object-contain" alt="Neckband Earphones"
+                  onerror="this.src='https://cdn-icons-png.flaticon.com/512/3106/3106794.png'">
+              </div>
+              <h4 class="font-bold text-orange-900 text-sm">Neckband</h4>
+              <p class="text-orange-700 text-xs mt-1">Wireless audio</p>
+              <span class="inline-block bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-1 rounded-full mt-2">
+                Bluetooth
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop Products Section (hidden on mobile) -->
+      <div class="hidden md:grid md:grid-cols-3 gap-6 mb-10 relative z-10">
 
         <!-- Product Card 1: Iron Box -->
         <div class="singil-product-card rounded-xl p-4 text-center shadow-lg relative h-full flex flex-col">
@@ -3075,6 +3566,8 @@
     </div>
   </div>
 </div>
+
+ 
 
 
   <!-- FOOTER -->
@@ -3418,6 +3911,17 @@
       return p.rating || "0.0";
     }
 
+
+     // Simple hover effect for mobile touch devices
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.classList.add('bg-orange-50');
+            });
+            
+            card.addEventListener('touchend', function() {
+                this.classList.remove('bg-orange-50');
+            });
+        });
   </script>
 
 </body>
