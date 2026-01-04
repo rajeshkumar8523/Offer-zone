@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout | Offers Zone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        main {
+            padding-bottom: 90px;
+            /* footer height + gap */
+        }
+
+        #paymentPage {
+            padding-bottom: 90px;
+        }
+
+        .payBtn {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .payItem {
+            padding: 14px;
+            border-bottom: 1px solid #e5e7eb;
+            cursor: pointer;
+        }
+
+        .payItem:hover {
+            background: #f9fafb
+        }
+
+        .payActive {
+            background: #eef2ff
+        }
+
+        .payBtn:hover {
+            background: #f1f5f9
+        }
+
+        .pay-head {
+            width: 100%;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .pay-body {
+            padding: 16px;
+            background: #fafafa;
+        }
+
+        .pay-radio {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+        }
+
+        .pay-input {
+            width: 100%;
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .pay-btn-yellow {
+            width: 100%;
+            background: #facc15;
+            padding: 14px;
+            font-weight: 700;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+
+
+    <!-- ================= HEADER ================= -->
+    <header class="bg-blue-600 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex items-center">
+            <h1 class="text-white text-2xl font-extrabold tracking-wide">
+                Offer<span class="text-yellow-300">Zone</span>
+            </h1>
+            <span class="ml-2 text-xs text-yellow-200">Explore Plus ✨</span>
+        </div>
+    </header>
+    <main class="flex-grow">
+
+        <!-- ================= CHECKOUT STEPS ================= -->
+        <div id="checkoutPage" class="max-w-7xl mx-auto mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+
+            <!-- LEFT -->
+            <div class="lg:col-span-2 space-y-4">
+
+                <!-- ================= STEP 1 : LOGIN ================= -->
+                <section class="bg-white border" id="loginStep">
+
+                    <!-- HEADER -->
+                    <div class="flex items-center justify-between px-6 py-3 bg-blue-600 text-white">
+                        <div class="flex items-center">
+                            <span class="bg-white text-blue-600 font-bold px-2 py-1 mr-3">1</span>
+                            <h2 class="font-semibold">LOGIN</h2>
+                        </div>
+                    </div>
+
+                    <!-- FULL LOGIN CONTENT -->
+                    <div id="loginContent" class="p-6 grid md:grid-cols-2 gap-6">
+
+                        <!-- LEFT -->
+                        <div>
+                            <p class="text-sm text-gray-500">Name</p>
+                            <p class="font-semibold">RAJESHKUMAR</p>
+
+                            <p class="text-sm text-gray-500 mt-3">Phone</p>
+                            <p class="font-semibold">+91 7660091425</p>
+
+                            <!-- CHANGE ACCOUNT LINK (hidden initially) -->
+                            <p id="changeAccount" class="hidden mt-4 text-blue-600 font-semibold cursor-pointer">
+                                Logout & Sign in to another account
+                            </p>
+
+                            <button onclick="completeLogin()"
+                                class="mt-6 bg-orange-500 text-white px-6 py-2 font-bold rounded">
+                                CONTINUE CHECKOUT
+                            </button>
+                        </div>
+
+                        <!-- RIGHT -->
+                        <div>
+                            <p class="font-semibold mb-3 text-gray-500">
+                                Advantages of our secure login
+                            </p>
+                            <ul class="text-sm text-gray-700 space-y-3">
+                                <li class="flex gap-3">
+                                    <i class="fa-solid fa-truck text-blue-600"></i>
+                                    Easily Track Orders, Hassle free Returns
+                                </li>
+                                <li class="flex gap-3">
+                                    <i class="fa-solid fa-bell text-blue-600"></i>
+                                    Get Relevant Alerts and Recommendation
+                                </li>
+                                <li class="flex gap-3">
+                                    <i class="fa-solid fa-star text-blue-600"></i>
+                                    Wishlist, Reviews, Ratings and more.
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- COLLAPSED SUMMARY -->
+                    <div id="loginSummary" class="hidden px-6 py-4 flex justify-between items-center border-t">
+                        <p class="font-semibold">
+                            ✓ LOGIN
+                            <span class="font-normal text-gray-600 ml-2">
+                                RAJESHKUMAR +91 7660091425
+                            </span>
+                        </p>
+                        <button onclick="editLogin()" class="text-blue-600 font-semibold">
+                            CHANGE
+                        </button>
+                    </div>
+
+                </section>
+
+
+                <!-- ================= STEP 2 : DELIVERY ADDRESS ================= -->
+                <section id="step2" class="bg-white border hidden">
+
+                    <!-- HEADER -->
+                    <div class="flex items-center px-6 py-3 bg-blue-600 text-white">
+                        <span class="bg-white text-blue-600 font-bold px-2 py-1 mr-3">2</span>
+                        <h2 class="font-semibold">DELIVERY ADDRESS</h2>
+                    </div>
+
+                    <!-- ================= EDIT / FORM VIEW ================= -->
+                    <div id="addressForm" class="bg-blue-50 p-6">
+
+                        <!-- Edit row -->
+                        <div class="flex items-center gap-3 mb-4 text-blue-600 font-semibold">
+                            <input type="radio" checked>
+                            EDIT ADDRESS
+                        </div>
+
+                        <!-- Location -->
+                        <button class="mb-6 bg-blue-600 text-white px-6 py-3 rounded shadow flex items-center gap-2">
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                            Use my current location
+                        </button>
+
+                        <!-- Form -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input class="border p-3 rounded" value="Rajesh" placeholder="Name">
+                            <input class="border p-3 rounded" value="7660991425" placeholder="10-digit mobile number">
+
+                            <input class="border p-3 rounded" value="509001" placeholder="Pincode">
+                            <input class="border p-3 rounded" value="Appannapally" placeholder="Locality">
+
+                            <textarea class="border p-3 rounded md:col-span-2"
+                                placeholder="Address (Area and Street)">Appannapally, hno 11-2-8</textarea>
+
+                            <input class="border p-3 rounded" value="Mahbubnagar" placeholder="City/District/Town">
+
+                            <select class="border p-3 rounded">
+                                <option selected>Telangana</option>
+                            </select>
+
+                            <input class="border p-3 rounded" placeholder="Landmark (Optional)">
+                            <input class="border p-3 rounded" placeholder="Alternate Phone (Optional)">
+                        </div>
+
+                        <!-- Address type -->
+                        <div class="mt-6">
+                            <p class="font-semibold mb-2">Address Type</p>
+                            <label class="mr-6">
+                                <input type="radio" checked> Home (All day delivery)
+                            </label>
+                            <label>
+                                <input type="radio"> Work (10 AM – 5 PM)
+                            </label>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="mt-6 flex items-center gap-6">
+                            <button onclick="completeAddress()"
+                                class="bg-orange-500 text-white px-8 py-3 font-bold rounded">
+                                SAVE AND DELIVER HERE
+                            </button>
+                            <button onclick="cancelAddress()" class="text-blue-600 font-semibold">
+                                CANCEL
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ================= SAVED VIEW ================= -->
+                    <div id="addressSummary" class="hidden px-6 py-4 flex justify-between items-center border-t">
+                        <p class="font-semibold">
+                            ✓ DELIVERY ADDRESS
+                            <span class="font-normal text-gray-600 ml-2">
+                                Rajesh, Appannapally, Mahbubnagar – 509001
+                            </span>
+                        </p>
+                        <button onclick="editAddress()" class="text-blue-600 font-semibold">
+                            CHANGE
+                        </button>
+                    </div>
+
+                    <!-- Add new -->
+                    <div class="px-6 py-4 border-t text-blue-600 font-semibold cursor-pointer">
+                        + Add a new address
+                    </div>
+
+                </section>
+
+
+                <!-- ================= STEP 3 : ORDER SUMMARY ================= -->
+                <section id="step3" class="bg-white border hidden">
+                    <div class="flex items-center px-6 py-3 bg-blue-600 text-white">
+                        <span class="bg-white text-blue-600 font-bold px-2 py-1 mr-3">3</span>
+                        <h2 class="font-semibold">ORDER SUMMARY</h2>
+                    </div>
+
+                    <div class="p-6 flex gap-6">
+                        <img src="https://via.placeholder.com/120" class="w-28 h-36 border">
+
+                        <div class="flex-1">
+                            <h3 class="font-semibold">TrybeX Full Sleeve Solid Men Jacket</h3>
+                            <p class="text-sm text-gray-500">Size: XL</p>
+
+                            <p class="mt-2">
+                                <span class="line-through text-gray-400">₹3,499</span>
+                                <span class="text-xl font-bold ml-2">₹900</span>
+                                <span class="text-green-600 ml-2">74% Off</span>
+                            </p>
+
+                            <p class="text-sm text-green-600 mt-2">
+                                ✔ Open Box Delivery is eligible for this item
+                            </p>
+
+                            <div class="mt-4 flex items-center gap-4">
+                                <button onclick="changeQty(-1)" class="border px-3 py-1">-</button>
+                                <span id="qty" class="font-semibold">1</span>
+                                <button onclick="changeQty(1)" class="border px-3 py-1">+</button>
+                                <button class="ml-6 text-blue-600 font-semibold">REMOVE</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="px-6 py-4 border-t flex justify-between items-center">
+                        <input class="border-b outline-none w-64" placeholder="Enter your email ID">
+                        <button onclick="openPayment()"
+                            class="bg-orange-500 hover:bg-orange-600 text-white px-10 py-3 font-bold rounded">
+                            CONTINUE
+                        </button>
+
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- RIGHT PRICE -->
+            <aside class="bg-white border p-6 h-fit sticky top-6">
+                <h3 class="font-semibold mb-4">PRICE DETAILS</h3>
+
+                <p class="mt-2">
+                    <span class="line-through text-gray-400">₹3,499</span>
+                    <span class="text-xl font-bold ml-2 item-price">₹900</span>
+                    <span class="text-green-600 ml-2">74% Off</span>
+                </p>
+
+
+                <div class="flex justify-between text-sm mt-2">
+                    <span>Platform Fee</span><span>₹7</span>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="flex justify-between font-bold">
+                    <span>Total Payable</span><span>₹907</span>
+                </div>
+
+                <p class="text-green-600 font-semibold mt-3">
+                    Your Total Savings on this order ₹2,592
+                </p>
+            </aside>
+
+        </div>
+
+        <section id="paymentPage" class="hidden">
+            <!-- ================= PAYMENT HEADER ================= -->
+            <div class="bg-white border-b">
+                <div class="max-w-7xl mx-auto px-6 py-4 flex items-center">
+                    <i onclick="backToSteps()" class="fa fa-arrow-left mr-4 cursor-pointer text-gray-600"></i>
+
+                    <h1 class="text-xl font-semibold">Complete Payment</h1>
+                    <span class="ml-auto bg-gray-100 px-3 py-1 rounded text-sm flex items-center gap-1">
+                        🔒 100% Secure
+                    </span>
+                </div>
+            </div>
+
+            <!-- ================= PAYMENT BODY ================= -->
+            <div class="max-w-7xl mx-auto mt-6 bg-white rounded shadow grid grid-cols-1 lg:grid-cols-3">
+
+                <!-- ========== LEFT : PAYMENT METHODS ========== -->
+
+
+                <div class="border-r">
+                    <div onclick="selectPay('upi')" id="upiBtn" class="payItem payActive">
+                        <div class="flex items-center gap-3 font-semibold">
+                            <i class="fa-brands fa-google-pay text-xl"></i> UPI
+                        </div>
+                        <p class="text-sm text-green-600 mt-1">
+                            Get upto ₹50 cashback • 4 offers available
+                        </p>
+                    </div>
+
+                    <div onclick="selectPay('card')" id="cardBtn" class="payItem">
+                        <div class="flex items-center gap-3 font-semibold">
+                            <i class="fa-regular fa-credit-card"></i> Credit / Debit / ATM Card
+                        </div>
+                        <p class="text-sm text-green-600 mt-1">
+                            Get upto 5% cashback • 2 offers available
+                        </p>
+                    </div>
+
+                    <div onclick="selectPay('emi')" id="emiBtn" class="payItem">
+                        <div class="flex items-center gap-3 font-semibold">
+                            <i class="fa-solid fa-calendar-days"></i> EMI
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">
+                            Get Debit and Cardless EMIs
+                        </p>
+                    </div>
+
+                    <div onclick="selectPay('cod')" id="codBtn" class="payItem">
+                        <div class="flex items-center gap-3 font-semibold">
+                            <i class="fa-solid fa-money-bill"></i> Cash on Delivery
+                        </div>
+                    </div>
+
+                    <div class="payItem">
+                        <div class="flex items-center gap-3 font-semibold">
+                            <i class="fa-solid fa-gift"></i> Have a Gift Card?
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== MIDDLE : PAYMENT CONTENT ========== -->
+                <div id="paymentContent" class="p-8 lg:col-span-1">
+                    <!-- JS injects -->
+                </div>
+
+                <!-- ========== RIGHT : PRICE DETAILS ========== -->
+                <div class="bg-gray-50 p-6 border-l">
+                    <h3 class="font-semibold mb-4">PRICE DETAILS</h3>
+
+                    <div class="flex justify-between text-sm">
+                        <span>Price (1 item)</span><span>₹1,386</span>
+                    </div>
+
+                    <div class="flex justify-between text-sm mt-2">
+                        <span>Platform Fee</span><span>₹7</span>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="flex justify-between font-bold text-blue-600">
+                        <span>Total Amount</span><span>₹1,393</span>
+                    </div>
+
+                    <div class="mt-4 bg-green-100 text-green-700 p-3 rounded text-sm flex items-center gap-2">
+                        💸 5% Cashback <span class="text-gray-500">+ more offers</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+    <!-- MOBILE PAYMENT ACCORDION -->
+    <div class="lg:hidden divide-y bg-white">
+
+        <!-- UPI -->
+        <div class="pay-accordion">
+            <button onclick="togglePay('upi')" class="pay-head">
+                <span class="flex items-center gap-3">
+                    <i class="fa-solid fa-qrcode"></i> UPI
+                </span>
+                <img id="upiArrow" src="https://cdn-icons-png.flaticon.com/512/271/271210.png"
+                    class="w-4 transition-transform">
+            </button>
+
+            <div id="upiBox" class="pay-body hidden">
+                <label class="pay-radio">
+                    <input type="radio" checked>
+                    Paytm <span class="text-green-600 text-sm ml-2">₹10 cashback</span>
+                </label>
+
+                <label class="pay-radio"><input type="radio"> Google Pay</label>
+                <label class="pay-radio"><input type="radio"> PhonePe</label>
+                <label class="pay-radio"><input type="radio"> Mobikwik</label>
+
+                <button class="pay-btn-yellow">Pay ₹558</button>
+            </div>
+        </div>
+
+        <!-- CARD -->
+        <div class="pay-accordion">
+            <button onclick="togglePay('card')" class="pay-head">
+                <span class="flex items-center gap-3">
+                    <i class="fa-regular fa-credit-card"></i> Credit / Debit / ATM Card
+                </span>
+                <img id="cardArrow" src="https://cdn-icons-png.flaticon.com/512/271/271210.png"
+                    class="w-4 transition-transform">
+            </button>
+
+            <div id="cardBox" class="pay-body hidden">
+                <input class="pay-input" placeholder="Card Number">
+                <div class="flex gap-3 mt-3">
+                    <input class="pay-input w-1/2" placeholder="MM/YY">
+                    <input class="pay-input w-1/2" placeholder="CVV">
+                </div>
+                <button class="pay-btn-yellow mt-4">Pay ₹558</button>
+            </div>
+        </div>
+
+        <!-- COD -->
+        <div class="pay-accordion">
+            <button onclick="togglePay('cod')" class="pay-head">
+                <span class="flex items-center gap-3">
+                    <i class="fa-solid fa-money-bill"></i> Cash on Delivery
+                </span>
+                <img id="codArrow" src="https://cdn-icons-png.flaticon.com/512/271/271210.png"
+                    class="w-4 transition-transform">
+            </button>
+
+            <div id="codBox" class="pay-body hidden">
+                <p class="text-sm text-gray-600 mb-3">
+                    Pay on delivery (cash/UPI).
+                </p>
+                <button class="pay-btn-yellow">Place Order</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ================= FIXED FOOTER (FLIPKART STYLE) ================= -->
+    <footer class="fixed bottom-0 left-0 w-full bg-gray-100 border-t z-[9999]">
+
+        <div class="max-w-7xl mx-auto px-6 py-3
+              flex flex-col md:flex-row
+              items-center justify-between
+              text-xs text-gray-600 gap-2">
+
+            <!-- LEFT -->
+            <div class="flex flex-wrap gap-2 items-center">
+                <span>Policies:</span>
+                <a href="#" class="text-blue-600 hover:underline">Returns Policy</a>
+                <span>|</span>
+                <a href="#" class="text-blue-600 hover:underline">Terms of use</a>
+                <span>|</span>
+                <a href="#" class="text-blue-600 hover:underline">Security</a>
+                <span>|</span>
+                <a href="#" class="text-blue-600 hover:underline">Privacy</a>
+            </div>
+
+            <!-- CENTER -->
+            <div class="text-gray-500">
+                © 2007–2026 OfferZone.com
+            </div>
+
+            <!-- RIGHT -->
+            <div class="flex gap-1 items-center">
+                <span>Need help?</span>
+                <a href="#" class="text-blue-600 hover:underline">Help Center</a>
+                <span>or</span>
+                <a href="#" class="text-blue-600 hover:underline">Contact Us</a>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script>
+        function completeLogin() {
+            document.getElementById("loginContent").classList.add("hidden");
+            document.getElementById("loginSummary").classList.remove("hidden");
+            document.getElementById("step2").classList.remove("hidden");
+        }
+
+        function editLogin() {
+            // Show login again
+            document.getElementById("loginContent").classList.remove("hidden");
+            document.getElementById("loginSummary").classList.add("hidden");
+
+            // Show "Logout & Sign in to another account"
+            document.getElementById("changeAccount").classList.remove("hidden");
+
+            // Reset next steps
+            document.getElementById("step2").classList.add("hidden");
+            document.getElementById("step3").classList.add("hidden");
+        }
+        function completeAddress() {
+            document.getElementById("addressForm").classList.add("hidden");
+            document.getElementById("addressSummary").classList.remove("hidden");
+            document.getElementById("step3").classList.remove("hidden");
+        }
+
+        function editAddress() {
+            document.getElementById("addressForm").classList.remove("hidden");
+            document.getElementById("addressSummary").classList.add("hidden");
+            document.getElementById("step3").classList.add("hidden");
+        }
+
+        function cancelAddress() {
+            document.getElementById("addressForm").classList.add("hidden");
+            document.getElementById("addressSummary").classList.remove("hidden");
+        }
+
+        function completeOrder() {
+            paymentPage.classList.add("hidden");
+            checkoutPage.classList.remove("hidden");
+            trackSection.classList.remove("hidden");
+        }
+
+        function resetActive() {
+            document.querySelectorAll(".payItem").forEach(el => el.classList.remove("payActive"));
+        }
+
+        function selectPay(type) {
+            resetActive();
+            document.getElementById(type + "Btn")?.classList.add("payActive");
+            const box = document.getElementById("paymentContent");
+
+            if (type === "upi") {
+                box.innerHTML = `
+      <h3 class="font-semibold mb-4">Pay by any UPI app</h3>
+      <input class="border p-3 rounded w-full" placeholder="Enter your UPI ID">
+      <button class="mt-6 bg-yellow-400 w-full py-3 rounded font-bold">
+        Pay ₹1,393
+      </button>
+    `;
+            }
+
+            if (type === "card") {
+                box.innerHTML = `
+      <p class="text-sm text-gray-500 mb-4">
+        Please ensure your card can be used for online transactions.
+      </p>
+
+      <label class="text-sm font-semibold">Card Number</label>
+      <input class="border p-3 rounded w-full mt-1" placeholder="XXXX XXXX XXXX XXXX">
+
+      <p class="text-red-500 text-sm mt-1">Card number is required</p>
+
+      <div class="flex gap-4 mt-4">
+        <div class="w-1/2">
+          <label class="text-sm font-semibold">Valid Thru</label>
+          <input class="border p-3 rounded w-full mt-1" placeholder="MM / YY">
+        </div>
+        <div class="w-1/2">
+          <label class="text-sm font-semibold">CVV</label>
+          <input class="border p-3 rounded w-full mt-1" placeholder="CVV">
+        </div>
+      </div>
+
+      <button class="mt-6 bg-yellow-400 w-full py-3 rounded font-bold">
+        Pay ₹1,393
+      </button>
+    `;
+            }
+
+            if (type === "emi") {
+                box.innerHTML = `
+      <h3 class="font-semibold mb-4">Get EMI in 3 easy steps</h3>
+      <p>HDFC Bank – ₹127/month</p>
+      <p class="mt-2">Kotak Bank – ₹477/month</p>
+      <button class="mt-6 bg-blue-600 text-white w-full py-3 rounded">
+        See Plans
+      </button>
+    `;
+            }
+
+            if (type === "cod") {
+                box.innerHTML = `
+      <h3 class="font-semibold mb-4">Cash on Delivery</h3>
+      <button class="bg-yellow-400 w-full py-3 rounded font-bold">
+        Place Order
+      </button>
+    `;
+            }
+        }
+
+        selectPay("upi");
+
+        let qty = 1;
+        const basePrice = 900; // item price
+
+        function changeQty(val) {
+            qty = qty + val;
+            if (qty < 1) qty = 1;
+
+            document.getElementById("qty").innerText = qty;
+
+            updateOrderPrice();
+        }
+
+        function updateOrderPrice() {
+            const total = qty * basePrice;
+
+            // Update STEP-3 price
+            document.querySelectorAll(".item-price").forEach(el => {
+                el.innerText = "₹" + total;
+            });
+        }
+
+        function openPayment() {
+            // Hide checkout steps ONLY
+            document.getElementById("checkoutPage").classList.add("hidden");
+
+            // Show payment page
+            document.getElementById("paymentPage").classList.remove("hidden");
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: "smooth" });
+
+            // Default payment
+            selectPay("upi");
+        }
+
+        function backToSteps() {
+            document.getElementById("paymentPage").classList.add("hidden");
+            document.getElementById("checkoutPage").classList.remove("hidden");
+            document.getElementById("step3").classList.remove("hidden");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+        function togglePay(type) {
+            const boxes = ['upi', 'card', 'cod'];
+
+            boxes.forEach(b => {
+                const box = document.getElementById(b + 'Box');
+                const arrow = document.getElementById(b + 'Arrow');
+
+                if (b === type) {
+                    box.classList.toggle('hidden');
+                    arrow.style.transform = box.classList.contains('hidden')
+                        ? 'rotate(0deg)'
+                        : 'rotate(180deg)';
+                } else {
+                    box.classList.add('hidden');
+                    arrow.style.transform = 'rotate(0deg)';
+                }
+            });
+        }
+        // Function to get URL parameters
+    function getUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+            id: params.get('id'),
+            name: decodeURIComponent(params.get('name') || 'Product Name'),
+            price: parseInt(params.get('price') || 0),
+            originalPrice: parseInt(params.get('originalPrice') || 0),
+            discount: parseInt(params.get('discount') || 0),
+            image: params.get('image'),
+            category: decodeURIComponent(params.get('category') || ''),
+            rating: parseFloat(params.get('rating') || 0),
+            reviews: parseInt(params.get('reviews') || 0),
+            description: decodeURIComponent(params.get('description') || '')
+        };
+    }
+
+    </script>
+
+</body>
+
+</html>

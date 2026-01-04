@@ -217,136 +217,279 @@
 
 <body class="bg-gray-50 text-slate-800">
 
-  <!-- HEADER -->
-  <header class="bg-white shadow-md px-6 py-4 sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-
-      <!-- LOGO -->
-      <a href="./index.html" class="select-none">
-        <h1 class="text-3xl md:text-4xl font-black tracking-[2px] text-orange-500 uppercase
-                 transition-all duration-300 hover:text-orange-400 hover:scale-105">
+<!-- HEADER -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+  <!-- Desktop Header -->
+  <div class="hidden md:block max-w-7xl mx-auto px-4 py-3">
+    <div class="flex items-center justify-between">
+      <!-- Logo - Left -->
+      <a href="../index.html" class="select-none flex-shrink-0">
+        <h1 class="text-3xl font-black tracking-[2px] text-orange-500 uppercase hover:text-orange-400 transition">
           OFFERS ZONE
         </h1>
       </a>
-
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:block">
-        <ul class="flex space-x-8 text-gray-700 font-medium">
-          <li><a href="./index.html">Home</a></li>
-
-          <li class="relative group">
-            <a class="nav-link flex items-center gap-1">
-              Categories
-              <i class="fa-solid fa-chevron-down text-xs"></i>
-            </a>
-
-            <!-- Dropdown -->
-            <ul class="absolute left-0 top-full mt-3 w-56 bg-white shadow-lg rounded-xl
-           opacity-0 invisible group-hover:opacity-100 group-hover:visible
-           transition-all duration-300 z-50 overflow-hidden">
-
-              <li>
-                <a href="./gas.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
-                  Gas Safety Devices
-                </a>
-              </li>
-
-              <li>
-                <a href="./men.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500 nav-link active">
-                  Mens Wears
-                </a>
-              </li>
-
-              <li>
-                <a href="./leadies.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
-                  Ladies Wears
-                </a>
-              </li>
-
-              <li>
-                <a href="./sares.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
-                  Sarees
-                </a>
-              </li>
-
-              <li>
-                <a href="./kid.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
-                  Kids Wears
-                </a>
-              </li>
-              <li>
-                <a href="./TRACKPANTS/trackp.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
-                  Track Pants
-                </a>
-              </li>
-              <li>
-                <a href="./SWEATERS/sweater.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
-                  Sweater
-                </a>
-              </li>
-              <li>
-                <a href="./SHIRTSHOOT/shirtshoot.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500">
-                  Shirting & Shooting
-                </a>
-              </li>
-              <li>
-                <a href="./GOLD/gold.html" class="block px-5 py-3 hover:bg-orange-50 hover:text-orange-500 ">
-                  Gold Jewellery
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li><a class="nav-link " href="./liked.html">Liked</a></li>
-          <li><a class="nav-link" href="./CART/cart.html">Cart</a></li>
-          <li><a class="nav-link" href="#">Blogs</a></li>
-          <li><a class="nav-link" href="#">Contact</a></li>
-          <li><a class="nav-link" href="#">About</a></li>
-
-
-        </ul>
-      </nav>
-
-      <!-- Mobile Menu Button -->
-      <button onclick="toggleMenu()" class="md:hidden text-3xl text-gray-700">
-        <i class="fa-solid fa-bars"></i>
+      
+      <!-- Search Bar - Center -->
+      <div class="flex-1 max-w-2xl mx-8">
+        <div class="relative">
+          <input type="text" id="desktopSearchInput" placeholder="Search for products, brands, categories..."
+            class="w-full px-4 py-2.5 pl-12 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent shadow-sm">
+          <i class="fa-solid fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+          
+          <!-- Search Results Dropdown -->
+          <div id="desktopSearchResults" 
+               class="absolute top-full left-0 right-0 mt-1 bg-white shadow-xl rounded-lg border border-gray-200 hidden z-50 max-h-96 overflow-y-auto">
+            <!-- Results will be dynamically inserted here -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Navigation Links and Account - Right -->
+      <div class="flex items-center space-x-6">
+        <nav>
+          <ul class="flex items-center space-x-6 text-gray-700 font-medium">
+            <li><a  href="../index.html">Home</a></li>
+            
+            <!-- Categories Dropdown -->
+            <li class="relative group">
+              <a class="nav-link flex items-center gap-1 cursor-pointer">
+                Categories
+                <i class="fa-solid fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
+              </a>
+              
+              <!-- Categories Mega Dropdown -->
+              <div class="absolute left-[-360px] top-full mt-3 w-[800px] bg-white shadow-2xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden border border-gray-100">
+                <div class="grid grid-cols-3 gap-0">
+                  <!-- Clothing Section -->
+                  <div class="p-5 border-r border-gray-100">
+                    <h3 class="font-bold text-gray-800 mb-3 text-base">Clothing</h3>
+                    <ul class="space-y-2">
+                      <li><a href="../MENPANTS/mpants.html" class="nav-link active text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                        <i class="fa-solid fa-shirt text-sm text-gray-400"></i> Mens Pants</a></li>
+                      <li><a href="../MENSHIRTS/mshirts.html" class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                        <i class="fa-solid fa-person-dress text-sm text-gray-400"></i> Mens Shirts</a></li>
+                      <li><a href="../SAREES/sares.html" class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                        <i class="fa-solid fa-scroll text-sm text-gray-400"></i> Sarees</a></li>
+                      <li><a href="../TRACKPANTS/trackp.html" class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                        <i class="fa-solid fa-person-running text-sm text-gray-400"></i> Track Pants</a></li>
+                      <li><a href="../SHIRTS CLOTHS/shirtcloth.html" class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                        <i class="fa-solid fa-vest text-sm text-gray-400"></i> Shirts Cloths</a></li>
+                      <li><a href="../PANT CLOTH/pantcloth.html" class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                        <i class="fa-solid fa-child text-sm text-gray-400"></i> Pant Cloths</a></li>
+                    </ul>
+                  </div>
+                  
+                  <!-- Materials & Others -->
+                  <div class="p-5 border-r border-gray-100">
+                    <h3 class="font-bold text-gray-800 mb-3 text-base">Materials & Others</h3>
+                    <ul class="space-y-2">
+                       <li><a href="../GAS/gas.html" class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                        <i class="fa-solid fa-fire-flame-curved text-sm text-gray-400"></i> Gas Safety Devices</a></li>
+                      <li><a href="../GOLD/gold.html" class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                        <i class="fa-solid fa-gem text-sm text-gray-400"></i> Gold Jewellery</a></li>
+                    </ul>
+                  </div>
+                  
+                  <!-- Combo packs -->
+                  <div class="p-5">
+                    <h3 class="font-bold text-gray-800 mb-3 text-base">Combo packs</h3>
+                    <ul class="space-y-2">
+                      <li><a href="#singil-container" class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                        <i class="fa-solid fa-gift text-sm text-gray-400"></i> Combo Pack 1</a></li>
+                      <li><a href="#singill-container" class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                        <i class="fa-solid fa-box-open text-sm text-gray-400"></i> Combo Pack 2</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            
+            <li><a class="nav-link" href="./blogs">Blogs</a></li>
+            <li><a class="nav-link" href="../CONTACTUS/contact.html">Contact</a></li>
+            <li><a class="nav-link" href="../ABOUTUS/about.html">About</a></li>
+          </ul>
+        </nav>
+        
+        <!-- Account Links -->
+        <div class="flex items-center space-x-4">
+          
+          <a href="../LIKED/liked.html" class="text-gray-700 hover:text-orange-500 transition group relative" title="Wishlist">
+            <i class="fa-solid fa-heart text-lg"></i>
+            <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition"></div>
+          </a>
+          <a href="../CART/cart.html" class="text-gray-700 hover:text-orange-500 transition group relative" title="Cart">
+            <i class="fa-solid fa-shopping-cart text-lg"></i>
+            <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition"></div>
+          </a>
+           <a href="../MYPROFILE/profile.html" class="text-gray-700 hover:text-orange-500 transition group relative" title="Account">
+            <i class="fa-solid fa-user text-lg"></i>
+            <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition"></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile Header -->
+  <div class="md:hidden px-3 py-3">
+    <div class="flex items-center justify-between">
+      <!-- Logo - Left side -->
+      <a href="../index.html" class="select-none">
+        <h1 class="text-2xl font-black tracking-[1px] text-orange-500 uppercase hover:text-orange-400 transition">
+          OFFERS ZONE
+        </h1>
+      </a>
+      
+      <!-- Right side icons: Search + Menu -->
+      <div class="flex items-center space-x-4">
+        <!-- Search Icon - Right side -->
+        <button id="mobileSearchToggle" class="text-gray-700 hover:text-orange-500 transition">
+          <i class="fa-solid fa-search text-xl"></i>
+        </button>
+        
+        <!-- Menu Button - Right side -->
+        <button onclick="toggleMenu()" class="text-gray-700 hover:text-orange-500 transition">
+          <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Search Bar (Hidden by default) -->
+    <div id="mobileSearchBar" class="mt-3 hidden">
+      <div class="relative">
+        <input type="text" id="mobileSearchInput" placeholder="Search for products, brands, categories..."
+          class="w-full px-4 py-3 pl-12 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent">
+        <i class="fa-solid fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        <button id="closeMobileSearch"
+          class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+          <i class="fa-solid fa-times"></i>
+        </button>
+        
+        <!-- Mobile Search Results -->
+        <div id="mobileSearchResults" 
+             class="absolute top-full left-0 right-0 mt-1 bg-white shadow-xl rounded-lg border border-gray-200 hidden z-50 max-h-96 overflow-y-auto">
+          <!-- Results will be dynamically inserted here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <nav id="mobileMenu"
+    class="fixed md:hidden top-0 right-0 h-full w-64 bg-white shadow-2xl z-50 transform transition-transform duration-300 translate-x-full">
+    <!-- Menu Header with Close Button -->
+    <div class="flex items-center justify-between p-4 border-b border-gray-200">
+      <h3 class="font-bold text-gray-800">Menu</h3>
+      <button onclick="toggleMenu()" class="text-gray-600 hover:text-orange-500">
+        <i class="fa-solid fa-times text-xl"></i>
       </button>
     </div>
 
-    <!-- Mobile Menu -->
-    <nav id="mobileMenu" class="hidden md:hidden bg-white shadow-md mt-3 rounded-lg px-6 py-4">
-      <ul class="flex flex-col space-y-4 text-gray-700 font-medium">
-        <li><a href="./index.html">Home</a></li>
-
+    <!-- Menu Content -->
+    <div class="h-[calc(100%-64px)] overflow-y-auto">
+      <ul class="flex flex-col py-4 text-gray-700 font-medium">
+        <!-- Home -->
         <li>
+          <a class="mobile-nav-link active flex items-center gap-3 px-6 py-4" href="../index.html">
+            <i class="fa-solid fa-house text-orange-500 w-5"></i>
+            <span>Home</span>
+          </a>
+        </li>
+
+        <!-- Categories Section -->
+        <li class="border-t border-gray-100">
           <details class="group">
-            <summary class="cursor-pointer flex items-center justify-between nav-link">
-              Categories
-              <i class="fa-solid fa-chevron-down text-xs"></i>
+            <summary class="cursor-pointer flex items-center justify-between mobile-nav-link px-6 py-4">
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-list text-orange-500 w-5"></i>
+                <span>Categories</span>
+              </div>
+              <i class="fa-solid fa-chevron-down text-xs transition-transform group-open:rotate-180"></i>
             </summary>
 
-            <ul class="ml-4 mt-2 space-y-2 text-slate-600">
-              <li><a href="./gas.html">Gas Safety Devices</a></li>
-              <li><a href="./men.html" class="nav-link active">Mens Wears</a></li>
-              <li><a href="./leadies.html">Ladies Wears</a></li>
-              <li><a href="./sares.html">Sarees</a></li>
-              <li><a href="./kid.html">Kids Wears</a></li>
-              <li><a href="./TRACKPANTS/trackp.html">Track Pants</a></li>
-              <li><a href="./SWEATERS/sweater.html">Sweater</a></li>
-              <li><a href="./SHIRTSHOOT/shirtshoot.html">Shirting & Shooting</a></li>
-              <li><a href="./GOLD/gold.html">Gold Jewellery</a></li>
+            <ul class="ml-4 mt-2 mb-3 space-y-2 text-slate-600">
+              <li><a href="../GAS/gas.html" class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                    class="fa-solid fa-fire-flame-curved text-sm text-gray-400 w-4"></i> Gas Safety Devices</a></li>
+              <li><a href="../MENPANTS/mpants.html" class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                    class="fa-solid fa-shirt text-sm text-gray-400 w-4"></i> Mens Pants</a></li>
+              <li><a href="../MENSHIRTS/mshirts.html" class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                    class="fa-solid fa-person-dress text-sm text-gray-400 w-4"></i> Mens Shirts</a></li>
+              <li><a href="../SAREES/sares.html" class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                    class="fa-solid fa-scroll text-sm text-gray-400 w-4"></i> Sarees</a></li>
+               
+              <li><a href="../TRACKPANTS/trackp.html" class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                    class="fa-solid fa-person-running text-sm text-gray-400 w-4"></i> Track Pants</a></li>
+              <li><a href="../SHIRTS CLOTHS/shirtcloth.html" class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                    class="fa-solid fa-vest text-sm text-gray-400 w-4"></i> shirts-cloths</a></li>
+              <li><a href="../PANT CLOTH/pantcloth.html" class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                    class=" fa-solid fa-child text-sm text-gray-400 w-4"></i> pant-cloths</a></li>
+              <li><a href="../GOLD/gold.html" class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                    class="fa-solid fa-gem text-sm text-gray-400 w-4"></i> Gold Jewellery</a></li>
+                     <li><a href="#singil-container" class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                    class="fa-solid fa-gift text-sm text-gray-400 w-4"></i>First Combo Pack</a></li>
+                     <li><a href="#singill-container" class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                    class="fa-solid fa-gift text-sm text-gray-400 w-4"></i> Second Combo Pack</a></li>
             </ul>
           </details>
         </li>
-        <li><a class="nav-link " href="./liked.html">Liked</a></li>
-        <li><a class="nav-link" href="./CART/cart.html">Cart</a></li>
 
-        <li><a class="nav-link" href="#">Blog</a></li>
-        <li><a class="nav-link" href="#">Contact</a></li>
-        <li><a class="nav-link" href="#">About</a></li>
+        <!-- Blogs -->
+        <li class="border-t border-gray-100">
+          <a class="mobile-nav-link flex items-center gap-3 px-6 py-4" href="#">
+            <i class="fa-solid fa-newspaper text-orange-500 w-5"></i>
+            <span>Blogs</span>
+          </a>
+        </li>
 
+        <!-- Contact -->
+        <li>
+          <a class="mobile-nav-link flex items-center gap-3 px-6 py-4" href="../CONTACTUS/contact.html">
+            <i class="fa-solid fa-phone text-orange-500 w-5"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+
+        <!-- About -->
+        <li class="border-t border-gray-100">
+          <a class="mobile-nav-link flex items-center gap-3 px-6 py-4" href="../ABOUTUS/about.html">
+            <i class="fa-solid fa-circle-info text-orange-500 w-5"></i>
+            <span>About</span>
+          </a>
+        </li>
+
+        <!-- Account Links Section -->
+        <li class="border-t border-gray-100 mt-4">
+          <div class="px-6 py-4">
+            <h4 class="text-sm font-semibold text-gray-500 mb-3">ACCOUNT</h4>
+            <div class="space-y-2">
+              <a href="../MYPROFILE/profile.html" class="flex items-center gap-3 text-gray-700 hover:text-orange-500 py-2 transition">
+                <i class="fa-solid fa-user text-gray-400 w-5"></i>
+                <span>My Account</span>
+              </a>
+              <a href="../LIKED/liked.html" class="flex items-center gap-3 text-gray-700 hover:text-orange-500 py-2 transition">
+                <i class="fa-solid fa-heart text-gray-400 w-5"></i>
+                <span>Wishlist</span>
+                <span id="mobileWishlistCount"
+                  class="ml-auto bg-orange-100 text-orange-600 text-xs px-2 py-1 rounded">0</span>
+              </a>
+              <a href="../CART/cart.html" class="flex items-center gap-3 text-gray-700 hover:text-orange-500 py-2 transition">
+                <i class="fa-solid fa-shopping-cart text-gray-400 w-5"></i>
+                <span>Cart</span>
+                <span id="mobileCartCount"
+                  class="ml-auto bg-orange-100 text-orange-600 text-xs px-2 py-1 rounded">0</span>
+              </a>
+            </div>
+          </div>
+        </li>
       </ul>
-    </nav>
-  </header>
+    </div>
+  </nav>
+
+  <!-- Overlay for mobile menu -->
+  <div id="mobileOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden" onclick="toggleMenu()"></div>
+</header>
+
+
   <h3 class="mt-10 mb-10 text-center text-black-600 text-3xl font-extrabold section-title">Men's Pants</h3>
   <!-- Filter Buttons -->
   <div class="flex flex-wrap justify-center gap-4 mt-6 mb-6">
@@ -372,13 +515,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=201">
+        <a href="../PRODUCTS/product.html?id=201">
           <img src="../IMAGES/mp1.jpg" alt="Slim Fit Jeans" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Jeans</p>
-        <a href="./PRODUCTS/product.html?id=201">
+        <a href="../PRODUCTS/product.html?id=201">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Slim Fit Jeans</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Stretchable denim with modern slim fit.</p>
@@ -405,13 +548,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=202">
+        <a href="../PRODUCTS/product.html?id=202">
           <img src="../IMAGES/mp2.jpg" alt="Formal Trousers" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Trousers</p>
-        <a href="./PRODUCTS/product.html?id=202">
+        <a href="../PRODUCTS/product.html?id=202">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Formal Trousers</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Office-ready fit with premium fabric finish.</p>
@@ -439,13 +582,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=203">
+        <a href="../PRODUCTS/product.html?id=203">
           <img src="../IMAGES/mp3.jpg" alt="Lycra Pants" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Casual Pants</p>
-        <a href="./PRODUCTS/product.html?id=203">
+        <a href="../PRODUCTS/product.html?id=203">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Lycra Pants</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Stretch comfort with flexible movement.</p>
@@ -473,13 +616,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=204">
+        <a href="../PRODUCTS/product.html?id=204">
           <img src="../IMAGES/mp4.jpg" alt="Track Pants" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Sports Pants</p>
-        <a href="./PRODUCTS/product.html?id=204">
+        <a href="../PRODUCTS/product.html?id=204">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Track Pants</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Comfortable wear for gym & casual use.</p>
@@ -507,13 +650,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=205">
+        <a href="../PRODUCTS/product.html?id=205">
           <img src="../IMAGES/mp5.jpg" alt="Office Trousers" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Formal Pants</p>
-        <a href="./PRODUCTS/product.html?id=205">
+        <a href="../PRODUCTS/product.html?id=205">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Office Trousers</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Premium wool blend for professional look.</p>
@@ -541,13 +684,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=206">
+        <a href="../PRODUCTS/product.html?id=206">
           <img src="../IMAGES/mp6.jpg" alt="Ripped Jeans" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Jeans</p>
-        <a href="./PRODUCTS/product.html?id=206">
+        <a href="../PRODUCTS/product.html?id=206">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Ripped Jeans</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Distressed look with comfort stretch fabric.</p>
@@ -575,13 +718,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=207">
+        <a href="../PRODUCTS/product.html?id=207">
           <img src="../IMAGES/mp7.jpg" alt="Cargo Pants" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Casual Pants</p>
-        <a href="./PRODUCTS/product.html?id=207">
+        <a href="../PRODUCTS/product.html?id=207">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Cargo Pants</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Multiple pockets with rugged outdoor style.</p>
@@ -609,13 +752,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=208">
+        <a href="../PRODUCTS/product.html?id=208">
           <img src="../IMAGES/mp8.jpg" alt="Jogger Pants" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Sports Pants</p>
-        <a href="./PRODUCTS/product.html?id=208">
+        <a href="../PRODUCTS/product.html?id=208">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Jogger Pants</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Elastic ankles for perfect fit during workouts.</p>
@@ -643,13 +786,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=209">
+        <a href="../PRODUCTS/product.html?id=209">
           <img src="../IMAGES/mp9.jpg" alt="Wool Blend Trousers" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Formal Pants</p>
-        <a href="./PRODUCTS/product.html?id=209">
+        <a href="../PRODUCTS/product.html?id=209">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Wool Blend Trousers</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Warm and comfortable for winter business wear.</p>
@@ -677,13 +820,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=210">
+        <a href="../PRODUCTS/product.html?id=210">
           <img src="../IMAGES/mp10.jpg" alt="Skinny Jeans" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Jeans</p>
-        <a href="./PRODUCTS/product.html?id=210">
+        <a href="../PRODUCTS/product.html?id=210">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Skinny Jeans</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Ultra slim fit for modern fashion statement.</p>
@@ -711,13 +854,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=211">
+        <a href="../PRODUCTS/product.html?id=211">
           <img src="../IMAGES/mp11.jpg" alt="Cotton Trousers" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Trousers</p>
-        <a href="./PRODUCTS/product.html?id=211">
+        <a href="../PRODUCTS/product.html?id=211">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Cotton Trousers</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Breathable cotton fabric for everyday comfort.</p>
@@ -745,13 +888,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=212">
+        <a href="../PRODUCTS/product.html?id=212">
           <img src="../IMAGES/mp12.jpg" alt="Chino Pants" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Casual Pants</p>
-        <a href="./PRODUCTS/product.html?id=212">
+        <a href="../PRODUCTS/product.html?id=212">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Chino Pants</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Versatile cotton twill for smart casual looks.</p>
@@ -779,13 +922,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=213">
+        <a href="../PRODUCTS/product.html?id=213">
           <img src="../IMAGES/mp13.jpg" alt="Yoga Pants" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Sports Pants</p>
-        <a href="./PRODUCTS/product.html?id=213">
+        <a href="../PRODUCTS/product.html?id=213">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Yoga Pants</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">High stretch fabric for yoga and flexibility.</p>
@@ -813,13 +956,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=214">
+        <a href="../PRODUCTS/product.html?id=214">
           <img src="../IMAGES/mp14.jpg" alt="Suit Pants" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Formal Pants</p>
-        <a href="./PRODUCTS/product.html?id=214">
+        <a href="../PRODUCTS/product.html?id=214">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Suit Pants</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Perfect match for blazer and formal occasions.</p>
@@ -847,13 +990,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=215">
+        <a href="../PRODUCTS/product.html?id=215">
           <img src="../IMAGES/mp15.jpg" alt="Bootcut Jeans" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Jeans</p>
-        <a href="./PRODUCTS/product.html?id=215">
+        <a href="../PRODUCTS/product.html?id=215">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Bootcut Jeans</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Flared bottom perfect for wearing with boots.</p>
@@ -881,13 +1024,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=216">
+        <a href="../PRODUCTS/product.html?id=216">
           <img src="../IMAGES/mp16.jpg" alt="Linen Trousers" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Trousers</p>
-        <a href="./PRODUCTS/product.html?id=216">
+        <a href="../PRODUCTS/product.html?id=216">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Linen Trousers</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Lightweight linen for summer comfort.</p>
@@ -915,13 +1058,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=217">
+        <a href="../PRODUCTS/product.html?id=217">
           <img src="../IMAGES/mp17.jpg" alt="Harem Pants" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Casual Pants</p>
-        <a href="./PRODUCTS/product.html?id=217">
+        <a href="../PRODUCTS/product.html?id=217">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Harem Pants</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Drop-crotch design for ultimate comfort.</p>
@@ -949,13 +1092,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=218">
+        <a href="../PRODUCTS/product.html?id=218">
           <img src="../IMAGES/mp18.jpg" alt="Running Pants" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Sports Pants</p>
-        <a href="./PRODUCTS/product.html?id=218">
+        <a href="../PRODUCTS/product.html?id=218">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Running Pants</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Moisture-wicking fabric for intense workouts.</p>
@@ -983,13 +1126,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=219">
+        <a href="../PRODUCTS/product.html?id=219">
           <img src="../IMAGES/mp19.jpg" alt="Pleated Trousers" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Formal Pants</p>
-        <a href="./PRODUCTS/product.html?id=219">
+        <a href="../PRODUCTS/product.html?id=219">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Pleated Trousers</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Classic pleated design for elegant look.</p>
@@ -1017,13 +1160,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=220">
+        <a href="../PRODUCTS/product.html?id=220">
           <img src="../IMAGES/mp20.jpg" alt="Straight Fit Jeans" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Jeans</p>
-        <a href="./PRODUCTS/product.html?id=220">
+        <a href="../PRODUCTS/product.html?id=220">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Straight Fit Jeans</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Classic straight cut for traditional look.</p>
@@ -1051,13 +1194,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=221">
+        <a href="../PRODUCTS/product.html?id=221">
           <img src="../IMAGES/mp1.jpg" alt="Corduroy Trousers" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Trousers</p>
-        <a href="./PRODUCTS/product.html?id=221">
+        <a href="../PRODUCTS/product.html?id=221">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Corduroy Trousers</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Ribbed texture for winter fashion.</p>
@@ -1085,13 +1228,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=222">
+        <a href="../PRODUCTS/product.html?id=222">
           <img src="../IMAGES/mp2.jpg" alt="Carpenter Pants" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Casual Pants</p>
-        <a href="./PRODUCTS/product.html?id=222">
+        <a href="../PRODUCTS/product.html?id=222">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Carpenter Pants</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Multiple tool pockets for utility wear.</p>
@@ -1119,13 +1262,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=223">
+        <a href="../PRODUCTS/product.html?id=223">
           <img src="../IMAGES/mp3.jpg" alt="Cycling Pants" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Sports Pants</p>
-        <a href="./PRODUCTS/product.html?id=223">
+        <a href="../PRODUCTS/product.html?id=223">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Cycling Pants</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Padded seat for long cycling sessions.</p>
@@ -1153,13 +1296,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=224">
+        <a href="../PRODUCTS/product.html?id=224">
           <img src="../IMAGES/mp4.jpg" alt="Tuxedo Pants" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Formal Pants</p>
-        <a href="./PRODUCTS/product.html?id=224">
+        <a href="../PRODUCTS/product.html?id=224">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Tuxedo Pants</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Silk stripe detailing for black-tie events.</p>
@@ -1187,13 +1330,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=225">
+        <a href="../PRODUCTS/product.html?id=225">
           <img src="../IMAGES/mp5.jpg" alt="Boyfriend Jeans" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Jeans</p>
-        <a href="./PRODUCTS/product.html?id=225">
+        <a href="../PRODUCTS/product.html?id=225">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Boyfriend Jeans</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Relaxed fit with distressed details.</p>
@@ -1221,13 +1364,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=226">
+        <a href="../PRODUCTS/product.html?id=226">
           <img src="../IMAGES/mp6.jpg" alt="Jersey Trousers" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Trousers</p>
-        <a href="./PRODUCTS/product.html?id=226">
+        <a href="../PRODUCTS/product.html?id=226">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Jersey Trousers</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Soft jersey fabric for lounge wear.</p>
@@ -1255,13 +1398,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=227">
+        <a href="../PRODUCTS/product.html?id=227">
           <img src="../IMAGES/mp7.jpg" alt="Denim Joggers" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Casual Pants</p>
-        <a href="./PRODUCTS/product.html?id=227">
+        <a href="../PRODUCTS/product.html?id=227">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Denim Joggers</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Denim fabric with jogger style cuffs.</p>
@@ -1289,13 +1432,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=228">
+        <a href="../PRODUCTS/product.html?id=228">
           <img src="../IMAGES/mp8.jpg" alt="Basketball Shorts" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Sports Pants</p>
-        <a href="./PRODUCTS/product.html?id=228">
+        <a href="../PRODUCTS/product.html?id=228">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Basketball Shorts</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Mesh panels for breathability during sports.</p>
@@ -1323,13 +1466,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=229">
+        <a href="../PRODUCTS/product.html?id=229">
           <img src="../IMAGES/mp9.jpg" alt="Flat Front Trousers" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Formal Pants</p>
-        <a href="./PRODUCTS/product.html?id=229">
+        <a href="../PRODUCTS/product.html?id=229">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">Flat Front Trousers</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Modern slim fit without pleats.</p>
@@ -1357,13 +1500,13 @@
         <div class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <a href="./PRODUCTS/product.html?id=230">
+        <a href="../PRODUCTS/product.html?id=230">
           <img src="../IMAGES/mp10.jpg" alt="High-Waisted Jeans" class="product-img">
         </a>
       </div>
       <div class="mt-4">
         <p class="text-sm text-slate-500">Men Jeans</p>
-        <a href="./PRODUCTS/product.html?id=230">
+        <a href="../PRODUCTS/product.html?id=230">
           <h4 class="text-lg font-bold truncate-2 hover:text-orange-500">High-Waisted Jeans</h4>
         </a>
         <p class="text-sm text-slate-600 truncate-2">Vintage style with high waist design.</p>

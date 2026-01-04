@@ -8,8 +8,22 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <style>
+        main {
+            padding-bottom: 90px;
+            /* footer height + gap */
+        }
+
+        #paymentPage {
+            padding-bottom: 90px;
+        }
+
         .payBtn {
             width: 100%;
             padding: 12px;
@@ -36,334 +50,1315 @@
         .payBtn:hover {
             background: #f1f5f9
         }
+
+        .pay-head {
+            width: 100%;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .pay-body {
+            padding: 16px;
+            background: #fafafa;
+        }
+
+        .pay-radio {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+        }
+
+        .pay-input {
+            width: 100%;
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .pay-btn-yellow {
+            width: 100%;
+            background: #facc15;
+            padding: 14px;
+            font-weight: 700;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
-    <!-- ================= CHECKOUT PAGE ================= -->
-    <div id="checkoutPage" class="max-w-7xl mx-auto mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-        <!-- ================= LEFT ================= -->
-        <div class="lg:col-span-2 space-y-6">
 
-            <!-- ========== 1 DELIVERY ADDRESS ========== -->
-            <section class="bg-white rounded shadow">
-                <div class="bg-blue-600 text-white px-6 py-3 font-bold">1 DELIVERY ADDRESS</div>
+    <!-- ================= HEADER ================= -->
+    <header class="bg-blue-600 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex items-center">
+            <h1 class="text-white text-2xl font-extrabold tracking-wide">
+                Offer<span class="text-yellow-300">Zone</span>
+            </h1>
+            <span class="ml-2 text-xs text-yellow-200">Explore Plus ✨</span>
+        </div>
+    </header>
+    <main class="flex-grow">
 
-                <div id="addressForm" class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-blue-50">
-                    <input class="border p-3 rounded" placeholder="Full Name">
-                    <input class="border p-3 rounded" placeholder="Mobile Number">
-                    <input class="border p-3 rounded" placeholder="Pincode">
-                    <input class="border p-3 rounded" placeholder="Locality">
-                    <textarea class="border p-3 rounded md:col-span-2" placeholder="Address (Area & Street)"></textarea>
-                    <input class="border p-3 rounded" placeholder="City">
-                    <select class="border p-3 rounded">
-                        <option>Select State</option>
-                    </select>
+        <!-- ================= CHECKOUT STEPS ================= -->
+        <div id="checkoutPage" class="max-w-7xl mx-auto mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                    <button onclick="saveAddress()"
-                        class="md:col-span-2 bg-orange-500 text-white py-3 rounded font-semibold">
-                        SAVE AND DELIVER HERE
-                    </button>
-                </div>
 
-                <div id="savedAddress" class="hidden p-6 flex justify-between items-center">
-                    <p class="font-semibold">Rajesh, Mahbubnagar, Telangana – 509001</p>
-                    <button onclick="editAddress()" class="border px-4 py-2 rounded text-blue-600">CHANGE</button>
-                </div>
-            </section>
+            <!-- LEFT -->
+            <div class="lg:col-span-2 space-y-4">
 
-            <!-- ========== 2 ORDER SUMMARY ========== -->
-            <section id="orderSummary" class="hidden bg-white rounded shadow">
-                <div class="bg-blue-600 text-white px-6 py-3 font-bold">2 ORDER SUMMARY</div>
+                <!-- ================= STEP 1 : LOGIN ================= -->
+                <section class="bg-white border" id="loginStep">
 
-                <div class="p-6 space-y-4">
+                    <!-- HEADER -->
+                    <div class="flex items-center justify-between px-6 py-3 bg-blue-600 text-white">
+                        <div class="flex items-center">
+                            <span class="bg-white text-blue-600 font-bold px-2 py-1 mr-3">1</span>
+                            <h2 class="font-semibold">LOGIN</h2>
+                        </div>
+                    </div>
 
-                    <div onclick="toggleDetails()" class="flex gap-6 items-center cursor-pointer">
-                        <img src="g1.jpeg" class="w-24 h-24 object-contain">
+                    <!-- FULL LOGIN CONTENT -->
+                    <div id="loginContent" class="p-6 grid md:grid-cols-2 gap-6">
 
-                        <div class="flex-1">
-                            <h3 class="font-semibold">Gas Safety Auto Shutoff Device</h3>
-                            <p class="text-sm text-gray-500">Seller: SALETRUSTER</p>
-                            <p>
-                                <span class="line-through text-gray-400">₹4,300</span>
-                                <span class="text-xl font-bold ml-2">₹<span id="price">1386</span></span>
-                                <span class="text-green-600 ml-2">67% Off</span>
+                        <!-- LEFT -->
+                        <div>
+                            <p class="text-sm text-gray-500">Name</p>
+                            <p class="font-semibold">RAJESHKUMAR</p>
+
+                            <p class="text-sm text-gray-500 mt-3">Phone</p>
+                            <p class="font-semibold">+91 7660091425</p>
+
+                            <!-- CHANGE ACCOUNT LINK (hidden initially) -->
+                            <p id="changeAccount" class="hidden mt-4 text-blue-600 font-semibold cursor-pointer">
+                                Logout & Sign in to another account
+                            </p>
+
+                            <button onclick="completeLogin()"
+                                class="mt-6 bg-orange-500 text-white px-6 py-2 font-bold rounded">
+                                CONTINUE CHECKOUT
+                            </button>
+                        </div>
+
+                        <!-- RIGHT -->
+                        <div>
+                            <p class="font-semibold mb-3 text-gray-500">
+                                Advantages of our secure login
+                            </p>
+                            <ul class="text-sm text-gray-700 space-y-3">
+                                <li class="flex gap-3">
+                                    <i class="fa-solid fa-truck text-blue-600"></i>
+                                    Easily Track Orders, Hassle free Returns
+                                </li>
+                                <li class="flex gap-3">
+                                    <i class="fa-solid fa-bell text-blue-600"></i>
+                                    Get Relevant Alerts and Recommendation
+                                </li>
+                                <li class="flex gap-3">
+                                    <i class="fa-solid fa-star text-blue-600"></i>
+                                    Wishlist, Reviews, Ratings and more.
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- COLLAPSED SUMMARY -->
+                    <div id="loginSummary" class="hidden px-6 py-4 flex justify-between items-center border-t">
+                        <p class="font-semibold">
+                            ✓ LOGIN
+                            <span class="font-normal text-gray-600 ml-2">
+                                RAJESHKUMAR +91 7660091425
+                            </span>
+                        </p>
+                        <button onclick="editLogin()" class="text-blue-600 font-semibold">
+                            CHANGE
+                        </button>
+                    </div>
+
+                </section>
+
+
+                <!-- ================= STEP 2 : DELIVERY ADDRESS ================= -->
+                <section id="step2" class="bg-white border hidden">
+
+                    <!-- HEADER -->
+                    <div class="flex items-center px-6 py-3 bg-blue-600 text-white">
+                        <span class="bg-white text-blue-600 font-bold px-2 py-1 mr-3">2</span>
+                        <h2 class="font-semibold">DELIVERY ADDRESS</h2>
+                    </div>
+
+                    <!-- ================= EDIT / FORM VIEW ================= -->
+                    <div id="addressForm" class="bg-blue-50 p-6">
+
+
+                        <button onclick="openMap()"
+                            class="mb-6 bg-blue-600 text-white px-6 py-3 rounded shadow flex items-center gap-2">
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                            Use my current location
+                        </button>
+
+                        <!-- Map -->
+                        <div id="mapBox" class="hidden mb-6">
+                            <div id="map" class="w-full h-[300px] rounded-lg border"></div>
+                            <p class="text-sm text-gray-500 mt-2">
+                                Drag the marker to adjust delivery location
                             </p>
                         </div>
 
-                        <i id="arrowIcon" class="fa-solid fa-chevron-down"></i>
+                        <!-- Form -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input class="border p-3 rounded" value="Rajesh" placeholder="Name">
+                            <input class="border p-3 rounded" value="7660991425" placeholder="10-digit mobile number">
+
+                            <input class="border p-3 rounded" value="509001" placeholder="Pincode">
+                            <input class="border p-3 rounded" value="Appannapally" placeholder="Locality">
+
+                            <textarea class="border p-3 rounded md:col-span-2"
+                                placeholder="Address (Area and Street)">Appannapally, hno 11-2-8</textarea>
+
+                            <input class="border p-3 rounded" value="Mahbubnagar" placeholder="City/District/Town">
+
+                            <input list="countries" class="border p-3 rounded" placeholder="Country" value="India" />
+
+                            <datalist id="countries">
+                                <option value="India">
+                                <option value="United States">
+                                <option value="United Kingdom">
+                                <option value="Australia">
+                                <option value="Canada">
+                            </datalist>
+                            <input list="indiaStates" class="border p-3 rounded" placeholder="State" />
+
+                            <datalist id="indiaStates">
+                                <option value="Andhra Pradesh">
+                                <option value="Arunachal Pradesh">
+                                <option value="Assam">
+                                <option value="Bihar">
+                                <option value="Chhattisgarh">
+                                <option value="Goa">
+                                <option value="Gujarat">
+                                <option value="Haryana">
+                                <option value="Himachal Pradesh">
+                                <option value="Jharkhand">
+                                <option value="Karnataka">
+                                <option value="Kerala">
+                                <option value="Madhya Pradesh">
+                                <option value="Maharashtra">
+                                <option value="Manipur">
+                                <option value="Meghalaya">
+                                <option value="Mizoram">
+                                <option value="Nagaland">
+                                <option value="Odisha">
+                                <option value="Punjab">
+                                <option value="Rajasthan">
+                                <option value="Sikkim">
+                                <option value="Tamil Nadu">
+                                <option value="Telangana">
+                                <option value="Tripura">
+                                <option value="Uttar Pradesh">
+                                <option value="Uttarakhand">
+                                <option value="West Bengal">
+
+                                    <!-- Union Territories -->
+                                <option value="Andaman and Nicobar Islands">
+                                <option value="Chandigarh">
+                                <option value="Dadra and Nagar Haveli and Daman and Diu">
+                                <option value="Delhi">
+                                <option value="Jammu and Kashmir">
+                                <option value="Ladakh">
+                                <option value="Lakshadweep">
+                                <option value="Puducherry">
+                            </datalist>
+
+
+                            <input class="border p-3 rounded" placeholder="Landmark (Optional)">
+                            <input class="border p-3 rounded" placeholder="Alternate Phone (Optional)">
+                        </div>
+
+                        <div class="mt-6">
+                            <p class="font-semibold mb-2">Address Type</p>
+
+                            <label class="mr-6 cursor-pointer">
+                                <input type="radio" name="addressType" value="home" checked
+                                    onclick="toggleOther(false)">
+                                Home (All day delivery)
+                            </label>
+
+                            <label class="mr-6 cursor-pointer">
+                                <input type="radio" name="addressType" value="work" onclick="toggleOther(false)">
+                                Work (10 AM – 5 PM)
+                            </label>
+
+                            <label class="cursor-pointer">
+                                <input type="radio" name="addressType" value="other" onclick="toggleOther(true)">
+                                Other
+                            </label>
+
+                            <!-- OTHER MESSAGE BOX -->
+                            <div id="otherBox" class="hidden mt-4">
+                                <textarea class="w-full border p-3 rounded"
+                                    placeholder="Enter address type (e.g., Office reception, Friend's house)">
+                                </textarea>
+                            </div>
+                        </div>
+
+
+                        <!-- Buttons -->
+                        <div class="mt-6 flex items-center gap-6">
+                            <button onclick="completeAddress()"
+                                class="bg-orange-500 text-white px-8 py-3 font-bold rounded">
+                                SAVE AND DELIVER HERE
+                            </button>
+                            <button onclick="cancelAddress()" class="text-blue-600 font-semibold">
+                                CANCEL
+                            </button>
+                        </div>
                     </div>
 
-                    <div id="productDetails" class="hidden text-sm text-gray-600">
-                        ✔ Auto cut-off<br>✔ Brass body<br>✔ ISI Certified
+                    <!-- ================= SAVED VIEW ================= -->
+                    <div id="addressSummary" class="hidden px-6 py-4 flex justify-between items-center border-t">
+                        <p class="font-semibold">
+                            ✓ DELIVERY ADDRESS
+                            <span class="font-normal text-gray-600 ml-2">
+                                Rajesh, Appannapally, Mahbubnagar – 509001
+                            </span>
+                        </p>
+                        <button onclick="editAddress()" class="text-blue-600 font-semibold">
+                            CHANGE
+                        </button>
                     </div>
 
-                    <!-- Quantity -->
-                    <div class="flex items-center gap-4 mt-3">
-                        <button onclick="changeQty(-1)" class="border px-3 py-1">−</button>
-                        <span id="qty" class="font-bold">1</span>
-                        <button onclick="changeQty(1)" class="border px-3 py-1">+</button>
+                    <div onclick="clearAddress()" class="px-6 py-4 border-t text-blue-600 font-semibold cursor-pointer">
+                        + Add a new address
                     </div>
 
-                    <!-- Coupon -->
-                    <div>
-                        <input id="coupon" class="border p-2 rounded w-full mt-3" placeholder="Enter coupon code">
-                        <button onclick="applyCoupon()"
-                            class="mt-2 bg-green-600 text-white px-4 py-2 rounded">Apply</button>
+
+                </section>
+
+
+                <!-- ================= STEP 3 : ORDER SUMMARY ================= -->
+                <section id="step3" class="bg-white border hidden">
+                    <div class="flex items-center px-6 py-3 bg-blue-600 text-white">
+                        <span class="bg-white text-blue-600 font-bold px-2 py-1 mr-3">3</span>
+                        <h2 class="font-semibold">ORDER SUMMARY</h2>
                     </div>
 
-                    <button onclick="openPayment()"
-                        class="mt-6 bg-orange-500 text-white px-8 py-3 rounded font-semibold">
-                        CONTINUE
-                    </button>
+                    <div class="p-6 flex gap-6">
+                        <!-- Product Image -->
+                        <img id="productImage" src="" class="w-28 h-36 border object-cover">
 
-                </div>
-            </section>
+                        <div class="flex-1">
+                            <!-- Product Name -->
+                            <h3 id="productName" class="font-semibold"></h3>
 
-            <!-- ========== ORDER TRACKING ========== -->
-            <section id="trackSection" class="hidden bg-white rounded shadow p-6">
-                <h2 class="font-bold text-xl mb-4">Order Status</h2>
-                <div class="flex justify-between text-center">
-                    <div class="text-green-600 font-bold">✔ Payment Done</div>
-                    <div class="text-gray-400">📦 Order Shipped</div>
-                    <div class="text-gray-400">🚚 Delivered</div>
-                </div>
-            </section>
+                            <!-- Category -->
+                            <p id="productCategory" class="text-sm text-gray-500"></p>
 
-        </div>
+                            <!-- Rating -->
+                            <div id="productRating" class="flex items-center gap-1 mt-1">
+                                <!-- Stars will be generated here -->
+                            </div>
 
-        <!-- ================= PRICE DETAILS ================= -->
-        <aside class="bg-white rounded shadow p-6 h-fit">
-            <h3 class="font-bold mb-4">PRICE DETAILS</h3>
-            <div class="flex justify-between"><span>Items</span><span id="itemPrice">₹1386</span></div>
-            <div class="flex justify-between mt-2"><span>Platform Fee</span><span>₹7</span></div>
-            <hr class="my-4">
-            <div class="flex justify-between font-bold"><span>Total</span><span id="totalPrice">₹1393</span></div>
-        </aside>
+                            <!-- Price Details -->
+                            <p class="mt-2">
+                                <span id="originalPrice" class="line-through text-gray-400"></span>
+                                <span id="currentPrice" class="text-xl font-bold ml-2"></span>
+                                <span id="discountPercent" class="text-green-600 ml-2"></span>
+                            </p>
 
-    </div>
-    <section id="paymentPage" class="hidden">
-        <!-- ================= PAYMENT HEADER ================= -->
-        <div class="bg-white border-b">
-            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center">
-                <i class="fa fa-arrow-left mr-4 cursor-pointer text-gray-600"></i>
-                <h1 class="text-xl font-semibold">Complete Payment</h1>
-                <span class="ml-auto bg-gray-100 px-3 py-1 rounded text-sm flex items-center gap-1">
-                    🔒 100% Secure
-                </span>
+                            <!-- Description -->
+                            <p id="productDescription" class="text-sm text-gray-600 mt-2"></p>
+
+                            <!-- Quantity Controls -->
+                            <div class="mt-4 flex items-center gap-4">
+                                <button onclick="changeQty(-1)" class="border px-3 py-1 hover:bg-gray-100">-</button>
+                                <span id="qty" class="font-semibold">1</span>
+                                <button onclick="changeQty(1)" class="border px-3 py-1 hover:bg-gray-100">+</button>
+                                <button class="ml-6 text-blue-600 font-semibold hover:text-blue-800">REMOVE</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-6 py-4 border-t flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-gray-400"></i>
+                            <input class="border-b outline-none w-64" placeholder="Enter your email ID for updates">
+                        </div>
+                        <button onclick="openPayment()"
+                            class="bg-orange-500 hover:bg-orange-600 text-white px-10 py-3 font-bold rounded">
+                            CONTINUE
+                        </button>
+                    </div>
+                </section>
+
             </div>
-        </div>
 
-        <!-- ================= PAYMENT BODY ================= -->
-        <div class="max-w-7xl mx-auto mt-6 bg-white rounded shadow grid grid-cols-1 lg:grid-cols-3">
-
-            <!-- ========== LEFT : PAYMENT METHODS ========== -->
-
-
-            <div class="border-r">
-                <div onclick="selectPay('upi')" id="upiBtn" class="payItem payActive">
-                    <div class="flex items-center gap-3 font-semibold">
-                        <i class="fa-brands fa-google-pay text-xl"></i> UPI
-                    </div>
-                    <p class="text-sm text-green-600 mt-1">
-                        Get upto ₹50 cashback • 4 offers available
-                    </p>
-                </div>
-
-                <div onclick="selectPay('card')" id="cardBtn" class="payItem">
-                    <div class="flex items-center gap-3 font-semibold">
-                        <i class="fa-regular fa-credit-card"></i> Credit / Debit / ATM Card
-                    </div>
-                    <p class="text-sm text-green-600 mt-1">
-                        Get upto 5% cashback • 2 offers available
-                    </p>
-                </div>
-
-                <div onclick="selectPay('emi')" id="emiBtn" class="payItem">
-                    <div class="flex items-center gap-3 font-semibold">
-                        <i class="fa-solid fa-calendar-days"></i> EMI
-                    </div>
-                    <p class="text-sm text-gray-500 mt-1">
-                        Get Debit and Cardless EMIs
-                    </p>
-                </div>
-
-                <div onclick="selectPay('cod')" id="codBtn" class="payItem">
-                    <div class="flex items-center gap-3 font-semibold">
-                        <i class="fa-solid fa-money-bill"></i> Cash on Delivery
-                    </div>
-                </div>
-
-                <div class="payItem">
-                    <div class="flex items-center gap-3 font-semibold">
-                        <i class="fa-solid fa-gift"></i> Have a Gift Card?
-                    </div>
-                </div>
-            </div>
-
-            <!-- ========== MIDDLE : PAYMENT CONTENT ========== -->
-            <div id="paymentContent" class="p-8 lg:col-span-1">
-                <!-- JS injects -->
-            </div>
-
-            <!-- ========== RIGHT : PRICE DETAILS ========== -->
-            <div class="bg-gray-50 p-6 border-l">
+            <!-- RIGHT PRICE -->
+            <aside class="bg-white border p-6 h-fit sticky top-6">
                 <h3 class="font-semibold mb-4">PRICE DETAILS</h3>
 
-                <div class="flex justify-between text-sm">
-                    <span>Price (1 item)</span><span>₹1,386</span>
+                <!-- Price Details will be dynamically filled -->
+                <div class="space-y-2">
+                    <div class="flex justify-between">
+                        <span>Price (<span id="itemCount">1</span> item)</span>
+                        <span id="priceItemTotal">₹0</span>
+                    </div>
+
+                    <div class="flex justify-between text-green-600">
+                        <span>Discount</span>
+                        <span id="priceDiscount">-₹0</span>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <span>Delivery Charges</span>
+                        <span id="deliveryCharges">FREE</span>
+                    </div>
+
+                    <div class="flex justify-between text-sm mt-2">
+                        <span>Platform Fee</span>
+                        <span>₹7</span>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="flex justify-between font-bold text-lg">
+                        <span>Total Payable</span>
+                        <span id="totalPayable">₹0</span>
+                    </div>
                 </div>
 
-                <div class="flex justify-between text-sm mt-2">
-                    <span>Platform Fee</span><span>₹7</span>
+                <p id="savingsText" class="text-green-600 font-semibold mt-3">
+                    Your Total Savings on this order ₹0
+                </p>
+
+                <!-- Safe Shopping Guarantee -->
+                <div class="mt-4 p-3 bg-blue-50 rounded text-sm">
+                    <div class="flex items-center gap-2 mb-1">
+                        <i class="fa-solid fa-shield text-blue-600"></i>
+                        <span class="font-semibold">Safe and Secure Payments</span>
+                    </div>
+                    <p class="text-gray-600">100% secure payments with SSL encryption</p>
                 </div>
+            </aside>
 
-                <hr class="my-4">
+        </div>
 
-                <div class="flex justify-between font-bold text-blue-600">
-                    <span>Total Amount</span><span>₹1,393</span>
-                </div>
+        <section id="paymentPage" class="hidden">
 
-                <div class="mt-4 bg-green-100 text-green-700 p-3 rounded text-sm flex items-center gap-2">
-                    💸 5% Cashback <span class="text-gray-500">+ more offers</span>
+            <!-- ================= PAYMENT HEADER (ALL DEVICES) ================= -->
+            <div class="bg-white border-b">
+                <div class="max-w-7xl mx-auto px-6 py-4 flex items-center">
+                    <i onclick="backToSteps()" class="fa fa-arrow-left mr-4 cursor-pointer text-gray-600"></i>
+                    <h1 class="text-xl font-semibold">Complete Payment</h1>
+                    <span class="ml-auto bg-gray-100 px-3 py-1 rounded text-sm flex items-center gap-1">
+                        🔒 100% Secure
+                    </span>
                 </div>
             </div>
 
-        </div>
-    </section>
-    <script>
-        let qty = 1, basePrice = 1386, discount = 0;
+            <!-- ============================================================= -->
+            <!-- ================= DESKTOP PAYMENT (PC ONLY) ================= -->
+            <!-- ============================================================= -->
+            <div class="hidden lg:block">
 
-        function saveAddress() {
-            addressForm.classList.add("hidden");
-            savedAddress.classList.remove("hidden");
-            orderSummary.classList.remove("hidden");
-        }
+                <div class="max-w-7xl mx-auto mt-6 bg-white rounded shadow grid grid-cols-3">
 
-        function editAddress() {
-            savedAddress.classList.add("hidden");
-            addressForm.classList.remove("hidden");
-        }
+                    <!-- LEFT : PAYMENT METHODS -->
+                    <div class="border-r">
 
-        function toggleDetails() {
-            productDetails.classList.toggle("hidden");
-            arrowIcon.classList.toggle("fa-chevron-up");
-        }
+                        <div onclick="selectPay('upi')" id="upiBtn" class="payItem payActive">
+                            <div class="flex items-center gap-3 font-semibold">
+                                <i class="fa-solid fa-qrcode text-xl"></i> UPI
+                            </div>
+                            <p class="text-sm text-green-600 mt-1">
+                                Pay using any UPI app • Instant verification
+                            </p>
+                        </div>
 
-        function changeQty(val) {
-            qty = Math.max(1, qty + val);
-            document.getElementById("qty").innerText = qty;
-            updatePrice();
-        }
+                        <div onclick="selectPay('card')" id="cardBtn" class="payItem">
+                            <div class="flex items-center gap-3 font-semibold">
+                                <i class="fa-regular fa-credit-card"></i> Credit / Debit / ATM Card
+                            </div>
+                            <p class="text-sm text-green-600 mt-1">
+                                Get upto 5% cashback • 2 offers available
+                            </p>
+                        </div>
 
-        function applyCoupon() {
-            if (coupon.value === "OFFER100") {
-                discount = 100;
-                alert("₹100 discount applied");
-                updatePrice();
-            } else {
-                alert("Invalid coupon");
+                        <div onclick="selectPay('emi')" id="emiBtn" class="payItem">
+                            <div class="flex items-center gap-3 font-semibold">
+                                <i class="fa-solid fa-calendar-days"></i> EMI
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">
+                                Get Debit and Cardless EMIs
+                            </p>
+                        </div>
+
+                        <div onclick="selectPay('cod')" id="codBtn" class="payItem">
+                            <div class="flex items-center gap-3 font-semibold">
+                                <i class="fa-solid fa-money-bill"></i> Cash on Delivery
+                            </div>
+                        </div>
+
+                        <div onclick="selectPay('gift')" id="giftBtn" class="payItem">
+                            <div class="flex items-center gap-3 font-semibold">
+                                <i class="fa-solid fa-gift"></i> Have a Gift Card?
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">
+                                Redeem your gift card or voucher
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- MIDDLE : PAYMENT CONTENT -->
+                    <div id="paymentContent" class="p-8"></div>
+
+                    <!-- RIGHT : PRICE DETAILS -->
+                    <div class="bg-gray-50 p-6 border-l">
+                        <h3 class="font-semibold mb-4">PRICE DETAILS</h3>
+
+                        <div class="flex justify-between text-sm">
+                            <span>Price (<span id="itemQty">1</span> item)</span>
+                            <span id="itemPrice">₹0</span>
+                        </div>
+
+                        <div class="flex justify-between text-sm mt-2">
+                            <span>Platform Fee</span>
+                            <span>₹7</span>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="flex justify-between font-bold text-blue-600">
+                            <span>Total Amount</span>
+                            <span id="totalAmount">₹0</span>
+                        </div>
+
+                        <div class="mt-4 bg-green-100 text-green-700 p-3 rounded text-sm">
+                            💸 You save <span id="totalSavings">₹0</span> on this order
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ============================================================= -->
+            <!-- ================= MOBILE PAYMENT (MOBILE ONLY) =============== -->
+            <!-- ============================================================= -->
+            <div class="block lg:hidden">
+
+                <!-- MOBILE PRICE SUMMARY -->
+                <div class="bg-blue-50 p-4 rounded m-4">
+                    <div class="flex justify-between text-sm">
+                        <span>MRP (incl. of all taxes)</span>
+                        <span>₹<span id="mrp">17999</span></span>
+                    </div>
+
+                    <div class="flex justify-between text-sm mt-2">
+                        <span>Fees</span>
+                        <span>₹<span id="fees">86</span></span>
+                    </div>
+
+                    <div class="flex justify-between text-sm mt-2 text-green-600">
+                        <span>Discounts</span>
+                        <span>-₹<span id="discount">3000</span></span>
+                    </div>
+
+                    <hr class="my-3">
+
+                    <div class="flex justify-between font-bold text-blue-600">
+                        <span>Total Amount</span>
+                        <span>₹<span id="mobileTotal">15085</span></span>
+                    </div>
+                </div>
+
+                <!-- MOBILE PAYMENT ACCORDION -->
+                <div class="bg-white rounded divide-y mx-4 mb-6">
+
+
+                    <!-- UPI -->
+                    <div>
+                        <button onclick="toggleMobilePay('upi')" class="w-full flex justify-between items-center p-4">
+                            <div class="text-left">
+                                <p class="font-semibold">UPI</p>
+                                <p class="text-sm text-green-600">Pay by any UPI app</p>
+                            </div>
+                            <i id="upiArrow" class="fa-solid fa-chevron-down transition-transform"></i>
+                        </button>
+
+                        <div id="upiBox" class="hidden p-4 bg-gray-50 space-y-3">
+
+                            <label class="text-sm font-semibold">Enter UPI ID</label>
+
+                            <div class="flex gap-2">
+                                <input id="mobileUpiInput" class="pay-input flex-1" placeholder="yourname@bank">
+                                <button onclick="verifyMobileUPI()"
+                                    class="px-4 bg-blue-600 text-white rounded font-semibold">
+                                    Verify
+                                </button>
+                            </div>
+
+                            <p id="mobileUpiStatus" class="text-sm"></p>
+
+                            <button id="mobileUpiPayBtn" class="pay-btn-yellow w-full hidden">
+                                Pay ₹<span class="mobilePayAmt">0</span>
+                            </button>
+
+                        </div>
+                    </div>
+
+
+
+                    <!-- CARD -->
+                    <div>
+                        <button onclick="toggleMobilePay('card')" class="w-full flex justify-between items-center p-4">
+                            <div class="text-left">
+                                <p class="font-semibold">Credit / Debit / ATM Card</p>
+                                <p class="text-sm text-green-600">Get upto 5% cashback</p>
+                            </div>
+                            <i id="cardArrow" class="fa-solid fa-chevron-down transition-transform"></i>
+                        </button>
+
+                        <div id="cardBox" class="hidden p-4 bg-gray-50 space-y-3">
+
+                            <label class="text-sm font-semibold">Card Number</label>
+                            <input class="pay-input" placeholder="1234 5678 9012 3456">
+
+                            <label class="text-sm font-semibold">Card Holder Name</label>
+                            <input class="pay-input" placeholder="Name on card">
+
+                            <div class="flex gap-3">
+                                <div class="w-1/2">
+                                    <label class="text-sm font-semibold">MM/YY</label>
+                                    <input class="pay-input" placeholder="MM/YY">
+                                </div>
+                                <div class="w-1/2">
+                                    <label class="text-sm font-semibold">CVV</label>
+                                    <input class="pay-input" placeholder="CVV" type="password">
+                                </div>
+                            </div>
+
+                            <label class="flex items-center gap-2 text-sm">
+                                <input type="checkbox"> Securely save this card
+                            </label>
+
+                            <button class="pay-btn-yellow w-full">
+                                Pay ₹<span class="mobilePayAmt">0</span>
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <!-- EMI -->
+                    <div>
+                        <button onclick="toggleMobilePay('emi')" class="w-full flex justify-between items-left p-4">
+                           <div class="text-left">
+                                <p class="font-semibold ">EMI</p>
+                                <p class="text-sm text-gray-500">Debit & Cardless EMI</p>
+                            </div>
+                            <i id="emiArrow" class="fa-solid fa-chevron-down transition-transform"></i>
+                        </button>
+
+                        <div id="emiBox" class="hidden p-4 bg-gray-50 space-y-3">
+
+                            <label class="block border p-3 rounded">
+                                <input type="radio" name="emiPlan" checked>
+                                <span class="ml-2 font-semibold">HDFC Bank</span>
+                                <p class="text-xs text-gray-500 ml-6">₹2,515 / month for 6 months (No Cost)</p>
+                            </label>
+
+                            <label class="block border p-3 rounded">
+                                <input type="radio" name="emiPlan">
+                                <span class="ml-2 font-semibold">Axis Bank</span>
+                                <p class="text-xs text-gray-500 ml-6">₹1,720 / month for 9 months</p>
+                            </label>
+
+                            <label class="block border p-3 rounded">
+                                <input type="radio" name="emiPlan">
+                                <span class="ml-2 font-semibold">Bajaj Finserv</span>
+                                <p class="text-xs text-gray-500 ml-6">₹1,250 / month for 12 months</p>
+                            </label>
+
+                            <button class="pay-btn-yellow w-full">
+                                Continue with EMI
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <!-- GIFT CARD -->
+                    <div>
+                        <button onclick="toggleMobilePay('gift')" class="w-full flex justify-between items-center p-4">
+                            <p class="font-semibold">Have a Gift Card?</p>
+                            <i id="giftArrow" class="fa-solid fa-chevron-down transition-transform"></i>
+                        </button>
+
+                        <div id="giftBox" class="hidden p-4 bg-gray-50 space-y-3">
+
+                            <label class="text-sm font-semibold">
+                                Gift Card / Voucher Code
+                            </label>
+
+                            <input class="pay-input" placeholder="Enter gift card code">
+
+                            <button class="pay-btn-yellow w-full">
+                                Apply Gift Card
+                            </button>
+
+                            <p class="text-sm text-gray-500">
+                                Gift cards are subject to terms & conditions
+                            </p>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </section>
+
+
+
+
+        <!-- ================= FIXED FOOTER (FLIPKART STYLE) ================= -->
+        <footer class="fixed bottom-0 left-0 w-full bg-gray-100 border-t z-[9999]">
+
+            <div class="max-w-7xl mx-auto px-6 py-3
+              flex flex-col md:flex-row
+              items-center justify-between
+              text-xs text-gray-600 gap-2">
+
+                <!-- LEFT -->
+                <div class="flex flex-wrap gap-2 items-center">
+                    <span>Policies:</span>
+                    <a href="#" class="text-blue-600 hover:underline">Returns Policy</a>
+                    <span>|</span>
+                    <a href="#" class="text-blue-600 hover:underline">Terms of use</a>
+                    <span>|</span>
+                    <a href="#" class="text-blue-600 hover:underline">Security</a>
+                    <span>|</span>
+                    <a href="#" class="text-blue-600 hover:underline">Privacy</a>
+                </div>
+
+                <!-- CENTER -->
+                <div class="text-gray-500">
+                    © 2007–2026 OfferZone.com
+                </div>
+
+                <!-- RIGHT -->
+                <div class="flex gap-1 items-center">
+                    <span>Need help?</span>
+                    <a href="#" class="text-blue-600 hover:underline">Help Center</a>
+                    <span>or</span>
+                    <a href="#" class="text-blue-600 hover:underline">Contact Us</a>
+                </div>
+
+            </div>
+        </footer>
+
+
+        <script>
+            // ===== ELEMENT REFERENCES (CRITICAL FIX) =====
+            const checkoutPage = document.getElementById("checkoutPage");
+            const paymentPage = document.getElementById("paymentPage");
+
+            const loginContent = document.getElementById("loginContent");
+            const loginSummary = document.getElementById("loginSummary");
+
+            const step2 = document.getElementById("step2");
+            const step3 = document.getElementById("step3");
+
+            const product = JSON.parse(localStorage.getItem("buyProduct"));
+            let qty = 1;
+            const platformFee = 7;
+
+            if (!product) {
+                alert("No product selected");
+                window.location.href = "/index.html";
             }
-        }
+            function getOrderTotals() {
+                const itemTotal = product.price * qty;
+                const discount = (product.originalPrice - product.price) * qty;
+                const totalPayable = itemTotal + platformFee;
 
-        function updatePrice() {
-            let total = (basePrice * qty) - discount + 7;
-            itemPrice.innerText = "₹" + (basePrice * qty);
-            totalPrice.innerText = "₹" + total;
-            payable.innerText = "₹" + total;
-        }
-
-        function openPayment() {
-            checkoutPage.classList.add("hidden");
-            paymentPage.classList.remove("hidden");
-            selectPay("upi");
-        }
-
-        function backToSummary() {
-            paymentPage.classList.add("hidden");
-            checkoutPage.classList.remove("hidden");
-        }
+                return {
+                    itemTotal,
+                    discount,
+                    totalPayable
+                };
+            }
 
 
 
-        function completeOrder() {
-            paymentPage.classList.add("hidden");
-            checkoutPage.classList.remove("hidden");
-            trackSection.classList.remove("hidden");
-        }
+            /* ================= INITIAL RENDER ================= */
 
-        function resetActive() {
-            document.querySelectorAll(".payItem").forEach(el => el.classList.remove("payActive"));
-        }
+            document.addEventListener("DOMContentLoaded", () => {
+                renderProduct();
+                updateOrderPrice();
+            });
 
-        function selectPay(type) {
-            resetActive();
-            document.getElementById(type + "Btn")?.classList.add("payActive");
-            const box = document.getElementById("paymentContent");
+            /* ================= RENDER PRODUCT ================= */
+            function renderProduct() {
+                if (!product) return;
 
-            if (type === "upi") {
-                box.innerHTML = `
-      <h3 class="font-semibold mb-4">Pay by any UPI app</h3>
-      <input class="border p-3 rounded w-full" placeholder="Enter your UPI ID">
-      <button class="mt-6 bg-yellow-400 w-full py-3 rounded font-bold">
-        Pay ₹1,393
+                // Image
+                document.getElementById("productImage").src =
+                    product.image ? "../IMAGES/" + product.image : "../IMAGES/no-image.png";
+
+                // Name
+                document.getElementById("productName").innerText =
+                    product.name || "Product Name";
+
+                // Category
+                document.getElementById("productCategory").innerText =
+                    product.category || "";
+
+                // Prices
+                document.getElementById("originalPrice").innerText =
+                    product.originalPrice ? "₹" + product.originalPrice : "";
+
+                document.getElementById("currentPrice").innerText =
+                    product.price ? "₹" + product.price : "";
+
+                // Discount
+                if (product.originalPrice && product.price) {
+                    const discount =
+                        Math.round(
+                            ((product.originalPrice - product.price) / product.originalPrice) * 100
+                        );
+                    document.getElementById("discountPercent").innerText =
+                        discount + "% Off";
+                }
+
+                // Description
+                document.getElementById("productDescription").innerText =
+                    product.description || "";
+
+                // Rating
+                renderRating(product.rating || 0);
+            } function renderRating(rating) {
+                const ratingBox = document.getElementById("productRating");
+                ratingBox.innerHTML = "";
+
+                for (let i = 1; i <= 5; i++) {
+                    const star = document.createElement("i");
+                    star.className =
+                        i <= rating
+                            ? "fa-solid fa-star text-yellow-400"
+                            : "fa-regular fa-star text-gray-300";
+                    ratingBox.appendChild(star);
+                }
+            }
+
+            function changeQty(val) {
+                qty += val;
+                if (qty < 1) qty = 1;
+
+                document.getElementById("qty").innerText = qty;
+
+                // update summary price
+                document.getElementById("currentPrice").innerText =
+                    "₹" + product.price * qty;
+
+                // update payment price if payment page is open
+                if (!paymentPage.classList.contains("hidden")) {
+                    renderPaymentPrice();
+                    selectPay("upi");
+                }
+            }
+
+
+            /* ================= PRICE UPDATE ================= */
+
+            function updateOrderPrice() {
+                const itemTotal = product.price * qty;
+                const discount = (product.originalPrice - product.price) * qty;
+                const totalPayable = itemTotal + platformFee;
+
+                document.querySelectorAll(".item-price").forEach(el => {
+                    el.innerText = "₹" + itemTotal;
+                });
+
+                document.querySelector("aside .font-bold span:last-child").innerText =
+                    "₹" + totalPayable;
+
+                document.querySelector("aside p.text-green-600").innerText =
+                    `Your Total Savings on this order ₹${discount}`;
+            }
+
+            /* ================= STEP CONTROL ================= */
+
+            function completeLogin() {
+                loginContent.classList.add("hidden");
+                loginSummary.classList.remove("hidden");
+                step2.classList.remove("hidden");
+            }
+
+
+
+            /* ================= PAYMENT ================= */
+            function renderPaymentPrice() {
+                const { itemTotal, discount, totalPayable } = getOrderTotals();
+
+                document.getElementById("itemQty").innerText = qty;
+                document.getElementById("itemPrice").innerText = "₹" + itemTotal;
+                document.getElementById("totalAmount").innerText = "₹" + totalPayable;
+                document.getElementById("totalSavings").innerText = "₹" + discount;
+            }
+
+            function openPayment() {
+                checkoutPage.classList.add("hidden");
+                paymentPage.classList.remove("hidden");
+
+                renderPaymentPrice();   // desktop
+                updateMobilePrices();   // ✅ mobile
+
+                selectPay("upi");
+            }
+
+            function editLogin() {
+                // Show login again
+                document.getElementById("loginContent").classList.remove("hidden");
+                document.getElementById("loginSummary").classList.add("hidden");
+
+                // Show "Logout & Sign in to another account"
+                document.getElementById("changeAccount").classList.remove("hidden");
+
+                // Reset next steps
+                document.getElementById("step2").classList.add("hidden");
+                document.getElementById("step3").classList.add("hidden");
+            }
+            function backToSteps() {
+                paymentPage.classList.add("hidden");
+                checkoutPage.classList.remove("hidden");
+                step3.classList.remove("hidden");
+            }
+
+            /* ================= PAYMENT OPTIONS ================= */
+            function updateCardPayAmount() {
+                const { totalPayable } = getOrderTotals();
+                document.getElementById("cardPayBtn").innerText =
+                    "Pay ₹" + totalPayable;
+            }
+            function payByCard() {
+                const number = cardNumber.value.trim();
+                const name = cardName.value.trim();
+                const expiry = cardExpiry.value.trim();
+                const cvv = cardCVV.value.trim();
+
+                if (!number || number.length < 16) {
+                    alert("Enter valid card number");
+                    return;
+                }
+                if (!name) {
+                    alert("Enter card holder name");
+                    return;
+                }
+                if (!expiry || !expiry.includes("/")) {
+                    alert("Enter valid expiry date");
+                    return;
+                }
+                if (!cvv || cvv.length < 3) {
+                    alert("Enter valid CVV");
+                    return;
+                }
+
+                alert("Payment successful (demo)");
+            }
+
+            function resetActive() {
+                document.querySelectorAll(".payItem")
+                    .forEach(el => el.classList.remove("payActive"));
+            }
+
+            function selectPay(type) {
+                resetActive();
+                document.getElementById(type + "Btn")?.classList.add("payActive");
+
+                const box = document.getElementById("paymentContent");
+                const { totalPayable } = getOrderTotals();
+
+                /* ================= UPI ================= */
+                if (type === "upi") {
+                    box.innerHTML = `
+    <h3 class="font-semibold mb-4">Pay using UPI</h3>
+
+    <label class="block text-sm font-semibold mb-1">
+      Enter UPI ID
+    </label>
+
+    <div class="flex gap-3">
+      <input
+        id="upiInput"
+        class="pay-input flex-1"
+        placeholder="yourname@bank"
+      >
+      <button onclick="verifyUPI()"
+        class="px-4 bg-blue-600 text-white rounded font-semibold">
+        Verify
       </button>
-    `;
-            }
+    </div>
 
-            if (type === "card") {
-                box.innerHTML = `
-      <p class="text-sm text-gray-500 mb-4">
-        Please ensure your card can be used for online transactions.
-      </p>
+    <p id="upiStatus" class="text-sm mt-2"></p>
 
-      <label class="text-sm font-semibold">Card Number</label>
-      <input class="border p-3 rounded w-full mt-1" placeholder="XXXX XXXX XXXX XXXX">
+    <button id="upiPayBtn"
+      class="pay-btn-yellow mt-4 w-full hidden">
+      Pay ₹${totalPayable}
+    </button>
 
-      <p class="text-red-500 text-sm mt-1">Card number is required</p>
+    <p class="text-xs text-gray-500 mt-2">
+      You will be redirected to your UPI app to complete payment
+    </p>
+  `;
+                }
 
-      <div class="flex gap-4 mt-4">
+
+                /* ================= CARD ================= */
+                if (type === "card") {
+                    box.innerHTML = `
+      <label class="block text-sm font-semibold mb-1">Card Number</label>
+      <input class="pay-input w-full" placeholder="1234 5678 9012 3456">
+
+      <label class="block text-sm font-semibold mt-4 mb-1">Card Holder Name</label>
+      <input class="pay-input w-full" placeholder="Name on card">
+
+      <div class="flex gap-3 mt-4">
         <div class="w-1/2">
-          <label class="text-sm font-semibold">Valid Thru</label>
-          <input class="border p-3 rounded w-full mt-1" placeholder="MM / YY">
+          <label class="block text-sm font-semibold mb-1">Expiry (MM/YY)</label>
+          <input class="pay-input w-full" placeholder="MM/YY">
         </div>
         <div class="w-1/2">
-          <label class="text-sm font-semibold">CVV</label>
-          <input class="border p-3 rounded w-full mt-1" placeholder="CVV">
+          <label class="block text-sm font-semibold mb-1">CVV</label>
+          <input class="pay-input w-full" placeholder="CVV" type="password">
         </div>
       </div>
 
-      <button class="mt-6 bg-yellow-400 w-full py-3 rounded font-bold">
-        Pay ₹1,393
+      <label class="flex items-center gap-2 mt-4 text-sm">
+        <input type="checkbox"> Securely save this card
+      </label>
+
+      <button class="pay-btn-yellow mt-4">
+        Pay ₹${totalPayable}
       </button>
     `;
-            }
+                }
 
-            if (type === "emi") {
-                box.innerHTML = `
-      <h3 class="font-semibold mb-4">Get EMI in 3 easy steps</h3>
-      <p>HDFC Bank – ₹127/month</p>
-      <p class="mt-2">Kotak Bank – ₹477/month</p>
-      <button class="mt-6 bg-blue-600 text-white w-full py-3 rounded">
-        See Plans
+                /* ================= EMI (FULL FIX) ================= */
+                if (type === "emi") {
+                    box.innerHTML = `
+      <h3 class="font-semibold mb-4">Easy EMI Options</h3>
+
+      <div class="space-y-3 text-sm">
+
+        <label class="flex justify-between items-start border p-3 rounded cursor-pointer">
+          <div>
+            <input type="radio" name="emiPlan" checked>
+            <span class="ml-2 font-semibold">HDFC Bank Credit Card</span>
+            <p class="text-gray-500 text-xs ml-6">
+              ₹${Math.round(totalPayable / 6)} / month for 6 months
+            </p>
+          </div>
+          <span class="text-green-600 font-semibold">No Cost EMI</span>
+        </label>
+
+        <label class="flex justify-between items-start border p-3 rounded cursor-pointer">
+          <div>
+            <input type="radio" name="emiPlan">
+            <span class="ml-2 font-semibold">Axis Bank Credit Card</span>
+            <p class="text-gray-500 text-xs ml-6">
+              ₹${Math.round(totalPayable / 9)} / month for 9 months
+            </p>
+          </div>
+        </label>
+
+        <label class="flex justify-between items-start border p-3 rounded cursor-pointer">
+          <div>
+            <input type="radio" name="emiPlan">
+            <span class="ml-2 font-semibold">Bajaj Finserv (Cardless EMI)</span>
+            <p class="text-gray-500 text-xs ml-6">
+              ₹${Math.round(totalPayable / 12)} / month for 12 months
+            </p>
+          </div>
+        </label>
+
+      </div>
+
+      <button class="pay-btn-yellow mt-6">
+        Continue with EMI
       </button>
-    `;
-            }
 
-            if (type === "cod") {
-                box.innerHTML = `
+      <p class="text-xs text-gray-500 mt-3">
+        EMI subject to bank approval. Interest may apply.
+      </p>
+    `;
+                }
+
+                /* ================= COD ================= */
+                if (type === "cod") {
+                    box.innerHTML = `
       <h3 class="font-semibold mb-4">Cash on Delivery</h3>
-      <button class="bg-yellow-400 w-full py-3 rounded font-bold">
-        Place Order
+      <button class="pay-btn-yellow">
+        Place Order ₹${totalPayable}
       </button>
     `;
-            }
-        }
+                }
 
-        selectPay("upi");
-    </script>
+                /* ================= GIFT CARD ================= */
+                if (type === "gift") {
+                    box.innerHTML = `
+    <h3 class="font-semibold mb-4">Redeem Gift Card</h3>
+
+    <label class="block text-sm font-semibold mb-1">
+      Gift Card / Voucher Code
+    </label>
+    <input
+      id="giftCode"
+      class="pay-input w-full"
+      placeholder="Enter gift card code"
+      autocomplete="off"
+    >
+
+    <button onclick="applyGiftCard()"
+      class="pay-btn-yellow mt-4">
+      Apply Gift Card
+    </button>
+
+    <div id="giftMsg" class="hidden mt-3 text-sm"></div>
+
+    <hr class="my-4">
+
+    <button class="pay-btn-yellow bg-green-500 hover:bg-green-600 text-white">
+      Continue to Pay ₹${totalPayable}
+    </button>
+
+    <p class="text-xs text-gray-500 mt-2">
+      Gift cards are subject to terms and conditions.
+    </p>
+  `;
+                }
+
+            }
+
+            /* Default */
+            selectPay("upi");
+
+            function verifyUPI() {
+                const upi = document.getElementById("upiInput").value.trim();
+                const status = document.getElementById("upiStatus");
+                const payBtn = document.getElementById("upiPayBtn");
+
+                // Basic UPI format check
+                const upiRegex = /^[\w.-]+@[\w.-]+$/;
+
+                if (!upi) {
+                    status.innerText = "Please enter your UPI ID";
+                    status.className = "text-red-600 text-sm mt-2";
+                    payBtn.classList.add("hidden");
+                    return;
+                }
+
+                if (!upiRegex.test(upi)) {
+                    status.innerText = "Invalid UPI ID format";
+                    status.className = "text-red-600 text-sm mt-2";
+                    payBtn.classList.add("hidden");
+                    return;
+                }
+
+                // Simulated verification (real apps call backend / PSP)
+                status.innerText = "✔ UPI ID verified successfully";
+                status.className = "text-green-600 text-sm mt-2";
+                payBtn.classList.remove("hidden");
+            }
+
+            function applyGiftCard() {
+                const input = document.getElementById("giftCode");
+                const msg = document.getElementById("giftMsg");
+
+                const code = input.value.trim();
+
+                if (!code) {
+                    msg.className = "mt-3 text-sm text-red-600";
+                    msg.innerText = "Please enter a gift card code";
+                    msg.classList.remove("hidden");
+                    return;
+                }
+
+                // Demo validation
+                if (code === "OFFER100") {
+                    msg.className = "mt-3 text-sm text-green-600";
+                    msg.innerText = "₹100 gift card applied successfully!";
+                    msg.classList.remove("hidden");
+                } else {
+                    msg.className = "mt-3 text-sm text-red-600";
+                    msg.innerText = "Invalid or expired gift card";
+                    msg.classList.remove("hidden");
+                }
+            }
+
+            function verifyMobileUPI() {
+                const upi = document.getElementById("mobileUpiInput")?.value.trim();
+                const status = document.getElementById("mobileUpiStatus");
+                const payBtn = document.getElementById("mobileUpiPayBtn");
+
+                if (!status || !payBtn) return;
+
+                const upiRegex = /^[\w.-]+@[\w.-]+$/;
+
+                if (!upi) {
+                    status.innerText = "Please enter your UPI ID";
+                    status.className = "text-red-600 text-sm";
+                    payBtn.classList.add("hidden");
+                    return;
+                }
+
+                if (!upiRegex.test(upi)) {
+                    status.innerText = "Invalid UPI ID format";
+                    status.className = "text-red-600 text-sm";
+                    payBtn.classList.add("hidden");
+                    return;
+                }
+
+                // ✅ SUCCESS
+                status.innerText = "✔ UPI ID verified successfully";
+                status.className = "text-green-600 text-sm";
+                payBtn.classList.remove("hidden");
+            }
+            function updateMobilePrices() {
+                const { totalPayable } = getOrderTotals();
+
+                // Top summary
+                const mobileTotal = document.getElementById("mobileTotal");
+                if (mobileTotal) mobileTotal.innerText = totalPayable;
+
+                // All Pay buttons
+                document.querySelectorAll(".mobilePayAmt").forEach(el => {
+                    el.innerText = totalPayable;
+                });
+            }
+
+            /* ---------------- OPEN MAP ---------------- */
+
+            let map, marker;
+            function openMap() {
+                document.getElementById("mapBox").classList.remove("hidden");
+
+                if (!map) {
+                    map = L.map("map").setView([20.5937, 78.9629], 5);
+
+                    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                        attribution: "© OpenStreetMap"
+                    }).addTo(map);
+
+                    marker = L.marker([20.5937, 78.9629], { draggable: true }).addTo(map);
+
+                    marker.on("dragend", () => {
+                        const pos = marker.getLatLng();
+                        fetchAddress(pos.lat, pos.lng);
+                    });
+                }
+
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        const lat = pos.coords.latitude;
+                        const lng = pos.coords.longitude;
+
+                        map.setView([lat, lng], 16);
+                        marker.setLatLng([lat, lng]);
+
+                        fetchAddress(lat, lng);
+                    },
+                    () => alert("Location permission denied")
+                );
+            }
+
+            /* ---------------- REVERSE GEOCODING ---------------- */
+            function fetchAddress(lat, lng) {
+                fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        const a = data.address;
+
+                        document.querySelector("input[placeholder='Pincode']").value = a.postcode || "";
+                        document.querySelector("input[placeholder='Locality']").value =
+                            a.suburb || a.village || "";
+                        document.querySelector("textarea").value =
+                            (a.road || "") + ", " + (a.house_number || "");
+                        document.querySelector("input[placeholder='City/District/Town']").value =
+                            a.city || a.town || a.county || "";
+                        document.querySelector("select").value = a.state || "Telangana";
+                    });
+            }
+
+            function completeAddress() {
+
+                /* Hide address form, show summary */
+                document.getElementById("addressForm").classList.add("hidden");
+                document.getElementById("addressSummary").classList.remove("hidden");
+
+                /* Open next step */
+                const step3 = document.getElementById("step3");
+                if (step3) {
+                    step3.classList.remove("hidden");
+
+                    /* Smooth scroll to next step */
+                    step3.scrollIntoView({ behavior: "smooth" });
+                }
+            }
+            /* ---------------- EDIT ADDRESS ---------------- */
+            function editAddress() {
+                document.getElementById("addressForm").classList.remove("hidden");
+                document.getElementById("addressSummary").classList.add("hidden");
+            }
+
+            /* ---------------- ADD NEW ADDRESS ---------------- */
+            function cancelAddress() {
+                clearAddress();
+            }
+
+            /* ---------------- CLEAR FORM ---------------- */
+            function clearAddress() {
+                document.querySelectorAll("#addressForm input, #addressForm textarea").forEach(el => {
+                    el.value = "";
+                });
+
+                document.getElementById("addressSummary").classList.add("hidden");
+                document.getElementById("addressForm").classList.remove("hidden");
+            }
+
+            function toggleOther(show) {
+                document.getElementById("otherBox").classList.toggle("hidden", !show);
+            }
+
+
+            function toggleMobilePay(type) {
+                const types = ["upi", "card", "emi", "gift"];
+
+                types.forEach(t => {
+                    const box = document.getElementById(t + "Box");
+                    const arrow = document.getElementById(t + "Arrow");
+
+                    if (t === type) {
+                        box.classList.toggle("hidden");
+                        arrow.classList.toggle("rotate-180");
+                    } else {
+                        box.classList.add("hidden");
+                        arrow.classList.remove("rotate-180");
+                    }
+                });
+            }
+            function updateMobilePayAmount(total) {
+                document.querySelectorAll(".mobilePayAmt")
+                    .forEach(el => el.innerText = total);
+            }
+        </script>
+
 
 </body>
 
