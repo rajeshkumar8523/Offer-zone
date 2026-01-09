@@ -1,5 +1,9 @@
 {
   "projects": {
+<<<<<<< HEAD
     "default": "offer-zone-5bf8c"
+=======
+    "default": "offers-zone-17db4"
+>>>>>>> ccbb0653382883d3f80b39e324c82136379e46d7
   }
 }
