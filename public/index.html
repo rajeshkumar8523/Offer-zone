@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" /> 
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Offers Zone — Updated</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="index.css">
+
+</head>
+ 
+<body class="bg-gray-50 text-slate-800">
+
+  <!-- HEADER -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <!-- Desktop Header -->
+    <div class="hidden md:block max-w-7xl mx-auto px-4 py-3">
+      <div class="flex items-center justify-between">
+        <!-- Logo - Left -->
+        <a href="./index.html" class="select-none flex-shrink-0">
+          <h1 class="text-3xl font-black tracking-[2px] text-orange-500 uppercase hover:text-orange-400 transition">
+            OFFERS ZONE
+          </h1>
+        </a>
+
+        <!-- Search Bar - Center -->
+        <div class="flex-1 max-w-2xl mx-8">
+          <div class="relative">
+            <input type="text" id="desktopSearchInput" placeholder="Search for products, brands, categories..."
+              class="w-full px-4 py-2.5 pl-12 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent shadow-sm">
+            <i class="fa-solid fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+
+            <!-- Search Results Dropdown -->
+            <div id="desktopSearchResults"
+              class="absolute top-full left-0 right-0 mt-1 bg-white shadow-xl rounded-lg border border-gray-200 hidden z-50 max-h-96 overflow-y-auto">
+              <!-- Results will be dynamically inserted here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Links and Account - Right -->
+        <div class="flex items-center space-x-6">
+          <nav>
+            <ul class="flex items-center space-x-6 text-gray-700 font-medium">
+              <li><a class="nav-link active" href="./index.html">Home</a></li>
+
+              <!-- Categories Dropdown -->
+              <li class="relative group">
+                <a class="nav-link flex items-center gap-1 cursor-pointer">
+                  Categories
+                  <i class="fa-solid fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
+                </a>
+
+                <!-- Categories Mega Dropdown -->
+                <div
+                  class="absolute left-[-360px] top-full mt-3 w-[800px] bg-white shadow-2xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden border border-gray-100">
+                  <div class="grid grid-cols-3 gap-0">
+                    <!-- Clothing Section -->
+                    <div class="p-5 border-r border-gray-100">
+                      <h3 class="font-bold text-gray-800 mb-3 text-base">Clothing</h3>
+                      <ul class="space-y-2">
+                        <li><a href="./MENPANTS/mpants.html"
+                            class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                            <i class="fa-solid fa-shirt text-sm text-gray-400"></i> Mens Pants</a></li>
+                        <li><a href="./MENSHIRTS/mshirts.html"
+                            class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                            <i class="fa-solid fa-person-dress text-sm text-gray-400"></i> Mens Shirts</a></li>
+                        <li><a href="./SAREES/sares.html"
+                            class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                            <i class="fa-solid fa-scroll text-sm text-gray-400"></i> Sarees</a></li>
+                        <li><a href="./TRACKPANTS/trackp.html"
+                            class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                            <i class="fa-solid fa-person-running text-sm text-gray-400"></i> Track Pants</a></li>
+                        <li><a href="./SHIRTS CLOTHS/shirtcloth.html"
+                            class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                            <i class="fa-solid fa-vest text-sm text-gray-400"></i> Shirts Cloths</a></li>
+                        <li><a href="./PANT CLOTH/pantcloth.html"
+                            class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                            <i class="fa-solid fa-child text-sm text-gray-400"></i> Pant Cloths</a></li>
+                      </ul>
+                    </div>
+
+                    <!-- Materials & Others -->
+                    <div class="p-5 border-r border-gray-100">
+                      <h3 class="font-bold text-gray-800 mb-3 text-base">Materials & Others</h3>
+                      <ul class="space-y-2">
+                        <li><a href="./GAS/gas.html"
+                            class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                            <i class="fa-solid fa-fire-flame-curved text-sm text-gray-400"></i> Gas Safety Devices</a>
+                        </li>
+                        <li><a href="./GOLD/gold.html"
+                            class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                            <i class="fa-solid fa-gem text-sm text-gray-400"></i> Gold Jewellery</a></li>
+                      </ul>
+                    </div>
+
+                    <!-- Combo packs -->
+                    <div class="p-5">
+                      <h3 class="font-bold text-gray-800 mb-3 text-base">Combo packs</h3>
+                      <ul class="space-y-2">
+                        <li><a href="#singil-container"
+                            class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                            <i class="fa-solid fa-gift text-sm text-gray-400"></i> Combo Pack 1</a></li>
+                        <li><a href="#singill-container"
+                            class="text-gray-600 hover:text-orange-500 transition flex items-center gap-2 py-1.5">
+                            <i class="fa-solid fa-box-open text-sm text-gray-400"></i> Combo Pack 2</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li><a class="nav-link" href="./blogs">Blogs</a></li>
+              <li><a class="nav-link" href="./CONTACTUS/contact.html">Contact</a></li>
+              <li><a class="nav-link" href="./ABOUTUS/about.html">About</a></li>
+            </ul>
+          </nav>
+
+          <!-- Account Links -->
+          <div class="flex items-center space-x-4">
+
+            <a href="./LIKED/liked.html" class="text-gray-700 hover:text-orange-500 transition group relative"
+              title="Wishlist">
+              <i class="fa-solid fa-heart text-lg"></i>
+              <div
+                class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition">
+              </div>
+            </a>
+            <a href="./CART/cart.html" class="text-gray-700 hover:text-orange-500 transition group relative"
+              title="Cart">
+              <i class="fa-solid fa-shopping-cart text-lg"></i>
+              <div
+                class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition">
+              </div>
+            </a>
+            <a href="./MYPROFILE/profile.html" class="text-gray-700 hover:text-orange-500 transition group relative"
+              title="Account">
+              <i class="fa-solid fa-user text-lg"></i>
+              <div
+                class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition">
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Header -->
+    <div class="md:hidden px-3 py-3">
+      <div class="flex items-center justify-between">
+        <!-- Logo - Left side -->
+        <a href="./index.html" class="select-none">
+          <h1 class="text-2xl font-black tracking-[1px] text-orange-500 uppercase hover:text-orange-400 transition">
+            OFFERS ZONE
+          </h1>
+        </a>
+
+        <!-- Right side icons: Search + Menu -->
+        <div class="flex items-center space-x-4">
+          <!-- Search Icon - Right side -->
+          <button id="mobileSearchToggle" class="text-gray-700 hover:text-orange-500 transition">
+            <i class="fa-solid fa-search text-xl"></i>
+          </button>
+
+          <!-- Menu Button - Right side -->
+          <button onclick="toggleMenu()" class="text-gray-700 hover:text-orange-500 transition">
+            <i class="fa-solid fa-bars text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Search Bar (Hidden by default) -->
+      <div id="mobileSearchBar" class="mt-3 hidden">
+        <div class="relative">
+          <input type="text" id="mobileSearchInput" placeholder="Search for products, brands, categories..."
+            class="w-full px-4 py-3 pl-12 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent">
+          <i class="fa-solid fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+          <button id="closeMobileSearch"
+            class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+            <i class="fa-solid fa-times"></i>
+          </button>
+
+          <!-- Mobile Search Results -->
+          <div id="mobileSearchResults"
+            class="absolute top-full left-0 right-0 mt-1 bg-white shadow-xl rounded-lg border border-gray-200 hidden z-50 max-h-96 overflow-y-auto">
+            <!-- Results will be dynamically inserted here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <nav id="mobileMenu"
+      class="fixed md:hidden top-0 right-0 h-full w-64 bg-white shadow-2xl z-50 transform transition-transform duration-300 translate-x-full">
+      <!-- Menu Header with Close Button -->
+      <div class="flex items-center justify-between p-4 border-b border-gray-200">
+        <h3 class="font-bold text-gray-800">Menu</h3>
+        <button onclick="toggleMenu()" class="text-gray-600 hover:text-orange-500">
+          <i class="fa-solid fa-times text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Menu Content -->
+      <div class="h-[calc(100%-64px)] overflow-y-auto">
+        <ul class="flex flex-col py-4 text-gray-700 font-medium">
+          <!-- Home -->
+          <li>
+            <a class="mobile-nav-link active flex items-center gap-3 px-6 py-4" href="./index.html">
+              <i class="fa-solid fa-house text-orange-500 w-5"></i>
+              <span>Home</span>
+            </a>
+          </li>
+
+          <!-- Categories Section -->
+          <li class="border-t border-gray-100">
+            <details class="group">
+              <summary class="cursor-pointer flex items-center justify-between mobile-nav-link px-6 py-4">
+                <div class="flex items-center gap-3">
+                  <i class="fa-solid fa-list text-orange-500 w-5"></i>
+                  <span>Categories</span>
+                </div>
+                <i class="fa-solid fa-chevron-down text-xs transition-transform group-open:rotate-180"></i>
+              </summary>
+
+              <ul class="ml-4 mt-2 mb-3 space-y-2 text-slate-600">
+                <li><a href="./GAS/gas.html"
+                    class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                      class="fa-solid fa-fire-flame-curved text-sm text-gray-400 w-4"></i> Gas Safety Devices</a></li>
+                <li><a href="./MENPANTS/mpants.html"
+                    class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                      class="fa-solid fa-shirt text-sm text-gray-400 w-4"></i> Mens Pants</a></li>
+                <li><a href="./MENSHIRTS/mshirts.html"
+                    class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                      class="fa-solid fa-person-dress text-sm text-gray-400 w-4"></i> Mens Shirts</a></li>
+                <li><a href="./SAREES/sares.html"
+                    class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                      class="fa-solid fa-scroll text-sm text-gray-400 w-4"></i> Sarees</a></li>
+
+                <li><a href="./TRACKPANTS/trackp.html"
+                    class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                      class="fa-solid fa-person-running text-sm text-gray-400 w-4"></i> Track Pants</a></li>
+                <li><a href="./SHIRTS CLOTHS/shirtcloth.html"
+                    class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                      class="fa-solid fa-vest text-sm text-gray-400 w-4"></i> shirts-cloths</a></li>
+                <li><a href="./PANT CLOTH/pantcloth.html"
+                    class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                      class=" fa-solid fa-child text-sm text-gray-400 w-4"></i> pant-cloths</a></li>
+                <li><a href="./GOLD/gold.html"
+                    class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                      class="fa-solid fa-gem text-sm text-gray-400 w-4"></i> Gold Jewellery</a></li>
+                <li><a href="#singil-container"
+                    class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                      class="fa-solid fa-gift text-sm text-gray-400 w-4"></i>First Combo Pack</a></li>
+                <li><a href="#singill-container"
+                    class="flex items-center gap-3 px-10 py-2 hover:text-orange-500 transition"><i
+                      class="fa-solid fa-gift text-sm text-gray-400 w-4"></i> Second Combo Pack</a></li>
+              </ul>
+            </details>
+          </li>
+
+          <!-- Blogs -->
+          <li class="border-t border-gray-100">
+            <a class="mobile-nav-link flex items-center gap-3 px-6 py-4" href="#">
+              <i class="fa-solid fa-newspaper text-orange-500 w-5"></i>
+              <span>Blogs</span>
+            </a>
+          </li>
+
+          <!-- Contact -->
+          <li>
+            <a class="mobile-nav-link flex items-center gap-3 px-6 py-4" href="./CONTACTUS/contact.html">
+              <i class="fa-solid fa-phone text-orange-500 w-5"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+
+          <!-- About -->
+          <li class="border-t border-gray-100">
+            <a class="mobile-nav-link flex items-center gap-3 px-6 py-4" href="./ABOUTUS/about.html">
+              <i class="fa-solid fa-circle-info text-orange-500 w-5"></i>
+              <span>About</span>
+            </a>
+          </li>
+
+          <!-- Account Links Section -->
+          <li class="border-t border-gray-100 mt-4">
+            <div class="px-6 py-4">
+              <h4 class="text-sm font-semibold text-gray-500 mb-3">ACCOUNT</h4>
+              <div class="space-y-2">
+                <a href="./MYPROFILE/profile.html"
+                  class="flex items-center gap-3 text-gray-700 hover:text-orange-500 py-2 transition">
+                  <i class="fa-solid fa-user text-gray-400 w-5"></i>
+                  <span>My Account</span>
+                </a>
+                <a href="./LIKED/liked.html"
+                  class="flex items-center gap-3 text-gray-700 hover:text-orange-500 py-2 transition">
+                  <i class="fa-solid fa-heart text-gray-400 w-5"></i>
+                  <span>Wishlist</span>
+                  <span id="mobileWishlistCount"
+                    class="ml-auto bg-orange-100 text-orange-600 text-xs px-2 py-1 rounded">0</span>
+                </a>
+                <a href="./CART/cart.html"
+                  class="flex items-center gap-3 text-gray-700 hover:text-orange-500 py-2 transition">
+                  <i class="fa-solid fa-shopping-cart text-gray-400 w-5"></i>
+                  <span>Cart</span>
+                  <span id="mobileCartCount"
+                    class="ml-auto bg-orange-100 text-orange-600 text-xs px-2 py-1 rounded">0</span>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Overlay for mobile menu -->
+    <div id="mobileOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden" onclick="toggleMenu()">
+    </div>
+  </header>
+
+  <!-- Slider Banner -->
+
+  <div class="banner-container relative max-w-full sm:max-w-6xl 
+            mx-3 sm:mx-auto  overflow-hidden rounded-2xl border border border-white/20
+            shadow-lg">
+    <!-- SLIDE 1 -->
+    <div class="fade-slide active absolute inset-0">
+      <!-- Using placeholder images since banner1.jpeg and banner2.jpeg aren't available -->
+      <div class="w-full h-full bg-gradient-to-r from-blue-900 to-gray-900">
+        <img
+          src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+          class="w-full h-full object-cover" alt="Luxury Car Banner">
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
+
+      <!-- Content container with responsive positioning -->
+      <div class="content-container absolute top-[45%] -translate-y-1/2 left-4 space-y-3">
+        <h1 class="typing-text font-extrabold leading-tight text-orange-400" data-text="FIND YOUR DREAM CAR">FIND YOUR
+          DREAM CAR</h1>
+
+        <p class="fade-down delay-1 text-subtitle text-slate-200 max-w-[220px]">
+          Premium luxury models with best performance.
+        </p>
+
+        <p class="fade-down delay-2 text-description text-slate-300 max-w-[240px]">
+          Best deals on top-rated vehicles.
+        </p>
+
+        <div class="fade-down delay-3 button-container flex items-center gap-3 pt-2">
+          <span class="fire-glow bg-orange-600 rounded-full font-bold shadow-lg">
+            🔥 FLAT 30% OFF
+          </span>
+
+          <a href="#" class="main-btn rounded-full bg-white/20 text-white font-semibold backdrop-blur-md">
+            Shop Now
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="fade-slide absolute inset-0">
+      <div class="w-full h-full bg-gradient-to-r from-gray-900 to-sky-900">
+        <img
+          src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+          class="w-full h-full object-cover" alt="Sports Car Banner">
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
+
+      <div class="content-container absolute top-[45%] -translate-y-1/2 left-4 space-y-3">
+        <h1 class="typing-text font-extrabold leading-tight text-sky-400" data-text="GET YOUR PERFECT RIDE">GET YOUR
+          PERFECT RIDE</h1>
+
+        <p class="fade-down delay-1 text-subtitle text-slate-200 max-w-[220px]">
+          Luxury, comfort & mileage.
+        </p>
+
+        <p class="fade-down delay-2 text-description text-slate-300 max-w-[240px]">
+          High mileage cars now with best prices.
+        </p>
+
+        <div class="fade-down delay-3 button-container flex items-center gap-3 pt-2">
+          <span class="fire-glow bg-orange-600 rounded-full font-bold shadow-lg">
+            ⚡ SAVE UPTO 40%
+          </span>
+
+          <a href="#" class="main-btn rounded-full bg-white/20 text-white font-semibold backdrop-blur-md">
+            Explore
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="fade-slide absolute inset-0">
+      <div class="w-full h-full bg-gradient-to-r from-purple-900 to-indigo-900">
+        <img
+          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+          class="w-full h-full object-cover" alt="SUV Car Banner">
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
+
+      <div class="content-container absolute top-[45%] -translate-y-1/2 left-4 space-y-3">
+        <h1 class="typing-text font-extrabold leading-tight text-emerald-400" data-text="FAMILY SUV DEALS">FAMILY SUV
+          DEALS</h1>
+
+        <p class="fade-down delay-1 text-subtitle text-slate-200 max-w-[220px]">
+          Spacious & safe family vehicles.
+        </p>
+
+        <p class="fade-down delay-2 text-description text-slate-300 max-w-[240px]">
+          Top safety ratings with premium features.
+        </p>
+
+        <div class="fade-down delay-3 button-container flex items-center gap-3 pt-2">
+          <span class="fire-glow bg-orange-600 rounded-full font-bold shadow-lg">
+            🎁 FREE 1 YEAR SERVICE
+          </span>
+
+          <a href="#" class="main-btn rounded-full bg-white/20 text-white font-semibold backdrop-blur-md">
+            View Offers
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation arrows -->
+    <div class="slider-btn prev">
+      <i class="fas fa-chevron-left"></i>
+    </div>
+    <div class="slider-btn next">
+      <i class="fas fa-chevron-right"></i>
+    </div>
+
+    <!-- Dots indicator -->
+    <div class="slider-dots">
+      <div class="slider-dot active" data-slide="0"></div>
+      <div class="slider-dot" data-slide="1"></div>
+      <div class="slider-dot" data-slide="2"></div>
+    </div>
+  </div>
+
+  <!-- categories -->
+  <div class="max-w-7xl mx-auto px-4 py-8">
+
+    <!-- Title -->
+    <div class="mb-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-800 mb-2">Shop by Category</h2>
+      <p class="text-gray-600">Discover amazing products across all categories</p>
+    </div>
+
+    <!-- GRID : Mobile 2 | Tablet 4 | Desktop 8 -->
+    <div class="
+      grid 
+      grid-cols-2 
+      sm:grid-cols-3 
+      md:grid-cols-4 
+      lg:grid-cols-8 
+      gap-4
+  ">
+
+      <!-- Gas Devices -->
+      <a href="./GAS/gas.html"
+        class="category-card bg-white rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
+        <div class="circle-container gas-device mx-auto">
+          <img src="./IMAGES/g2.jpeg" alt="Gas Devices"
+            onerror="this.src='https://cdn-icons-png.flaticon.com/512/869/869869.png'"
+            class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-medium text-gray-800 mt-3 text-sm">Gas Devices</h3>
+        <p class="text-xs text-gray-500">Pipes, Safety</p>
+      </a>
+
+      <!-- Mens Pants -->
+      <a href="./MENPANTS/mpants.html"
+        class="category-card bg-white rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
+        <div class="circle-container mens-pants mx-auto">
+          <img src="./IMAGES/mp1.jpeg" alt="Mens Pants"
+            onerror="this.src='https://cdn-icons-png.flaticon.com/512/863/863684.png'"
+            class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-medium text-gray-800 mt-3 text-sm">Mens Pants</h3>
+        <p class="text-xs text-gray-500">Formal, Casual</p>
+      </a>
+
+      <!-- Mens Shirts -->
+      <a href="./MENSHIRTS/mshirts.html"
+        class="category-card bg-white rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
+        <div class="circle-container mens-shirts mx-auto">
+          <img src="./IMAGES/ms.jpeg" alt="Mens Shirts"
+            onerror="this.src='https://cdn-icons-png.flaticon.com/512/4254/4254056.png'"
+            class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-medium text-gray-800 mt-3 text-sm">Mens Shirts</h3>
+        <p class="text-xs text-gray-500">Cotton, Formal</p>
+      </a>
+
+      <!-- Sarees -->
+      <a href="./SAREES/sares.html"
+        class="category-card bg-white rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
+        <div class="circle-container sarees mx-auto">
+          <img src="./IMAGES/s-1.jpg" alt="Sarees" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3111/3111091.png'"
+            class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-medium text-gray-800 mt-3 text-sm">Sarees</h3>
+        <p class="text-xs text-gray-500">Silk, Cotton</p>
+      </a>
+
+      <!-- Track Pants -->
+      <a href="./TRACKPANTS/trackp.html"
+        class="category-card bg-white rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
+        <div class="circle-container track-pants mx-auto">
+          <img src="./IMAGES/tp1.jpeg" alt="Track Pants"
+            onerror="this.src='https://cdn-icons-png.flaticon.com/512/2236/2236810.png'"
+            class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-medium text-gray-800 mt-3 text-sm">Track Pants</h3>
+        <p class="text-xs text-gray-500">Sports, Gym</p>
+      </a>
+
+      <!-- Shirts Cloths -->
+      <a href="./SHIRTS CLOTHS/shirtcloth.html"
+        class="category-card bg-white rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
+        <div class="circle-container shirts-cloths mx-auto">
+          <img src="./IMAGES/sc1.jpeg" alt="Shirts Cloths"
+            onerror="this.src='https://cdn-icons-png.flaticon.com/512/3082/3082383.png'"
+            class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-medium text-gray-800 mt-3 text-sm">Shirts Cloths</h3>
+        <p class="text-xs text-gray-500">Fabrics</p>
+      </a>
+
+      <!-- Pant Cloths -->
+      <a href="./PANT CLOTH/pantcloth.html"
+        class="category-card bg-white rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
+        <div class="circle-container pant-cloths mx-auto">
+          <img src="./IMAGES/sc1.jpeg" alt="Pant Cloths"
+            onerror="this.src='https://cdn-icons-png.flaticon.com/512/863/863684.png'"
+            class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-medium text-gray-800 mt-3 text-sm">Pant Cloths</h3>
+        <p class="text-xs text-gray-500">Denim, Cotton</p>
+      </a>
+
+      <!-- Gold -->
+      <a href="./GOLD/gold.html"
+        class="category-card bg-white rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
+        <div class="circle-container gold mx-auto">
+          <img src="./IMAGES/gld1.jpeg" alt="Gold"
+            onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'"
+            class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-medium text-gray-800 mt-3 text-sm">Gold</h3>
+        <p class="text-xs text-gray-500">Jewelry</p>
+      </a>
+
+    </div>
+  </div>
+
+
+  <!-- First Combo Pack Section -->
+  <div class="sm:max-w-6xl 
+            mx-3 sm:mx-auto mt-10">
+   <div id="singil-container"
+     onclick="openCombo('combo-1')">
+
+
+      <!-- Banner Header -->
+      <div class="singil-header-bg py-6 px-8 text-center relative">
+        <!-- Decorative elements -->
+        <div class="absolute top-0 left-0 w-20 h-20 opacity-10">
+          <i class="fas fa-star text-white text-4xl"></i>
+        </div>
+        <div class="absolute bottom-0 right-0 w-16 h-16 opacity-10">
+          <i class="fas fa-gift text-white text-3xl"></i>
+        </div>
+
+        <h1 class="text-white text-4xl md:text-5xl font-extrabold singil-glow tracking-tight relative z-10">
+          First Combo Pack
+        </h1>
+        <p class="text-orange-100 text-lg mt-2 relative z-10">Get all 3 essential appliances in one amazing bundle!</p>
+      </div>
+
+      <!-- Main Content Area with White Background -->
+      <div class="bg-white p-8 md:p-12 relative">
+        <!-- Decorative corner accents -->
+        <div class="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-orange-200 rounded-tl-lg"></div>
+        <div class="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-orange-200 rounded-tr-lg"></div>
+        <div class="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-orange-200 rounded-bl-lg"></div>
+        <div class="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-orange-200 rounded-br-lg"></div>
+
+        <!-- Mobile Products Container (only for mobile) -->
+        <div class="md:hidden mb-6 relative z-10">
+          <div class="singil-product-card rounded-xl p-4 shadow-lg">
+            <!-- Mobile container title -->
+            <div class="text-center mb-4">
+              <h3 class="text-lg font-bold text-orange-900">3-in-1 Combo Pack</h3>
+              <p class="text-orange-700 text-sm mt-1">All 3 products included</p>
+            </div>
+
+            <!-- Fixed 3-column grid for mobile -->
+            <div class="grid grid-cols-3 gap-3">
+              <!-- Product Card 1: Charging Lite -->
+              <div class="rounded-lg p-3 bg-gradient-to-b from-orange-50 to-white text-center">
+                <div class="flex justify-center mb-2">
+                  <div class="singil-product-number text-xs w-6 h-6 flex items-center justify-center">1</div>
+                </div>
+                <div class="h-16 mb-2 flex items-center justify-center">
+                  <img src="bublb.png" class="h-full object-contain" alt="Charging Lite"
+                    onerror="this.src='https://cdn-icons-png.flaticon.com/512/2972/2972543.png'">
+                </div>
+                <h4 class="font-bold text-orange-900 text-sm">Charging Lite</h4>
+                <p class="text-orange-700 text-xs mt-1">Fast charging </p>
+                <span
+                  class="inline-block bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-1 rounded-full mt-2">
+                  Portable
+                </span>
+              </div>
+
+              <!-- Product Card 2: Water Heater -->
+              <div class="rounded-lg p-3 bg-gradient-to-b from-orange-50 to-white text-center">
+                <div class="flex justify-center mb-2">
+                  <div class="singil-product-number text-xs w-6 h-6 flex items-center justify-center">2</div>
+                </div>
+                <div class="h-16 mb-2 flex items-center justify-center">
+                  <img src="heater.png" class="h-full object-contain" alt="Water Heater"
+                    onerror="this.src='https://cdn-icons-png.flaticon.com/512/3037/3037008.png'">
+                </div>
+                <h4 class="font-bold text-orange-900 text-sm">Water Heater</h4>
+                <p class="text-orange-700 text-xs mt-1">Instant hot water</p>
+                <span
+                  class="inline-block bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-1 rounded-full mt-2">
+                  Energy Saving
+                </span>
+              </div>
+
+              <!-- Product Card 3: Neckband Earphones -->
+              <div class="rounded-lg p-3 bg-gradient-to-b from-orange-50 to-white text-center">
+                <div class="flex justify-center mb-2">
+                  <div class="singil-product-number text-xs w-6 h-6 flex items-center justify-center">3</div>
+                </div>
+                <div class="h-16 mb-2 flex items-center justify-center">
+                  <img src="neck.png" class="h-full object-contain" alt="Neckband Earphones"
+                    onerror="this.src='https://cdn-icons-png.flaticon.com/512/3127/3127247.png'">
+                </div>
+                <h4 class="font-bold text-orange-900 text-sm">Neckband</h4>
+                <p class="text-orange-700 text-xs mt-1">Wireless audio</p>
+                <span
+                  class="inline-block bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-1 rounded-full mt-2">
+                  Bluetooth
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop Products Section (hidden on mobile) -->
+        <div class="hidden md:grid md:grid-cols-3 gap-6 mb-10 relative z-10">
+
+          <!-- Product Card 1: Charging Lite -->
+          <div class="singil-product-card rounded-xl p-4 text-center shadow-lg relative h-full flex flex-col">
+            <div class="bg-gradient-to-b from-orange-50 to-white p-4 rounded-lg flex-grow-0">
+              <img src="bublb.png" class="singil-product-image mx-auto" alt="Charging Lite"
+                onerror="this.src='https://cdn-icons-png.flaticon.com/512/2972/2972543.png'">
+            </div>
+            <!-- Title with Number -->
+            <div class="singil-title-container mt-3">
+              <div class="singil-product-number">1</div>
+              <h3 class="text-xl font-bold text-orange-900">Charging Lite</h3>
+            </div>
+            <p class="mt-1 text-orange-700 text-sm">Fast charging solution for all devices</p>
+            <div class="mt-2">
+              <span class="inline-block bg-orange-100 text-orange-800 font-semibold px-3 py-1 rounded-full text-xs">
+                Portable & Efficient
+              </span>
+            </div>
+          </div>
+
+          <!-- Product Card 2: Water Heater -->
+          <div class="singil-product-card rounded-xl p-4 text-center shadow-lg relative h-full flex flex-col">
+            <div class="bg-gradient-to-b from-orange-50 to-white p-4 rounded-lg flex-grow-0">
+              <img src="heater.png" class="singil-product-image mx-auto" alt="Water Heater"
+                onerror="this.src='https://cdn-icons-png.flaticon.com/512/3037/3037008.png'">
+            </div>
+            <!-- Title with Number -->
+            <div class="singil-title-container mt-3">
+              <div class="singil-product-number">2</div>
+              <h3 class="text-xl font-bold text-orange-900">Water Heater</h3>
+            </div>
+            <p class="mt-1 text-orange-700 text-sm">Instant hot water for your needs</p>
+            <div class="mt-2">
+              <span class="inline-block bg-orange-100 text-orange-800 font-semibold px-3 py-1 rounded-full text-xs">
+                Energy Saving
+              </span>
+            </div>
+          </div>
+
+          <!-- Product Card 3: Neckband Earphones -->
+          <div class="singil-product-card rounded-xl p-4 text-center shadow-lg relative h-full flex flex-col">
+            <div class="bg-gradient-to-b from-orange-50 to-white p-4 rounded-lg flex-grow-0">
+              <img src="neck.png" class="singil-product-image mx-auto" alt="Neckband Earphones"
+                onerror="this.src='https://cdn-icons-png.flaticon.com/512/3127/3127247.png'">
+            </div>
+            <!-- Title with Number -->
+            <div class="singil-title-container mt-3">
+              <div class="singil-product-number">3</div>
+              <h3 class="text-xl font-bold text-orange-900">Neckband Earphones</h3>
+            </div>
+            <p class="mt-1 text-orange-700 text-sm">
+              Wireless audio with deep bass and clear calls
+            </p>
+            <div class="mt-2">
+              <span class="inline-block bg-orange-100 text-orange-800 font-semibold px-3 py-1 rounded-full text-xs">
+                Bluetooth Connectivity
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ALL IN ONE SUPER DEAL Highlight -->
+        <div class="mb-10 text-center relative z-10">
+          <div class="singil-deal-banner inline-block rounded-full py-3 px-6 relative">
+            <div class="absolute -top-1 -left-1 w-6 h-6 bg-yellow-300 rounded-full opacity-70"></div>
+            <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-yellow-300 rounded-full opacity-70"></div>
+            <h2
+              class="text-white text-xl md:text-2xl font-extrabold flex items-center justify-center gap-2 relative z-10">
+              <i class="fas fa-star text-yellow-300 text-sm"></i>
+              ALL IN ONE SUPER DEAL!
+              <i class="fas fa-star text-yellow-300 text-sm"></i>
+            </h2>
+          </div>
+          <p class="mt-3 text-gray-600">Limited time offer - Save 30% when you buy all three together!</p>
+
+          <!-- Price Section -->
+          <div class="mt-4 flex items-center justify-center gap-3">
+            <span class="text-2xl font-bold text-orange-600">$149.99</span>
+            <span class="text-lg text-gray-500 line-through">$214.99</span>
+            <span class="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-sm">Save $65</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
+          <!-- BUY NOW button -->
+          <a href="checkout.html?product=combo-1" class="singil-buy-button group flex items-center justify-center gap-2 
+           text-white font-bold px-8 py-3 rounded-full shadow-lg 
+           hover:from-orange-600 hover:to-orange-700 transition-all duration-300 
+           transform hover:-translate-y-1 hover:shadow-xl">
+            <i class="fa-solid fa-bolt group-hover:scale-125 transition-transform"></i>
+            BUY NOW
+            <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+          </a>
+
+          <!-- ADD TO CART button -->
+          <button class="singil-cart-button add-cart-btn group flex items-center justify-center gap-2 bg-white text-orange-600 
+           font-bold px-8 py-3 rounded-full shadow-lg border-2 
+           hover:bg-orange-50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl">
+            <i class="fa-solid fa-cart-shopping group-hover:scale-125 transition-transform"></i>
+            ADD TO CART
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer Banner -->
+      <div class="singil-header-bg py-3 text-center relative">
+        <p class="text-orange-100 font-medium">
+          <i class="fas fa-gift mr-2"></i>
+          Limited Time Offer • Offer Ends Soon!
+        </p>
+        <!-- Decorative dots -->
+        <div class="absolute top-1/2 left-6 transform -translate-y-1/2 flex gap-1">
+          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+        </div>
+        <div class="absolute top-1/2 right-6 transform -translate-y-1/2 flex gap-1">
+          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Combo Pack Section -->
+  <div class="sm:max-w-6xl 
+            mx-3 sm:mx-auto mt-10">
+   <div id="singill-container"
+     onclick="openCombo('combo-2')">
+
+      <!-- Banner Header -->
+      <div class="singil-header-bg py-6 px-8 text-center relative">
+        <!-- Decorative elements -->
+        <div class="absolute top-0 left-0 w-20 h-20 opacity-10">
+          <i class="fas fa-star text-white text-4xl"></i>
+        </div>
+        <div class="absolute bottom-0 right-0 w-16 h-16 opacity-10">
+          <i class="fas fa-gift text-white text-3xl"></i>
+        </div>
+
+        <h1 class="text-white text-4xl md:text-5xl font-extrabold singil-glow tracking-tight relative z-10">
+          Second Combo Pack
+        </h1>
+        <p class="text-orange-100 text-lg mt-2 relative z-10">Get all 3 premium products in one amazing bundle!</p>
+      </div>
+
+      <!-- Main Content Area with White Background -->
+      <div class="bg-white p-8 md:p-12 relative">
+        <!-- Decorative corner accents -->
+        <div class="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-orange-200 rounded-tl-lg"></div>
+        <div class="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-orange-200 rounded-tr-lg"></div>
+        <div class="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-orange-200 rounded-bl-lg"></div>
+        <div class="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-orange-200 rounded-br-lg"></div>
+
+        <!-- Mobile Products Container (only for mobile) -->
+        <div class="md:hidden mb-6 relative z-10">
+          <div class="singil-product-card rounded-xl p-4 shadow-lg">
+            <!-- Mobile container title -->
+            <div class="text-center mb-4">
+              <h3 class="text-lg font-bold text-orange-900">3-in-1 Combo Pack</h3>
+              <p class="text-orange-700 text-sm mt-1">All 3 products included</p>
+            </div>
+
+            <!-- Fixed 3-column grid for mobile -->
+            <div class="grid grid-cols-3 gap-3">
+              <!-- Product Card 1: Iron Box -->
+              <div class="rounded-lg p-3 bg-gradient-to-b from-orange-50 to-white text-center">
+                <div class="flex justify-center mb-2">
+                  <div class="singil-product-number text-xs w-6 h-6 flex items-center justify-center">1</div>
+                </div>
+                <div class="h-16 mb-2 flex items-center justify-center">
+                  <img src="./iron.png" class="h-full object-contain" alt="Iron Box"
+                    onerror="this.src='https://cdn-icons-png.flaticon.com/512/3127/3127247.png'">
+                </div>
+                <h4 class="font-bold text-orange-900 text-sm">Iron Box</h4>
+                <p class="text-orange-700 text-xs mt-1">Steam iron</p>
+                <span
+                  class="inline-block bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-1 rounded-full mt-2">
+                  Steam
+                </span>
+              </div>
+
+              <!-- Product Card 2: Dosa Tawa -->
+              <div class="rounded-lg p-3 bg-gradient-to-b from-orange-50 to-white text-center">
+                <div class="flex justify-center mb-2">
+                  <div class="singil-product-number text-xs w-6 h-6 flex items-center justify-center">2</div>
+                </div>
+                <div class="h-16 mb-2 flex items-center justify-center">
+                  <img src="dosa.png" class="h-full object-contain" alt="Dosa Tawa"
+                    onerror="this.src='https://cdn-icons-png.flaticon.com/512/3190/3190635.png'">
+                </div>
+                <h4 class="font-bold text-orange-900 text-sm">Dosa Tawa</h4>
+                <p class="text-orange-700 text-xs mt-1">Non-stick pan</p>
+                <span
+                  class="inline-block bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-1 rounded-full mt-2">
+                  Non-Stick
+                </span>
+              </div>
+
+              <!-- Product Card 3: Neckband Earphones -->
+              <div class="rounded-lg p-3 bg-gradient-to-b from-orange-50 to-white text-center">
+                <div class="flex justify-center mb-2">
+                  <div class="singil-product-number text-xs w-6 h-6 flex items-center justify-center">3</div>
+                </div>
+                <div class="h-16 mb-2 flex items-center justify-center">
+                  <img src="neck.png" class="h-full object-contain" alt="Neckband Earphones"
+                    onerror="this.src='https://cdn-icons-png.flaticon.com/512/3106/3106794.png'">
+                </div>
+                <h4 class="font-bold text-orange-900 text-sm">Neckband</h4>
+                <p class="text-orange-700 text-xs mt-1">Wireless audio</p>
+                <span
+                  class="inline-block bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-1 rounded-full mt-2">
+                  Bluetooth
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop Products Section (hidden on mobile) -->
+        <div class="hidden md:grid md:grid-cols-3 gap-6 mb-10 relative z-10">
+
+          <!-- Product Card 1: Iron Box -->
+          <div class="singil-product-card rounded-xl p-4 text-center shadow-lg relative h-full flex flex-col">
+            <div class="bg-gradient-to-b from-orange-50 to-white p-4 rounded-lg flex-grow-0">
+              <img src="./iron.png" class="singil-product-image mx-auto" alt="Iron Box"
+                onerror="this.src='https://cdn-icons-png.flaticon.com/512/3127/3127247.png'">
+            </div>
+            <!-- Title with Number -->
+            <div class="singil-title-container mt-3">
+              <div class="singil-product-number">1</div>
+              <h3 class="text-xl font-bold text-orange-900">Iron Box</h3>
+            </div>
+            <p class="mt-1 text-orange-700 text-sm">Professional steam iron for wrinkle-free clothes</p>
+            <div class="mt-2">
+              <span class="inline-block bg-orange-100 text-orange-800 font-semibold px-3 py-1 rounded-full text-xs">
+                Steam Function
+              </span>
+            </div>
+          </div>
+
+          <!-- Product Card 2: Dosa Tawa -->
+          <div class="singil-product-card rounded-xl p-4 text-center shadow-lg relative h-full flex flex-col">
+            <div class="bg-gradient-to-b from-orange-50 to-white p-4 rounded-lg flex-grow-0">
+              <img src="dosa.png" class="singil-product-image mx-auto" alt="Dosa Tawa"
+                onerror="this.src='https://cdn-icons-png.flaticon.com/512/3190/3190635.png'">
+            </div>
+            <!-- Title with Number -->
+            <div class="singil-title-container mt-3">
+              <div class="singil-product-number">2</div>
+              <h3 class="text-xl font-bold text-orange-900">Dosa Tawa</h3>
+            </div>
+            <p class="mt-1 text-orange-700 text-sm">Non-stick pan for perfect dosas and pancakes</p>
+            <div class="mt-2">
+              <span class="inline-block bg-orange-100 text-orange-800 font-semibold px-3 py-1 rounded-full text-xs">
+                Non-Stick Coating
+              </span>
+            </div>
+          </div>
+
+          <!-- Product Card 3: Neckband Earphones -->
+          <div class="singil-product-card rounded-xl p-4 text-center shadow-lg relative h-full flex flex-col">
+            <div class="bg-gradient-to-b from-orange-50 to-white p-4 rounded-lg flex-grow-0">
+              <img src="neck.png" class="singil-product-image mx-auto" alt="Neckband Earphones"
+                onerror="this.src='https://cdn-icons-png.flaticon.com/512/3106/3106794.png'">
+            </div>
+            <!-- Title with Number -->
+            <div class="singil-title-container mt-3">
+              <div class="singil-product-number">3</div>
+              <h3 class="text-xl font-bold text-orange-900">Neckband Earphones</h3>
+            </div>
+            <p class="mt-1 text-orange-700 text-sm">Wireless audio with deep bass and clear calls</p>
+            <div class="mt-2">
+              <span class="inline-block bg-orange-100 text-orange-800 font-semibold px-3 py-1 rounded-full text-xs">
+                Bluetooth 5.0
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ALL IN ONE SUPER DEAL Highlight -->
+        <div class="mb-10 text-center relative z-10">
+          <div class="singil-deal-banner inline-block rounded-full py-3 px-6 relative">
+            <div class="absolute -top-1 -left-1 w-6 h-6 bg-yellow-300 rounded-full opacity-70"></div>
+            <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-yellow-300 rounded-full opacity-70"></div>
+            <h2
+              class="text-white text-xl md:text-2xl font-extrabold flex items-center justify-center gap-2 relative z-10">
+              <i class="fas fa-star text-yellow-300 text-sm"></i>
+              ALL IN ONE SUPER DEAL!
+              <i class="fas fa-star text-yellow-300 text-sm"></i>
+            </h2>
+          </div>
+          <p class="mt-3 text-gray-600">Limited time offer - Save 35% when you buy all three together!</p>
+
+          <!-- Price Section -->
+          <div class="mt-4 flex items-center justify-center gap-3">
+            <span class="text-2xl font-bold text-orange-600">$129.99</span>
+            <span class="text-lg text-gray-500 line-through">$199.99</span>
+            <span class="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-sm">Save $70</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
+          <button class="singil-buy-button group flex items-center justify-center gap-2 
+                        text-white font-bold px-8 py-3 rounded-full shadow-lg 
+                        hover:from-orange-600 hover:to-orange-700 transition-all duration-300 
+                        transform hover:-translate-y-1 hover:shadow-xl">
+            <i class="fa-solid fa-bolt group-hover:scale-125 transition-transform"></i>
+            BUY NOW
+            <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+          </button>
+
+          <button class="singil-cart-button group flex items-center justify-center gap-2 bg-white text-orange-600 
+                        font-bold px-8 py-3 rounded-full shadow-lg border-2 
+                        hover:bg-orange-50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl">
+            <i class="fa-solid fa-cart-shopping group-hover:scale-125 transition-transform"></i>
+            ADD TO CART
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer Banner -->
+      <div class="singil-header-bg py-3 text-center relative">
+        <p class="text-orange-100 font-medium">
+          <i class="fas fa-gift mr-2"></i>
+          Limited Time Offer • Offer Ends Soon!
+        </p>
+        <!-- Decorative dots -->
+        <div class="absolute top-1/2 left-6 transform -translate-y-1/2 flex gap-1">
+          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+        </div>
+        <div class="absolute top-1/2 right-6 transform -translate-y-1/2 flex gap-1">
+          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+          <div class="w-2 h-2 bg-yellow-300 rounded-full opacity-60"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="max-w-7xl mx-auto mt-12 px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+      <!-- CARD 1 -->
+      <div class="flex items-center gap-4 p-5 rounded-xl shadow 
+                transition-all duration-300 
+                card-animate">
+
+        <div class="bg-white w-12 h-12 flex items-center justify-center 
+                  rounded-full text-2xl 
+                  icon-float icon-color">
+          <i class="fa fa-undo"></i>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-gray-800">Money Return</h3>
+          <p class="text-gray-600 text-sm">7-day refund policy</p>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="flex items-center gap-4 p-5 rounded-xl shadow 
+                transition-all duration-300 
+                card-animate">
+
+        <div class="bg-white w-12 h-12 flex items-center justify-center 
+                  rounded-full text-2xl 
+                  icon-float icon-color">
+          <i class="fa fa-tag"></i>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-gray-800">Best Discount</h3>
+          <p class="text-gray-600 text-sm">Festival offers</p>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="flex items-center gap-4 p-5 rounded-xl shadow 
+                transition-all duration-300 
+                card-animate">
+
+        <div class="bg-white w-12 h-12 flex items-center justify-center 
+                  rounded-full text-2xl 
+                  icon-float icon-color">
+          <i class="fa fa-truck"></i>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-gray-800">Fast Delivery</h3>
+          <p class="text-gray-600 text-sm">Free delivery</p>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="flex items-center gap-4 p-5 rounded-xl shadow 
+                transition-all duration-300 
+                card-animate">
+
+        <div class="bg-white w-12 h-12 flex items-center justify-center 
+                  rounded-full text-2xl 
+                  icon-float icon-color">
+          <i class="fa fa-headset"></i>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-gray-800">24/7 Support</h3>
+          <p class="text-gray-600 text-sm">Instant support</p>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-300 mt-10 w-full">
+    <div class="w-full px-10 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+
+      <div>
+        <h4 class="text-orange-500 text-2xl font-extrabold">OFFERS ZONE</h4>
+        <p class="mt-3 text-slate-400">Your trusted marketplace for essentials, fashion & safety.</p>
+
+        <!-- SOCIAL ICONS WITH A TAGS -->
+        <div class="flex gap-3 mt-4">
+          <a href="https://facebook.com" target="_blank"
+            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+
+          <a href="https://instagram.com" target="_blank"
+            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+
+          <a href="https://twitter.com" target="_blank"
+            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h5 class="text-white font-semibold">Quick Links</h5>
+        <ul class="mt-3 space-y-2 text-slate-400">
+          <li><a href="index.html" class="hover:text-orange-400">Home</a></li>
+          <li><a href="gas.html" class="hover:text-orange-400">Gas Safety Device</a></li>
+          <li><a href="men.html" class="hover:text-orange-400">Mens Wears</a></li>
+          <li><a href="leadies.html" class="hover:text-orange-400">leadies Wears</a></li>
+          <li><a href="sares.html" class="hover:text-orange-400">Sarees</a></li>
+          <li><a href="kid.html" class="hover:text-orange-400">Kids Wears</a></li>
+
+
+
+
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-white font-semibold">Support</h5>
+        <ul class="mt-3 space-y-2 text-slate-400">
+          <li><a href="#" class="hover:text-orange-400">FAQ</a></li>
+          <li><a href="#" class="hover:text-orange-400">Privacy policy</a></li>
+          <li><a href="#" class="hover:text-orange-400">Terms & Conditions</a></li>
+          <li><a href="#" class="hover:text-orange-400">Contact</a></li>
+          <li><a href="#" class="hover:text-orange-400">About</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-white font-semibold">Contact</h5>
+
+        <p class="mt-3 space-y-2 text-slate-400">
+          📍
+          <a href="https://maps.google.com/?q=Hyderabad, Telangana" target="_blank" class="hover:text-orange-400">
+            Hyderabad, Telangana
+          </a>
+        </p>
+
+        <p class="mt-3 space-y-2 text-slate-400">
+          📞
+          <a href="tel:+919876543210" class="hover:text-orange-400">
+            +91 98765 43210
+          </a>
+        </p>
+
+        <p class="mt-3 space-y-2 text-slate-400">
+          📧
+          <a href="mailto:support@offerszone.com" class="hover:text-orange-400">
+            support@offerszone.com
+          </a>
+        </p>
+      </div>
+
+
+    </div>
+
+    <div class="border-t border-gray-800">
+      <p class="text-center text-slate-500 py-6">© 2025 OFFERS ZONE — All Rights Reserved.</p>
+    </div>
+  </footer>
+
+
+ <script src="index.js"></script>
+
+</body>
+
+</html>
